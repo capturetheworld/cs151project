@@ -56,7 +56,7 @@ function createCircleNode(color) {
                 return other_point
             } else {
                 // should return a new point. not defined yet
-                throw "Should return a new point.. but havent finished defining. ln 52 of circlenode.js" 
+                throw "Should return a new point.. but havent finished defining. getConnectionPoints function." 
             }
         },    
     }
