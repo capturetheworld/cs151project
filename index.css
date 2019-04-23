@@ -1,9 +1,10 @@
 #graphpanel {
-    border: solid black thin;
+    /* border: solid black thin; */
 }
 
 table {
     border-radius: 10px;
+    border: solid black thin;
 }
 
 html, body {
