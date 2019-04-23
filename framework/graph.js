@@ -1,4 +1,3 @@
-
 function createGraph(getNodePrototypes, getEdgePrototypes) {
     let nodes = []
     let edges = []
@@ -86,4 +85,4 @@ function createGraph(getNodePrototypes, getEdgePrototypes) {
     }
 }
 
-module.exports = { createGraph }
+export default { createGraph }
