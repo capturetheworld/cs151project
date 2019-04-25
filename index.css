@@ -1,9 +1,9 @@
-#graphpanel {
+/* #graphpanel {
     border: solid black thin; 
-    padding: 0;
+} */
+#toolbar {
+    border-bottom: solid black thin;
 }
-
-
 
 table {
     border-radius: 10px;
@@ -13,7 +13,6 @@ table {
 html, body {
     height: 100%;
     width: 100%;
-
 }
 
 .container {
