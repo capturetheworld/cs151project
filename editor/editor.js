@@ -1,14 +1,31 @@
+window.addEventListener('resize', function() {
+    const panel = document.getElementById('graphpanel')
+    panel.width = window.innerWidth
+    panel.height = window.innerHeight
+
+    const toolbar = document.getElementById('toolbar')
+    toolbar.width = window.innerWidth
+})
+
 document.addEventListener('DOMContentLoaded', function () {
     const graph = new Graph()
     const n1 = createCircleNode(10, 10, 20, 'goldenrod')
     const n2 = createCircleNode(30, 30, 20, 'blue')
+    const n3 = createNode(20, 20, 20, 'blue')
     const e = createLineEdge()
     graph.add(n1)
     graph.add(n2)
+    graph.add(n3)
     graph.connect(e, { x: 20, y: 20 }, { x: 40, y: 40 })
     graph.draw()
 
+    const toolbar = document.getElementById('toolbar')
+    toolbar.width = window.innerWidth
+
     const panel = document.getElementById('graphpanel')
+    panel.width = window.innerWidth
+    panel.height = window.innerHeight
+
     let selected = undefined
     let dragStartPoint = undefined
     let dragStartBounds = undefined

@@ -1,6 +1,9 @@
-/* #graphpanel {
+#graphpanel {
     border: solid black thin; 
-} */
+    padding: 0;
+}
+
+
 
 table {
     border-radius: 10px;
@@ -10,7 +13,7 @@ table {
 html, body {
     height: 100%;
     width: 100%;
-    margin: 5px;
+
 }
 
 .container {

@@ -10,20 +10,32 @@
 </head>
 
 <body>
-    <div>
-        <div id="toolbar" style="position: absolute;"></div>
-        <div id="nodeContainer" style="position: absolute;"></div>
-        <canvas id="graphpanel" style="position: absolute; z-index: 1"></canvas>
+    <div id="toolbarDiv">
+        <canvas id="toolbar" style="position: absolute; top:0; left:0; z-index: 2; height: 70px; width: 100%; background-color: aqua"></canvas>
+    </div>
+    <div id="windowDiv">
+        <!-- <div id="nodeContainer" style="position: absolute;"></div> -->
+        <canvas id="graphpanel" style="position:absolute; top:70; left:0; z-index: 1"></canvas>
     </div>
     <!-- Table Prototyping -->
-    <table>
+    <table table border="1|0">
         <tr>
             <th>Name</th>
         </tr>
         <tr>
             <td>Attributes</td>
         </tr>
+        <tr>
+            <td>Attributes</td>
+        </tr>
+        <tr>
+            <td>Attributes</td>
+        </tr>
     </table>
 </body>
+
+<script>
+
+</script>
 
 </html>

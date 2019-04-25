@@ -6,7 +6,7 @@ function drawGrabber(x, y) {
     ctx.fillRect(x - size / 2, y - size / 2, size, size)
 }
 
-function createNode(x, y) {
+function createNode(x, y, size, color) {
     return {
         getBounds: () => {
             return {
@@ -24,12 +24,16 @@ function createNode(x, y) {
             y += dy
         },
         draw: () => {
+            const canvas = document.getElementById('graphpanel')
+            const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
+
             // const container = document.getElementById('nodeContainer')
             // const table = document.createElement('table')
             // const tr = document.createElement('tr')
-            // const td = document.createElement('td')
             // table.appendChild(tr)
-            // tr.appendChild(td)
+            // tr.innerText('hello')
+            // // tr.appendChild(td)
+
             // table.style.position = 'absolute'
             // table.style.left = x + 'px'
             // table.style.top = y + 'px'
@@ -37,6 +41,24 @@ function createNode(x, y) {
             // table.style.height = size + 'px'
             // table.style.background = color
             // container.appendChild(table)
+
+            var data = "<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>" +
+                "<foreignObject width='100%' height='100%'>" +
+                "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:40px'>" +
+                "<table border='1'><tr><td>row 1, cell 1</td><td>row 1, cell 2</td></tr><tr><td>row 2, cell 1</td><td>row 2, cell 2</td></tr></table>" +
+                "</div>" +
+                "</foreignObject>" +
+                "</svg>";
+
+            var DOMURL = self.URL || self.webkitURL || self;
+            var img = new Image();
+            var svg = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
+            var url = DOMURL.createObjectURL(svg);
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0);
+                DOMURL.revokeObjectURL(url);
+            };
+            img.src = url;
         }
     }
 }
@@ -65,19 +87,6 @@ function createCircleNode(x, y, size, color) {
             ctx.arc(x + size / 2, y + size / 2, size / 2, 0, Math.PI * 2, true)
             ctx.fillStyle = color
             ctx.fill()
-            // const container = document.getElementById('nodeContainer')
-            // const table = document.createElement('table')
-            // const tr = document.createElement('tr')
-            // const td = document.createElement('td')
-            // table.appendChild(tr)
-            // tr.appendChild(td)
-            // table.style.position = 'absolute'
-            // table.style.left = x + 'px'
-            // table.style.top = y + 'px'
-            // table.style.width = size + 'px'
-            // table.style.height = size + 'px'
-            // table.style.background = color
-            // container.appendChild(table)
         }
     }
 }
