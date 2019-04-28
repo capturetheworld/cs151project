@@ -26,11 +26,15 @@ function createNode(x, y, size, color) {
         draw: () => {
             var body = document.getElementById('nodeContainer')
             var table = document.createElement('table')
+            table.style.position = 'absolute'
+            table.style.backgroundColor = color
+            table.style.left = x
+            table.style.top = y
+            
             var tableBody = document.createElement('tbody')
             table.appendChild(tableBody)
 
             var tr = document.createElement('tr')
-            // tr.innerHTML = '<th>NAME</th>'
             tr.innerText = 'HELLO WORLD'
             tableBody.appendChild(tr)
 
@@ -76,10 +80,10 @@ function clearCanvas() {
     const ctx = canvas.getContext('2d') // No need for "if (canvas.getContext)"
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    // var div = document.getElementById('nodeContainer');
-    // while (div.firstChild) {
-    //     div.removeChild(div.firstChild);
-    // }
+    var div = document.getElementById('nodeContainer');
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
 }
 
 function center(rect) {

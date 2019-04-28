@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const graph = new Graph()
     const n1 = createCircleNode(10, 10, 20, 'goldenrod')
     const n2 = createCircleNode(30, 30, 20, 'blue')
-    const n3 = createNode(20, 20, 20, 'blue')
+    const n3 = createNode(100, 100, 20, 'blue')
     const e = createLineEdge()
     graph.add(n1)
     graph.add(n2)
