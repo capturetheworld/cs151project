@@ -1,8 +1,10 @@
 /* #graphpanel {
     border: solid black thin; 
 } */
+
 #toolbar {
     border-bottom: solid black thin;
+    background-color: lightgray;
 }
 
 table {

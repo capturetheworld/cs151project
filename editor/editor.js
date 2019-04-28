@@ -1,5 +1,5 @@
 window.addEventListener('resize', function() {
-    const panel = document.getElementById('graphpanel')
+    const panel = document.getElementById('graphPanel')
     panel.width = window.innerWidth
     panel.height = window.innerHeight
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const toolbar = document.getElementById('toolbar')
     toolbar.width = window.innerWidth
 
-    const panel = document.getElementById('graphpanel')
+    const panel = document.getElementById('graphPanel')
     panel.width = window.innerWidth
     panel.height = window.innerHeight
 
