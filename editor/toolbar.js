@@ -1,10 +1,18 @@
-class Graph {
+class Toolbar {
     constructor() {
         this.nodes = []
         this.edges = []
     }
-    add(n) {
+    create() {
+        const n1 = createNode(0, 0, 0, 'red', 'button')
+
+        this.nodes.push(n1)
+    }
+    addNode(n) {
         this.nodes.push(n)
+    }
+    addEdge(n) {
+        this.edges.push(n)
     }
     findNode(p) {
         for (let i = this.nodes.length - 1; i >= 0; i--) {
@@ -21,7 +29,6 @@ class Graph {
         for (const n of this.nodes) {
             n.draw()
         }
-  
     }
     connect(e, p1, p2) {
         const n1 = this.findNode(p1)

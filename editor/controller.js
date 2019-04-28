@@ -1,4 +1,4 @@
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
     const panel = document.getElementById('graphPanel')
     panel.width = window.innerWidth
     panel.height = window.innerHeight
@@ -8,19 +8,24 @@ window.addEventListener('resize', function() {
 })
 
 document.addEventListener('DOMContentLoaded', function () {
+    //Create Toolbar
+    const toolbar = new Toolbar()
+    toolbar.create()
+    toolbar.draw()
+    const toolbarCanvas = document.getElementById('toolbar')
+    toolbarCanvas.width = window.innerWidth
+
+    //Create Graph
     const graph = new Graph()
     const n1 = createCircleNode(10, 10, 20, 'goldenrod')
     const n2 = createCircleNode(30, 30, 20, 'blue')
-    const n3 = createNode(100, 100, 100, 'red')
+    const n3 = createNode(100, 100, 100, 'red', 'nodeContainer')
     const e = createLineEdge()
     graph.add(n1)
     graph.add(n2)
     graph.add(n3)
     graph.connect(e, { x: 20, y: 20 }, { x: 40, y: 40 })
     graph.draw()
-
-    const toolbar = document.getElementById('toolbar')
-    toolbar.width = window.innerWidth
 
     const panel = document.getElementById('graphPanel')
     panel.width = window.innerWidth
@@ -56,6 +61,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selected !== undefined) {
             dragStartPoint = mousePoint
             dragStartBounds = selected.getBounds()
+            //Right click
+            window.oncontextmenu = function () {
+                prompt('Node', 'Name', 'Attributes')
+                return false     // cancel default menu
+            }
         }
         repaint()
     })

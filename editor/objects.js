@@ -6,45 +6,7 @@ function drawGrabber(x, y) {
     ctx.fillRect(x - size / 2, y - size / 2, size, size)
 }
 
-function createNode(x, y, size, color) {
-    // return {
-    //     getBounds: () => {
-    //         return {
-    //             x: x,
-    //             y: y,
-    //             width: size,
-    //             height: size
-    //         }
-    //     },
-    //     contains: p => {
-    //         return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
-    //     },
-    //     translate: (dx, xy) => {
-    //         x += dx
-    //         y += dy
-    //     },
-    //     draw: () => {
-    //         var body = document.getElementById('nodeContainer')
-    //         var table = document.createElement('table')
-    //         table.style.position = 'absolute'
-    //         table.style.backgroundColor = color
-    //         table.style.left = x
-    //         table.style.top = y
-
-    //         var tableBody = document.createElement('tbody')
-    //         table.appendChild(tableBody)
-
-    //         var tr = document.createElement('tr')
-    //         tr.innerText = 'HELLO WORLD'
-    //         tableBody.appendChild(tr)
-
-    //         var tr2 = document.createElement('tr')
-    //         tr2.innerText = 'Hi'
-    //         tableBody.appendChild(tr2)
-
-    //         body.appendChild(table)
-    //     }
-    // }
+function createNode(x, y, size, color, elementID) {
     return {
         getBounds: () => {
             return {
@@ -62,19 +24,13 @@ function createNode(x, y, size, color) {
             y += dy
         },
         draw: () => {
-            // const canvas = document.getElementById('graphPanel')
-            // const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
-            // ctx.beginPath()
-            // ctx.arc(x + size / 2, y + size / 2, size / 2, 0, Math.PI * 2, true)
-            // ctx.fillStyle = color
-            // ctx.fill()
-
-            var body = document.getElementById('nodeContainer')
+            var body = document.getElementById(elementID)
             var table = document.createElement('table')
             table.style.position = 'absolute'
             table.style.backgroundColor = color
             table.style.left = x
             table.style.top = y
+            table.width = size
 
             var tableBody = document.createElement('tbody')
             table.appendChild(tableBody)
