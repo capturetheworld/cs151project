@@ -2,42 +2,34 @@ class Toolbar {
     constructor() {
         this.nodes = []
         this.edges = []
-    }
-    create() {
-        const n1 = createNode(0, 0, 0, 'red', 'button')
 
+        const n1 = createNode(14, 7, 0, 'white', 'button', '', '')
         this.nodes.push(n1)
+        const e1 = createLineEdge()
     }
-    addNode(n) {
-        this.nodes.push(n)
-    }
-    addEdge(n) {
-        this.edges.push(n)
-    }
-    findNode(p) {
-        for (let i = this.nodes.length - 1; i >= 0; i--) {
-            const n = this.nodes[i]
-            if (n.contains(p)) return n
-        }
-        return undefined
+    addNode() {
+
     }
     draw() {
-        clearCanvas()
+        //Draw Buttons
+        var buttonArea = document.getElementById('toolbarDiv')
+        var button = document.createElement('button')
+        button.style.width = 50
+        button.style.height = 50
+        button.type = 'button'
+        button.style.position = 'absolute'
+        button.style.zIndex = 3
+        button.id = 'button1'
+        button.onclick = this.addNode()
+        buttonArea.appendChild(button)
+
+
         for (const m of this.edges) {
             m.draw()
         }
         for (const n of this.nodes) {
+            n.setElementID('button1')
             n.draw()
         }
-    }
-    connect(e, p1, p2) {
-        const n1 = this.findNode(p1)
-        const n2 = this.findNode(p2)
-        if (n1 !== undefined && n2 !== undefined) {
-            e.connect(n1, n2)
-            this.edges.push(e)
-            return true
-        }
-        return false
     }
 }

@@ -6,8 +6,15 @@ function drawGrabber(x, y) {
     ctx.fillRect(x - size / 2, y - size / 2, size, size)
 }
 
-function createNode(x, y, size, color, elementID) {
+function createNode(x, y, size, color, elementID, name, attributes) {
     return {
+        setElementID: (newElementID) => {
+            elementID = newElementID
+        },
+        setText: (newName, newAttributes) => {
+            name = newName
+            attributes = newAttributes
+        },
         getBounds: () => {
             return {
                 x: x,
@@ -36,11 +43,23 @@ function createNode(x, y, size, color, elementID) {
             table.appendChild(tableBody)
 
             var tr = document.createElement('tr')
-            tr.innerText = 'HELLO WORLD'
+            var th = document.createElement('th')
+            if (name === undefined){
+                th.innerText = 'Object Name'
+            } else {
+                th.innerText = name
+            }
+            tr.appendChild(th)
             tableBody.appendChild(tr)
 
             var tr2 = document.createElement('tr')
-            tr2.innerText = 'Hi'
+            var th2 = document.createElement('th')
+            if (attributes === undefined){
+                th2.innerText = 'Attributes'
+            } else {
+                th2.innerText = attributes
+            }
+            tr2.appendChild(th2)
             tableBody.appendChild(tr2)
 
             body.appendChild(table)

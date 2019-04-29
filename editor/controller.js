@@ -10,7 +10,6 @@ window.addEventListener('resize', function () {
 document.addEventListener('DOMContentLoaded', function () {
     //Create Toolbar
     const toolbar = new Toolbar()
-    toolbar.create()
     toolbar.draw()
     const toolbarCanvas = document.getElementById('toolbar')
     toolbarCanvas.width = window.innerWidth
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const graph = new Graph()
     const n1 = createCircleNode(10, 10, 20, 'goldenrod')
     const n2 = createCircleNode(30, 30, 20, 'blue')
-    const n3 = createNode(100, 100, 100, 'red', 'nodeContainer')
+    const n3 = createNode(100, 100, 100, 'lightgray', 'nodeContainer')
     const e = createLineEdge()
     graph.add(n1)
     graph.add(n2)

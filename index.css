@@ -8,9 +8,17 @@
 }
 
 table {
-    border-radius: 10px;
+    /* border-radius: 10px; */
     border: solid black thin;
+    /* border:1px solid black; */
+    border-collapse:collapse;
 }
+
+td, th {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    text-align: left;
+  }
 
 html, body {
     height: 100%;
