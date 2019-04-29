@@ -1,12 +1,3 @@
-window.addEventListener('resize', function () {
-    const panel = document.getElementById('graphPanel')
-    panel.width = window.innerWidth
-    panel.height = window.innerHeight
-
-    const toolbar = document.getElementById('toolbar')
-    toolbar.width = window.innerWidth
-})
-
 document.addEventListener('DOMContentLoaded', function () {
     //Create Toolbar
     const toolbar = new Toolbar()
@@ -88,4 +79,13 @@ document.addEventListener('DOMContentLoaded', function () {
         dragStartPoint = undefined
         dragStartBounds = undefined
     })
+})
+
+window.addEventListener('resize', function () {
+    const panel = document.getElementById('graphPanel')
+    panel.width = window.innerWidth
+    panel.height = window.innerHeight
+
+    const toolbar = document.getElementById('toolbar')
+    toolbar.width = window.innerWidth
 })
