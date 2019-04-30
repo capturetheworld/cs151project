@@ -125,7 +125,7 @@ function createLineEdge() {
             const p = center(start.getBounds()) // Just pick the center of the bounds for now
             const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
             ctx.moveTo(p.x, p.y)
-            ctx.lineTo(q.x, q.y)
+            ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.stroke()
         }
     }
