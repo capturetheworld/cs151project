@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const n1 = createCircleNode(10, 10, 20, 'goldenrod')
     const n2 = createCircleNode(30, 30, 20, 'blue')
     const n3 = createNode(100, 100, 100, 'lightgray', 'nodeContainer')
+
     const e = createLineEdge()
     graph.add(n1)
     graph.add(n2)
@@ -20,6 +21,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const panel = document.getElementById('graphPanel')
     panel.width = window.innerWidth
     panel.height = window.innerHeight
+
+    // Hard coding button listener
+    const elem = document.getElementById('button1');
+    elem.onclick = function() {
+      const n = createNode(60, 60, 100, 'lightgray', 'nodeContainer')
+      graph.add(n)
+      graph.draw()
+     }
 
     let selected = undefined
     let dragStartPoint = undefined

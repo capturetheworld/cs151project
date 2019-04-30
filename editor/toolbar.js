@@ -14,9 +14,6 @@ class Toolbar {
         button.type = 'button'
         button.style.position = 'absolute'
         button.id = 'button1'
-        button.onclick = function () {
-            const n1 = createNode(14, 7, 0, 'white', 'button', '', 'nodeContainer')
-        }
         buttonArea.appendChild(button)
 
 
