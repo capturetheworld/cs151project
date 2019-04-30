@@ -11,7 +11,6 @@ function createToolBar(){
         addNode: () => {},
         addEdge: () => {},
     }
-
 }
 
 export default {createToolBar}

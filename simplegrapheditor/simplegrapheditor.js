@@ -1,7 +1,112 @@
-const { createGraphFrame } = require('./framework/graphframe')
-const { createGraph } = require('./framework/graph')
-const { createCircleNode } = require('./circlenode')
-const { createCircleNode } = require('./lineedge')
+//const { createGraphFrame } = require('./framework/graphframe')
+//const { createGraph } = require('./framework/graph')
+//const { createCircleNode } = require('./circlenode')
+//const { createEdgeNode } = require('./lineedge')
+
+
+function createPoint(x, y){
+  
+
+  return {
+    getX: () =>{
+      return x
+    },
+    getY: ()=>{
+      return y
+    }
+
+  }
+}
+
+function createGraph(getNodePrototypes, getEdgePrototypes) {
+  let nodes = []
+  let edges = []
+
+  return {
+      connect: (e, point1, point2) => {
+          n1 = findNode(point1)
+          n2 = findNode(point2)
+
+          if (n1 != undefined && n2 != undefined) {
+              e.connect(n1, n2)
+              edges.push(e)
+              return true
+          }
+          return false
+      },
+      // add: (node, point) => {
+      //     bounds = node.getBounds()
+      //     node.translate(point.getX() - bounds.getX(), point.getY() - bounds.getY())
+      //     nodes.push(node)
+      //     return true
+      // },
+      add: (node) => {
+        nodes.push(node)
+      },
+
+      findNode: (point) => {
+          for (i = nodes.length - 1; i >= 0; i--) {
+              node = nodes[i]
+              if (node.contains(point)) return node;
+          }
+          return undefined
+      },
+
+      findEdge: (point) => {
+          for (i = edges.size() - 1; i >= 0; i--) {
+              e = edges[i]
+              if (e.contains(p)) return e
+          }
+          return undefined
+      },
+
+      draw: () => {
+          for (const n of nodes) { n.draw() }
+          for (const e of edges) { e.draw() }
+      },
+      removeNode: (n) => {
+          for (i = edges.length - 1; i >= 0; i--) {
+              e = edges[i];
+              if (e.getStart() == n || e.getEnd() == n) {
+                  // Removing edge
+                  edges = edges.slice(0, i).concat(edges.slice(i + 1, edges.length))
+              }
+          }
+
+          // Finding the index of n before deleting
+          for (i = 0; i < nodes.length; i++) {
+              if (nodes[i] == n) {
+                  // Removing node
+                  nodes = nodes.slice(0, i).concat(nodes.slice(i + 1, nodes.length))
+                  break
+              }
+          }
+
+      },
+      removeEdge: (e) => {
+          // Finding the index of n before deleting
+          for (i = 0; i < edges.length; i++) {
+              if (edges[i] == e) {
+                  // Removing node
+                  edges = edges.slice(0, i).concat(edges.slice(i + 1, edges.length))
+                  break
+              }
+          }
+
+      },
+      getBounds: () => {
+          // TBD
+
+      },
+      getNodes: () => {
+          return nodes
+      },
+      getEdges: () => {
+          return edges
+      },
+
+  }
+}
 
 function createSimpleGraph() {
 
@@ -22,10 +127,111 @@ function createSimpleGraph() {
 
 }
 
+function createNewButton(x, y){
+
+  const width = 40
+  const height = 30
+  
+  return({
+
+      getBounds: () => {
+          
+      },
+
+      contains: (point) => {
+
+          let diffx = Math.abs(point.x - (x + width/2))
+          let diffy = Math.abs(point.y - (y + height/2))
+          if(diffx < width/2 && diffy < height/2){
+              console.log("clicked")
+          }
+      },
+
+      draw: () => {
+          const canvas = document.getElementById('graphpanel')
+          const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
+        
+          ctx.strokeRect(x, y, width, height)
+          
+      }
+  })
+}
+
+function createCircleNode(color) {
+  let x = 0
+  let y = 0
+  let size = 20
+  //let color = color
+  
+  return {
+      
+      setColor: c => {
+          color = c
+      },
+      getColor: () => {
+          return color
+      }, 
+      clone: () => {
+          // Probably totally wrong
+          return createCircleNode(color)
+      },
+      
+      draw: () => {
+          const canvas = document.getElementById('graphpanel')
+          const ctx = canvas.getContext('2d')
+          
+          ctx.beginPath()
+          ctx.arc(x + size/2, y + size/2, size/2, 0, Math.PI * 2, true);
+          ctx.fillStyle = color
+          ctx.fill()           
+      },
+      
+      translate: (dx, dy) => {
+          x += dx
+          y += dy
+      },
+      
+      contains: p => {
+          return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
+      },
+      
+      getBounds: () => {
+          return {
+              x: x,
+              y: y,
+              width: size,
+              height: size
+          }
+      },
+      
+      getConnectionPoints: (other_point) => {
+          centerX = x + size/2
+          centerY = y + size/2
+          dx = other_point.getX() - centerX
+          dy = other_point.getY() - centerY
+          distance = Math.sqrt(dx * dx + dy * dy)
+          if (distance == 0){
+              return other_point
+          } else {
+              // should return a new point. not defined yet
+              throw "Should return a new point.. but havent finished defining. getConnectionPoints function." 
+          }
+      },    
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  const frame = createGraphFrame(createSimpleGraph())
+  //const frame = createGraphFrame(createSimpleGraph())
   // add prototype
   // add prototype
+  const graph = createSimpleGraph()
+  const b = createNewButton(100, 100)
+  const n1 = createCircleNode(10, 10, 20, 'goldenrod')
+  const n2 = createCircleNode(30, 30, 20, 'blue')
+  graph.add(b)
+  graph.add(n1)
+  graph.add(n2)
+  graph.draw()
 
   const panel = document.getElementById('graphpanel')
 
@@ -37,8 +243,8 @@ document.addEventListener('DOMContentLoaded', function () {
   function repaint() {
     panel.innerHTML = ''
 
-    const ctx = document.getElementById()
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    const ctx = panel.getContext('2d'); // No need for "if (canvas.getContext)"
+    ctx.clearRect(0, 0, panel.width, panel.height)
 
     graph.draw()
 
@@ -88,4 +294,5 @@ document.addEventListener('DOMContentLoaded', function () {
     dragStartPoint = undefined
     dragStartBounds = undefined
   })
+  
 })
