@@ -3,10 +3,19 @@
 //const { createCircleNode } = require('./circlenode')
 //const { createEdgeNode } = require('./lineedge')
 
+function drawGrabber(x, y) {
+    const size = 5;
+    const canvas = document.getElementById('graphpanel')
+    const ctx = canvas.getContext('2d')
+    
+    ctx.beginPath()
+    ctx.fillStyle = "black"
+    ctx.fillRect(x - size/2, y -size/2, size, size);
+    ctx.fill()
+}
 
 function createPoint(x, y){
   
-
   return {
     getX: () =>{
       return x
@@ -144,14 +153,63 @@ function createNewButton(x, y){
           let diffy = Math.abs(point.y - (y + height/2))
           if(diffx < width/2 && diffy < height/2){
               console.log("clicked")
+          }else{
+            console.log("not clicked")
           }
       },
 
       draw: () => {
           const canvas = document.getElementById('graphpanel')
           const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
-        
           ctx.strokeRect(x, y, width, height)
+          
+      }
+  })
+}
+
+function createNewObject(x, y){
+
+  const width = 40
+  const height = 30
+  let text = ''
+  var attributes = 'default'
+  
+  var props = {text, attributes}
+
+  return({
+
+      getBounds: () => {
+          
+      },
+
+      setAttribute: (str) => {
+          text = str
+          props[0] = text
+
+      },
+
+      
+      getProps: ()=> {
+        return props
+      },
+
+      contains: (point) => {
+
+          let diffx = Math.abs(point.x - (x + width/2))
+          let diffy = Math.abs(point.y - (y + height/2))
+          
+          if(diffx < width/2 && diffy < height/2){
+              console.log("clicked")
+          }
+      },
+
+      draw: () => {
+          
+          const canvas = document.getElementById('graphpanel')
+          const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
+          ctx.strokeRect(x, y, width, height)
+          ctx.font = "15px Arial";
+          ctx.fillText("help", x, y + height/2)
           
       }
   })
@@ -220,60 +278,140 @@ function createCircleNode(color) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  //const frame = createGraphFrame(createSimpleGraph())
-  // add prototype
-  // add prototype
-  const graph = createSimpleGraph()
-  const b = createNewButton(100, 100)
-  const n1 = createCircleNode(10, 10, 20, 'goldenrod')
-  const n2 = createCircleNode(30, 30, 20, 'blue')
-  graph.add(b)
-  graph.add(n1)
-  graph.add(n2)
-  graph.draw()
-
-  const panel = document.getElementById('graphpanel')
-
-  let selected = undefined
-  let dragStartPoint = undefined
-  let dragStartBounds = undefined
-
-  // The rest is from lab18 and very subject to change
-  function repaint() {
-    panel.innerHTML = ''
-
-    const ctx = panel.getContext('2d'); // No need for "if (canvas.getContext)"
-    ctx.clearRect(0, 0, panel.width, panel.height)
-
-    graph.draw()
-
-    if (selected !== undefined) {
-      const bounds = selected.getBounds()
-      drawGrabber(bounds.x, bounds.y)
-      drawGrabber(bounds.x + bounds.width, bounds.y)
-      drawGrabber(bounds.x, bounds.y + bounds.height)
-      drawGrabber(bounds.x + bounds.width, bounds.y + bounds.height)
-    }
-  }
-
-  function mouseLocation(event) {
-    var rect = panel.getBoundingClientRect();
+function createSquareNode(color) {
+    let x = 0
+    let y = 0
+    let size = 20
+    //let color = color
+    
     return {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top,
+        
+        setColor: c => {
+            color = c
+        },
+        getColor: () => {
+            return color
+        }, 
+        clone: () => {
+            // Probably totally wrong
+            return createCircleNode(color)
+        },
+        
+        draw: () => {
+            const canvas = document.getElementById('graphpanel')
+            const ctx = canvas.getContext('2d')
+            ctx.fillRect(x, y, size, size);
+            ctx.fillStyle = color
+            ctx.fill()           
+        },
+        
+        translate: (dx, dy) => {
+            x += dx
+            y += dy
+        },
+        
+        contains: p => {
+            return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
+        },
+        
+        getBounds: () => {
+            return {
+                x: x,
+                y: y,
+                width: size,
+                height: size
+            }
+        },
+        
+        getConnectionPoints: (other_point) => {
+            centerX = x + size/2
+            centerY = y + size/2
+            dx = other_point.getX() - centerX
+            dy = other_point.getY() - centerY
+            distance = Math.sqrt(dx * dx + dy * dy)
+            if (distance == 0){
+                return other_point
+            } else {
+                // should return a new point. not defined yet
+                throw "Should return a new point.. but havent finished defining. getConnectionPoints function." 
+            }
+        },    
     }
   }
 
-  panel.addEventListener('mousedown', event => {
-    let mousePoint = mouseLocation(event)
-    selected = graph.findNode(mousePoint)
-    if (selected !== undefined) {
-      dragStartPoint = mousePoint
-      dragStartBounds = selected.getBounds()
+document.addEventListener('DOMContentLoaded', function () {
+    //const frame = createGraphFrame(createSimpleGraph())
+    // add prototype
+    // add prototype
+    const graph = createSimpleGraph()
+    //Create Toolbar
+    const toolbar = createToolbar()
+    toolbar.addButton()
+    toolbar.addButton()
+    toolbar.addButton()
+
+    const properties = createProperties()
+    //const b = createNewButton(100, 100)
+    //const o = createNewObject(200, 100)
+    const n1 = createCircleNode(10, 10, 20, 'goldenrod')
+    const n2 = createCircleNode(30, 30, 20, 'blue')
+    const s1 = createSquareNode(30, 30, 20, 'blue')
+    //graph.add(b)
+    graph.add(n1)
+    graph.add(n2)
+    graph.add(s1)
+    //graph.add(o)
+    graph.draw()
+    toolbar.draw()
+    properties.draw()
+
+  
+    const panel = document.getElementById('graphpanel')
+
+    let selected = undefined
+    let dragStartPoint = undefined
+    let dragStartBounds = undefined
+
+    // The rest is from lab18 and very subject to change
+    function repaint() {
+        panel.innerHTML = ''
+
+        const ctx = panel.getContext('2d'); // No need for "if (canvas.getContext)"
+        ctx.clearRect(0, 0, panel.width, panel.height)
+
+        graph.draw()
+        toolbar.draw()
+        
+
+        if (selected !== undefined) {
+          const bounds = selected.getBounds()
+          properties.draw(selected)
+          drawGrabber(bounds.x, bounds.y)
+          drawGrabber(bounds.x + bounds.width, bounds.y)
+          drawGrabber(bounds.x, bounds.y + bounds.height)
+          drawGrabber(bounds.x + bounds.width, bounds.y + bounds.height)
+        }else{
+            properties.draw(undefined)
+        }
     }
-    repaint()
-  })
+
+    function mouseLocation(event) {
+        var rect = panel.getBoundingClientRect();
+        return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+        }
+    }
+
+    panel.addEventListener('mousedown', event => {
+        let mousePoint = mouseLocation(event)
+        selected = graph.findNode(mousePoint)
+        if (selected !== undefined) {
+        dragStartPoint = mousePoint
+        dragStartBounds = selected.getBounds()
+        }
+        repaint()
+    })
 
   panel.addEventListener('mousemove', event => {
     if (dragStartPoint === undefined) return
