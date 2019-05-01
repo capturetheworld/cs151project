@@ -223,12 +223,28 @@ function createCircleNode(color) {
   
   return {
       
-      setColor: c => {
+      setColor:(c) => {
           color = c
       },
-      getColor: () => {
+      getColor: function getColor() {
           return color
       }, 
+
+      getRadius: function getRadius(){
+          return size
+      },
+
+      setRadius: function setRadius(rad){
+          size = rad
+      },
+      
+      getAttributes(){
+          return [
+              this.getColor, this.setColor,
+              this.getRadius, this.setRadius,
+          ]
+      },
+
       clone: () => {
           // Probably totally wrong
           return createCircleNode(color)
@@ -241,7 +257,8 @@ function createCircleNode(color) {
           ctx.beginPath()
           ctx.arc(x + size/2, y + size/2, size/2, 0, Math.PI * 2, true);
           ctx.fillStyle = color
-          ctx.fill()           
+          ctx.fill() 
+          
       },
       
       translate: (dx, dy) => {
@@ -278,29 +295,56 @@ function createCircleNode(color) {
   }
 }
 
-function createSquareNode(color) {
-    let x = 0
+function createRectNode(color) {
+    let x = 100
     let y = 0
-    let size = 20
+    let width = 35
+    let height = 20
     //let color = color
     
     return {
         
-        setColor: c => {
+        setColor: (c) => {
             color = c
         },
+        
         getColor: () => {
             return color
         }, 
+        
+        getWidth: function getWidth(){
+            return width
+        },
+        test: () => {},
+        setWidth: (sidelen) => {
+            width = sidelen
+        },
+
+        getHeight: function getHeight() {
+            return height
+        },
+
+        setHeight: function setHeight (sidelen){
+            height = sidelen
+        },
+
         clone: () => {
             // Probably totally wrong
-            return createCircleNode(color)
+            return createRectNode(color)
+        },
+        
+        getAttributes(){
+            return [
+                this.getColor, this.setColor,
+                this.getWidth, this.setWidth,
+                this.getHeight, this.setHeight
+            ]
         },
         
         draw: () => {
             const canvas = document.getElementById('graphpanel')
             const ctx = canvas.getContext('2d')
-            ctx.fillRect(x, y, size, size);
+            ctx.fillRect(x, y, width, height);
             ctx.fillStyle = color
             ctx.fill()           
         },
@@ -311,18 +355,18 @@ function createSquareNode(color) {
         },
         
         contains: p => {
-            return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
+            return (x + width / 2 - p.x) ** 2 + (y + height / 2 - p.y) ** 2 <= width ** 2 / 4
         },
         
         getBounds: () => {
             return {
                 x: x,
                 y: y,
-                width: size,
-                height: size
+                width: width,
+                height: height
             }
         },
-        
+    
         getConnectionPoints: (other_point) => {
             centerX = x + size/2
             centerY = y + size/2
@@ -336,7 +380,7 @@ function createSquareNode(color) {
                 throw "Should return a new point.. but havent finished defining. getConnectionPoints function." 
             }
         },    
-    }
+     }
   }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -353,19 +397,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const properties = createProperties()
     //const b = createNewButton(100, 100)
     //const o = createNewObject(200, 100)
-    const n1 = createCircleNode(10, 10, 20, 'goldenrod')
-    const n2 = createCircleNode(30, 30, 20, 'blue')
-    const s1 = createSquareNode(30, 30, 20, 'blue')
+    const n1 = createCircleNode('goldenrod')
+    const n2 = createCircleNode('blue')
+    const r1 = createRectNode('blue')
     //graph.add(b)
     graph.add(n1)
     graph.add(n2)
-    graph.add(s1)
+    graph.add(r1)
     //graph.add(o)
     graph.draw()
     toolbar.draw()
-    properties.draw()
+    //properties.draw()
 
-  
     const panel = document.getElementById('graphpanel')
 
     let selected = undefined
@@ -391,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function () {
           drawGrabber(bounds.x, bounds.y + bounds.height)
           drawGrabber(bounds.x + bounds.width, bounds.y + bounds.height)
         }else{
-            properties.draw(undefined)
+            //properties.draw(undefined)
         }
     }
 
