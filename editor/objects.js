@@ -130,14 +130,16 @@ function createCircleNode(x, y, s, c) {
         },
 
         setSize: (s) => {
-            this.size = s
+            console.log("setting size")
+            size = s
 
         },
         getColor: () => {
             return color
         },
         setColor: (c) => {
-            this.color = c
+            console.log("setting color")
+            color = c
         },
         getAttributes(){
             // format:  getter (even index), setter (odd)
