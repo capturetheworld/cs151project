@@ -7,6 +7,12 @@ function drawGrabber(x, y) {
 }
 
 function createNode(x, y, size, color, elementID, name, attributes) {
+    // let size = s
+    // let color = c
+    // let elementID = id
+    // let name = nm
+    // let attributes = attr
+
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
@@ -31,7 +37,7 @@ function createNode(x, y, size, color, elementID, name, attributes) {
             y += dy
         },
         draw: () => {
-            var body = document.getElementById(elementID)
+            let body = document.getElementById(elementID)
             var table = document.createElement('table')
             table.style.position = 'absolute'
             table.style.backgroundColor = color
@@ -63,11 +69,37 @@ function createNode(x, y, size, color, elementID, name, attributes) {
             tableBody.appendChild(tr2)
 
             body.appendChild(table)
+        },
+
+        getElementID: ()=>{
+            return this.elementID
+        },
+        // setElementID: (id) => {
+        //     this.elementID = id
+        // },
+        getObjectName: () => {
+            return this.name
+        },
+
+        setObjectName: (nm) => {
+            this.name = nm
+        },
+
+        getAttributes(){
+             // format:  getter (even index), setter (odd)
+            return [
+                this.getElementID, this.setElementID,
+                this.getObjectName, this.setObjectName
+            ]
         }
+
     }
 }
 
-function createCircleNode(x, y, size, color) {
+function createCircleNode(x, y, s, c) {
+    let size = s
+    let color = c
+
     return {
         getBounds: () => {
             return {
@@ -91,7 +123,30 @@ function createCircleNode(x, y, size, color) {
             ctx.arc(x + size / 2, y + size / 2, size / 2, 0, Math.PI * 2, true)
             ctx.fillStyle = color
             ctx.fill()
+        },
+
+        getSize: () => {
+            return size
+        },
+
+        setSize: (s) => {
+            this.size = s
+
+        },
+        getColor: () => {
+            return color
+        },
+        setColor: (c) => {
+            this.color = c
+        },
+        getAttributes(){
+            // format:  getter (even index), setter (odd)
+            return [
+                this.getSize, this.setSize,
+                this.getColor, this.setColor
+            ]
         }
+    
     }
 }
 

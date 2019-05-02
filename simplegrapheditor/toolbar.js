@@ -21,7 +21,7 @@ function createNewButton(pos){
         },
 
         draw: () => {
-            console.log("x: " + x + ", y: " + y)
+            //console.log("x: " + x + ", y: " + y)
             const canvas = document.getElementById('graphpanel')
             const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
             //ctx.nodeDraw()

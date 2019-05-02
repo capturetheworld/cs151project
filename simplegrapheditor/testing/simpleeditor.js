@@ -167,40 +167,14 @@ function createNewButton(x, y){
   })
 }
 
-function createNewField(n, v){
-    let name = n
-    let val = v
-
-    return{
-        draw: ()=> {
-            // ? 
-        },
-        getName: () => {
-            return name
-        },
-        setname: (n) => {
-            this.name = n
-        },
-        getVal: () => {
-            return val
-        },
-        setVal: (v) => {
-            this.val = v
-        }
-    }
-
-}
-
 function createNewObject(x, y){
 
   const width = 40
   const height = 30
   let text = ''
-  let attributes = 'default'
+  var attributes = 'default'
   
-  let props = {text, attributes}
-  fields = []
-
+  var props = {text, attributes}
 
   return({
 
@@ -213,10 +187,7 @@ function createNewObject(x, y){
           props[0] = text
 
       },
-      addField:(name, value) => {
-        let field = createNewField(name, value)
-        fields.push(field)
-      },
+
       
       getProps: ()=> {
         return props
@@ -240,32 +211,25 @@ function createNewObject(x, y){
           ctx.font = "15px Arial";
           ctx.fillText("help", x, y + height/2)
           
-      },
-
-      getAttributes(){
-          return [
-              
-          ]
       }
   })
 }
 
-
-function createCircleNode(c) {
+function createCircleNode(color) {
   let x = 0
   let y = 0
   let size = 20
-  let color = c
+  //let color = color
   
   // new: property sheet
   
 
   return {
       
-      setColor: function setColor(c){
+      setColor:(c) => {
           color = c
       },
-      getColor:  ()=>  {
+      getColor: function getColor() {
           return color
       }, 
 
@@ -277,8 +241,6 @@ function createCircleNode(c) {
           size = rad
       },
       
-      
-      // format:  getter (even index), setter (odd)
       getAttributes(){
           return [
               this.getColor, this.setColor,
@@ -336,12 +298,12 @@ function createCircleNode(c) {
   }
 }
 
-function createRectNode(c) {
+function createRectNode(color) {
     let x = 100
     let y = 0
     let width = 35
     let height = 20
-    let color = c
+    //let color = color
     
     return {
         
@@ -375,8 +337,6 @@ function createRectNode(c) {
         },
         
         getAttributes(){
-        
-            // format:  getter (even index), setter (odd)
             return [
                 this.getColor, this.setColor,
                 this.getWidth, this.setWidth,
@@ -424,106 +384,7 @@ function createRectNode(c) {
             }
         },    
      }
-}
-
-
-function createProp(text, id){
-    
-    // create prop wrapper
-    let prop = document.createElement('div')
-    prop.className = "prop"
-    
-    // label and input
-    //let text = document.createTextNode("test")
-    let label = document.createElement('p')
-    label.className = "label"
-    label.innerHTML = id
-    
-    let inp = document.createElement('input')
-    inp.type = "text"
-    inp.value = text
-    inp.className = "input"
-    
-
-    prop.appendChild(label)
-    prop.appendChild(inp)
-    prop.id = id
-    
-    return prop
-    
-}
-
-function createPropertySheet(){
-    let container = document.getElementById('propertySheetWrapper')
-    let form = document.createElement('form')
-    let getters = []
-    let setters = []
-
-    saveProperties = function(){console.log("init save prop")}
-
-    let submit = document.createElement('button')
-    submit.setAttribute('onclick', "saveProperties()")
-    submit.className = "apply"
-    container.appendChild(form)
-    container.appendChild(submit)
-    
-    return {
-        // called when an object is selected
-        setObj: (obj) => {
-            // fetches functions (getters & setters) from obj
-            let attributes = obj.getAttributes()
-
-            // gets property getters from evens
-            getters = []
-            for(i = 0; i < attributes.length; i+=2){getters.push(attributes[i])}
-
-            // gets property setters from odds
-            setters = []
-            for(i = 1; i < attributes.length; i+=2){setters.push(attributes[i])}
-
-            // clears old input elements
-            while(form.firstChild){
-                form.removeChild(form.firstChild)
-            }
-            // removes old submit button
-            while(container.submit){
-                container.removeChild(submit)
-            }
-
-            submit = document.createElement('button')
-            submit.setAttribute('onclick', "saveProperties()")
-            submit.className = "apply"
-
-            // creates text input
-            for(i = 0; i < getters.length; i++){
-                // get label text: splice function name
-                let functName = getters[i].name
-                let label = functName.substring(3, functName.length)
-                
-                let input = createProp(getters[i](), label)
-                form.appendChild(input)
-            }
-            console.log("new save props")
-            
-            this.saveProperties = function(){  
-                // goes through setters array and 
-                for(i = 0; i < setters.length; i++){
-                    let functName = setters[i].name
-                    // slices 'Color' from 'getColor()'
-                    let label = functName.substring(3, functName.length)
-                    input = document.getElementById(label)
-                    setters[i](input.lastChild.value)
-
-                }
-            }
-
-        },
-        
-    }
-}
-
-
-
+  }
 
 document.addEventListener('DOMContentLoaded', function () {
     //const frame = createGraphFrame(createSimpleGraph())
@@ -535,32 +396,17 @@ document.addEventListener('DOMContentLoaded', function () {
     toolbar.addButton()
     toolbar.addButton()
     toolbar.addButton()
-
     
-    const properties = createPropertySheet()
+    const properties = createProperties()
     //const b = createNewButton(100, 100)
     //const o = createNewObject(200, 100)
-    
-    //const n2 = createCircleNode('blue')
-    
-    // const n3 = createCircleNode('yellow')
-     const r1 = createRectNode('teal')
-     const r2 = createRectNode('tan')
-     const r3 = createRectNode('red')
-    // const n1 = createCircleNode('goldenrod')
-    // const n4 = createCircleNode('red')
-
-
-    //  ---- 
-    //  Something to notice: the last object added to graph
-    //  will be colored black always
-    //
-    graph.add(r3)
+    const n1 = createCircleNode('goldenrod')
+    const n2 = createCircleNode('blue')
+    const r1 = createRectNode('blue')
+    //graph.add(b)
+    graph.add(n1)
+    graph.add(n2)
     graph.add(r1)
-    graph.add(r2)
-    
-    // graph.add(r2)
-    // graph.add(n4)
     //graph.add(o)
     graph.draw()
     toolbar.draw()
@@ -582,17 +428,17 @@ document.addEventListener('DOMContentLoaded', function () {
         graph.draw()
         toolbar.draw()
         
-        console.log(selected)
 
         if (selected !== undefined) {
           const bounds = selected.getBounds()
-          //properties.setObj(selected) 
+          properties.draw(selected)
           drawGrabber(bounds.x, bounds.y)
           drawGrabber(bounds.x + bounds.width, bounds.y)
           drawGrabber(bounds.x, bounds.y + bounds.height)
           drawGrabber(bounds.x + bounds.width, bounds.y + bounds.height)
-        } 
-        
+        }else{
+            //properties.draw(undefined)
+        }
     }
 
     function mouseLocation(event) {
@@ -606,11 +452,9 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.addEventListener('mousedown', event => {
         let mousePoint = mouseLocation(event)
         selected = graph.findNode(mousePoint)
-        
         if (selected !== undefined) {
-            properties.setObj(selected)
-            dragStartPoint = mousePoint
-            dragStartBounds = selected.getBounds()
+        dragStartPoint = mousePoint
+        dragStartBounds = selected.getBounds()
         }
         repaint()
     })

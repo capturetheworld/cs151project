@@ -8,6 +8,7 @@
     <script src='./editor/graph.js'></script>
     <script src='./editor/objects.js'></script>
     <script src="./editor/toolbar.js"></script>
+    <script src="./editor/propertysheet.js"></script>
     <script></script>
 </head>
 
@@ -17,12 +18,16 @@
         <!-- <button id = "button" type="button" style="position: absolute; top: 20; z-index: 3"
             onclick="alert('You pressed the button!')">Click
             me!</button> -->
-        <canvas id="toolbar" style="position: absolute; top:0; left:0; z-index: 2; height: 70px; width: 100%;"></canvas>
+        <!--<canvas id="toolbar" style="position: absolue; top:0; left:0; z-index: 2; height: 70px; width: 100%;"></canvas> -->
     </div>
-    <div id="graphDiv">
-        <div id="nodeContainer" style="position:absolute; top:70; left:0; z-index: 1"></div>
-        <canvas id="graphPanel" style="position:absolute; top:70; left:0; z-index: 1"></canvas>
+    <div id="graphDiv" style="position: relative; height: auto;">
+        <!--<div id="nodeContainer" style="position:relative; top:70; left:0; z-index: 1"></div> 
+        <canvas id="graphPanel" style="position:relative; top:70; left:0; z-index: 1;"></canvas> -->
+        <div id="nodeContainer" style="position:relative; top:70; left:0;"></div> 
+        <canvas id="graphPanel" style="position:relative; top:70; left:0; "></canvas>
+    
     </div>
+    <div id="propertySheetWrapper" style="position: relative; width: inherit; height: auto;"></div>
 
     <!-- Table Prototyping -->
     <!-- <table style="position: absolute; top: 100; left: 100;">

@@ -44,7 +44,7 @@ class Toolbar {
         var buttonArea = document.getElementById('toolbarDiv')
         var button = document.createElement('button')
         button.type = 'button'
-        button.style.position = 'absolute'
+        button.style.position = 'relative'
         button.id = 'button1'
         buttonArea.appendChild(button)
 

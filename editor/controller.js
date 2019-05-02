@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     //Create Toolbar
     const toolbar = new Toolbar()
     toolbar.draw()
-    const toolbarCanvas = document.getElementById('toolbar')
+    //const toolbarCanvas = document.getElementById('toolbar')
+    const toolbarCanvas = document.getElementById('toolbarDiv')
     toolbarCanvas.width = window.innerWidth
 
     //Create Graph
@@ -10,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const n1 = createCircleNode(10, 10, 20, 'goldenrod')
     const n2 = createCircleNode(30, 30, 20, 'blue')
     const n3 = createNode(100, 100, 100, 'lightgray', 'nodeContainer')
+
+    //Create Property sheet
+    const properties = createPropertySheet()
+
 
     const e = createLineEdge()
     graph.add(n1)
@@ -28,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const n = createNode(60, 60, 100, 'lightgray', 'nodeContainer')
       graph.add(n)
       graph.draw()
-     }
+    }
 
     let selected = undefined
     let dragStartPoint = undefined
@@ -60,6 +65,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selected !== undefined) {
             dragStartPoint = mousePoint
             dragStartBounds = selected.getBounds()
+
+            // focuses property sheet on new object
+            //if(properties.object !=== selected)
+            properties.setObj(selected)
+
             //Right click
             window.oncontextmenu = function () {
                 prompt('Node', 'Name', 'Attributes')
