@@ -6,12 +6,12 @@ function drawGrabber(x, y) {
     ctx.fillRect(x - size / 2, y - size / 2, size, size)
 }
 
-function createNode(x, y, size, color, elementID, name, attributes) {
-    // let size = s
-    // let color = c
-    // let elementID = id
-    // let name = nm
-    // let attributes = attr
+function createNode(x, y, s, c, id, nm, attr) {
+    let size = s
+    let color = c
+    let elementID = id
+    let name = nm
+    let attributes = attr
 
     return {
         setElementID: (newElementID) => {
@@ -72,17 +72,17 @@ function createNode(x, y, size, color, elementID, name, attributes) {
         },
 
         getElementID: ()=>{
-            return this.elementID
+            return elementID
         },
         // setElementID: (id) => {
         //     this.elementID = id
         // },
         getObjectName: () => {
-            return this.name
+            return name
         },
 
         setObjectName: (nm) => {
-            this.name = nm
+            name = nm
         },
 
         getAttributes(){
