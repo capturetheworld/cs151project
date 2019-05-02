@@ -55,7 +55,7 @@ function createNode(x, y, size, color, elementID, name, attributes) {
             var tr2 = document.createElement('tr')
             var th2 = document.createElement('th')
             if (attributes === undefined){
-                th2.innerText = 'Attributes'
+                th2.innerText = 'Name = Value'
             } else {
                 th2.innerText = attributes
             }
