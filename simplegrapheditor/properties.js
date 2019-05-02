@@ -15,9 +15,9 @@ function createProperties(){
             let props = selected.getAttributes()
             console.log(props.length)
             for(i = 0; i < props.length; i+=2){
-                
                 ctx.fillStyle = "black"
-                ctx.fillText(props[i](), i * 13 + 50, 230)
+                ctx.font = "15px Arial";
+                ctx.fillText(props[i](), i * 23 + 50, 237)
             }
 
             props = []
