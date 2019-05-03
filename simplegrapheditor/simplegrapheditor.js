@@ -27,6 +27,8 @@ function createPoint(x, y){
   }
 }
 
+
+
 function createGraph(getNodePrototypes, getEdgePrototypes) {
   let nodes = []
   let edges = []
