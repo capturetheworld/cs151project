@@ -22,7 +22,8 @@ button {
     margin-left: 3;
 }
 
-canvasbutton {
+
+#canvasbutton {
     width: 50;
     height: 50;
     margin-left: 3;

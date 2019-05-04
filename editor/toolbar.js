@@ -7,6 +7,7 @@ class Toolbar {
         ]
 
         this.edges = [
+          createLineEdge2(),
           createLineEdge2()
         ]
         this.toolbarGraph = graph
@@ -40,14 +41,16 @@ class Toolbar {
 
         //Draw Edge Buttons
         for (const e of this.edges) {
-            var buttonArea = document.getElementById('toolbarDiv')
+            const buttonArea = document.getElementById('toolbarDiv')
+            const canvas = document.createElement('canvas')
+            canvas.id = 'canvasbutton' + nodeIndex
+            canvas.style.position = 'relative'
+            canvas.width = 45
+            canvas.height = 45
             var button = document.createElement('button')
-            var canvas = document.createElement('canvas')
             button.type = 'button'
             button.style.position = 'relative'
             button.id = 'button' + nodeIndex
-            canvas.style.position = 'relative'
-            canvas.id = 'canvasbutton' + nodeIndex
             buttonArea.appendChild(button)
             button.appendChild(canvas)
             e.setElementID('canvasbutton' + nodeIndex)
@@ -62,8 +65,8 @@ class Toolbar {
             }
             let s = createPointNode()
             let f = createPointNode()
-            s.translate(5,45)
-            f.translate(45,5)
+            s.translate(5,40)
+            f.translate(30,10)
             e.connect(s,f)
             e.draw()
             nodeIndex++
