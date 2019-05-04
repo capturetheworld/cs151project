@@ -6,6 +6,30 @@ function drawGrabber(x, y) {
     ctx.fillRect(x - size / 2, y - size / 2, size, size)
 }
 
+function createLineEdge2() {
+    let start = undefined
+    let end = undefined
+    return {
+        setElementID: (newElementID) => {
+            elementID = newElementID
+        },
+        connect: (s, e) => {
+            start = s
+            end = e
+        },
+        draw: () => {
+            let canvas = document.getElementById(elementID)
+            const ctx = canvas.getContext('2d')
+            ctx.beginPath()
+            const p = center(start.getBounds()) // Just pick the center of the bounds for now
+            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
+            ctx.moveTo(p.x, p.y)
+            ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
+            ctx.stroke()
+        }
+    }
+}
+
 function createNode(x, y, s, c, id, nm, attr) {
     let size = s
     let color = c
@@ -101,6 +125,9 @@ function createCircleNode(x, y, s, c) {
     let color = c
 
     return {
+        setElementID: (newElementID) => {
+            elementID = newElementID
+        },
         getBounds: () => {
             return {
                 x: x,
@@ -208,4 +235,5 @@ function createLineEdge() {
             ctx.stroke()
         }
     }
+
 }

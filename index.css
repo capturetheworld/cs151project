@@ -4,7 +4,7 @@
 
 .noselect {
 
- user-select: none; 
+ user-select: none;
  /*disable selection of text*/
 
 }
@@ -19,6 +19,13 @@ button {
     width: 50;
     height: 50;
     z-index: 3;
+    margin-left: 3;
+}
+
+
+#canvasbutton {
+    width: 50;
+    height: 50;
     margin-left: 3;
 }
 
