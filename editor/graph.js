@@ -27,8 +27,11 @@ class Graph {
         for (const m of this.edges) {
             m.draw()
         }
+        let index = 0;
         for (const n of this.nodes) {
             n.draw()
+            n.setNodeID(index)
+            index++
         }
         //Delete later
         // for (const n of this.nvPairs) {

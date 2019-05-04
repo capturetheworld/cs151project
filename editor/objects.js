@@ -13,7 +13,11 @@ function createNode(x, y, s, c, id, nm, attr) {
     let name = nm
     let attributes = attr
     let nvPairs = []
+    let nodeID = undefined
     return {
+        setNodeID: (newNodeID) => {
+            nodeID = newNodeID
+        },
         addNVPair: (newNVPair) => {
             nvPairs.push(newNVPair)
         },
@@ -67,7 +71,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             for(const n of nvPairs) {
                 let tr = document.createElement('tr')
                 let div = document.createElement('div')
-                div.id = 'nvRow' + rowIndex
+                div.id = nodeID + 'nvRow' + rowIndex
                 div.innerText = 'hello'
 
                 tr.appendChild(div)
@@ -75,15 +79,16 @@ function createNode(x, y, s, c, id, nm, attr) {
                 rowIndex++
             }
 
+            table.appendChild(tableBody)
+            body.appendChild(table)
+
             rowIndex = 0
             for(const n of nvPairs) {
-                n.setElementID('nvRow' + rowIndex)
-                n.draw()
+                n.setElementID(nodeID + 'nvRow' + rowIndex)
+                n.drawInCanvas()
                 rowIndex++
             }
 
-            table.appendChild(tableBody)
-            body.appendChild(table)
         },
 
         getElementID: ()=>{
@@ -152,6 +157,28 @@ function createNVPair() {
             let table = document.createElement('table')
             table.style.fontSize = 5
             table.style.position = 'absolute'
+            table.style.backgroundColor = "white"
+            table.style.left = 5
+            table.style.top = 5
+            table.width = 10
+
+            let tableBody = document.createElement('tbody')
+            table.appendChild(tableBody)
+
+            let tr = document.createElement('tr')
+            let th = document.createElement('th')
+            th.innerText = name + ' = ' + value
+            tr.appendChild(th)
+            tableBody.appendChild(tr)
+
+            body.appendChild(table)
+
+        },
+
+        drawInCanvas: () => {
+            let body = document.getElementById(elementID)
+            let table = document.createElement('table')
+            table.style.fontSize = 5
             table.style.backgroundColor = "white"
             table.style.left = 5
             table.style.top = 5
