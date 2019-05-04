@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.addEventListener('mousedown', event => {
         let mousePoint = mouseLocation(event)
         selected = graph.findNode(mousePoint)
+        toolbar.setSelected(selected)
         if (selected !== undefined) {
             dragStartPoint = mousePoint
             dragStartBounds = selected.getBounds()

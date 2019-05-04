@@ -16,6 +16,9 @@ class Toolbar {
         this.name = 'hello'
 
     }
+    setSelected(newSelected) {
+        this.selected = newSelected
+    }
 
     draw() {
         //Draw Object Buttons
