@@ -71,7 +71,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             for(const n of nvPairs) {
                 let tr = document.createElement('tr')
                 let div = document.createElement('div')
-                div.id = nodeID + 'nvRow' + rowIndex
+                div.id =  'nvRow' + rowIndex
                 div.innerText = 'hello'
 
                 tr.appendChild(div)
@@ -84,7 +84,7 @@ function createNode(x, y, s, c, id, nm, attr) {
 
             rowIndex = 0
             for(const n of nvPairs) {
-                n.setElementID(nodeID + 'nvRow' + rowIndex)
+                n.setElementID( 'nvRow' + rowIndex)
                 n.drawInCanvas()
                 rowIndex++
             }
