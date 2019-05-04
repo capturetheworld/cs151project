@@ -12,12 +12,22 @@ class Toolbar {
         this.NVPairs = [
             createNVPair()
         ]
+        this.tools = []
         var dashedEdge = createLineEdge()
         dashedEdge.dashed(true)
         this.edges.push(dashedEdge)
         this.toolbarGraph = graph
-
+        this.selectedTool = undefined
     }
+
+    getSelectedTool() {
+      return this.selectedTool
+    }
+
+    setSelectedTool(elem) {
+      this.selectedTool = elem
+    }
+
     setSelected(newSelected) {
         this.selected = newSelected
     }
@@ -43,6 +53,7 @@ class Toolbar {
                 self.toolbarGraph.draw()
             }
             n.draw()
+            this.tools.push(n)
             nodeIndex++
         }
 
@@ -65,17 +76,16 @@ class Toolbar {
             var self = this
 
             const elem = document.getElementById('button' + nodeIndex);
-            elem.onclick = function () {
-                const n = createNode(60, 60, 200, 'lightgray', 'nodeContainer')
-                self.toolbarGraph.add(n)
-                self.toolbarGraph.draw()
-            }
+            elem.addEventListener('mousedown', event => {
+              this.selectedTool = this.tools[nodeIndex]
+            })
             let s = createPointNode()
             let f = createPointNode()
             s.translate(5, 40)
             f.translate(30, 10)
             e.connect(s, f)
             e.draw()
+            this.tools.push(e)
             nodeIndex++
         }
 
@@ -101,6 +111,7 @@ class Toolbar {
                     self.toolbarGraph.draw()
                 }
             }
+            this.tools.push(n)
             n.draw()
         }
     }
