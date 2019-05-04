@@ -44,7 +44,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             y += dy
         },
         draw: () => {
-            
+
             let body = document.getElementById(elementID)
             var table = document.createElement('table')
             table.style.position = 'absolute'
@@ -342,6 +342,9 @@ function createCurvedLineEdge() {
             ctx.moveTo(p.x, p.y)
             ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.stroke()
+        },
+        testEvent: () => {
+          window.alert("pressed")
         }
     }
 }
