@@ -12,8 +12,15 @@ function createNode(x, y, s, c, id, nm, attr) {
     let elementID = id
     let name = nm
     let attributes = attr
-
+    let nvPairs = []
+    let nodeID = undefined
     return {
+        setNodeID: (newNodeID) => {
+            nodeID = newNodeID
+        },
+        addNVPair: (newNVPair) => {
+            nvPairs.push(newNVPair)
+        },
         setElementID: (newElementID) => {
             elementID = newElementID
         },
@@ -37,6 +44,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             y += dy
         },
         draw: () => {
+
             let body = document.getElementById(elementID)
             var table = document.createElement('table')
             table.style.position = 'absolute'
@@ -46,7 +54,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             table.width = size
 
             var tableBody = document.createElement('tbody')
-            table.appendChild(tableBody)
+
 
             var tr = document.createElement('tr')
             var th = document.createElement('th')
@@ -58,17 +66,29 @@ function createNode(x, y, s, c, id, nm, attr) {
             tr.appendChild(th)
             tableBody.appendChild(tr)
 
-            var tr2 = document.createElement('tr')
-            var th2 = document.createElement('th')
-            if (attributes === undefined){
-                th2.innerText = 'Name = Value'
-            } else {
-                th2.innerText = attributes
-            }
-            tr2.appendChild(th2)
-            tableBody.appendChild(tr2)
+            //Create NV divs
+            let rowIndex = 0
+            for(const n of nvPairs) {
+                let tr = document.createElement('tr')
+                let div = document.createElement('div')
+                div.id =  'nvRow' + rowIndex
+                div.innerText = 'hello'
 
+                tr.appendChild(div)
+                tableBody.appendChild(tr)
+                rowIndex++
+            }
+
+            table.appendChild(tableBody)
             body.appendChild(table)
+
+            rowIndex = 0
+            for(const n of nvPairs) {
+                n.setElementID( 'nvRow' + rowIndex)
+                n.drawInCanvas()
+                rowIndex++
+            }
+
         },
 
         getElementID: ()=>{
@@ -96,11 +116,96 @@ function createNode(x, y, s, c, id, nm, attr) {
     }
 }
 
+function createNVPair() {
+    let x = 100
+    let y = 100
+    let size = 10
+    let parent = undefined
+    let name = 'Name'
+    let value = 'Value'
+    let elementID = undefined
+    return {
+        setParent: (newParent) => {
+            parent = newParent
+        },
+        setElementID: (newID) => {
+            elementID = newID
+        },
+        setName: (newName) => {
+            name = newName
+        },
+        setValue: (newValue) => {
+            value = newValue
+        },
+        getBounds: () => {
+            return {
+                x: x,
+                y: y,
+                width: size,
+                height: size
+            }
+        },
+        contains: p => {
+            return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
+        },
+        translate: (dx, dy) => {
+            x += dx
+            y += dy
+        },
+        draw: () => {
+            let body = document.getElementById(elementID)
+            let table = document.createElement('table')
+            table.style.fontSize = 5
+            table.style.position = 'absolute'
+            table.style.backgroundColor = "white"
+            table.style.left = 5
+            table.style.top = 5
+            table.width = 10
+
+            let tableBody = document.createElement('tbody')
+            table.appendChild(tableBody)
+
+            let tr = document.createElement('tr')
+            let th = document.createElement('th')
+            th.innerText = name + ' = ' + value
+            tr.appendChild(th)
+            tableBody.appendChild(tr)
+
+            body.appendChild(table)
+
+        },
+
+        drawInCanvas: () => {
+            let body = document.getElementById(elementID)
+            let table = document.createElement('table')
+            table.style.fontSize = 5
+            table.style.backgroundColor = "white"
+            table.style.left = 5
+            table.style.top = 5
+            table.width = 10
+
+            let tableBody = document.createElement('tbody')
+            table.appendChild(tableBody)
+
+            let tr = document.createElement('tr')
+            let th = document.createElement('th')
+            th.innerText = name + ' = ' + value
+            tr.appendChild(th)
+            tableBody.appendChild(tr)
+
+            body.appendChild(table)
+        }
+    }
+}
+
 function createCircleNode(x, y, s, c) {
     let size = s
     let color = c
 
     return {
+        setElementID: (newElementID) => {
+            elementID = newElementID
+        },
         getBounds: () => {
             return {
                 x: x,
@@ -187,6 +292,37 @@ function createPointNode() {
 function createLineEdge() {
     let start = undefined
     let end = undefined
+    let dashed = false
+    return {
+        setElementID: (newElementID) => {
+            elementID = newElementID
+        },
+        connect: (s, e) => {
+            start = s
+            end = e
+        },
+        dashed: (boolean) => {
+          dashed = boolean
+        },
+        draw: () => {
+            const canvas = document.getElementById(elementID)
+            const ctx = canvas.getContext('2d')
+            if(dashed) {
+              ctx.setLineDash([4, 4]);
+            }
+            ctx.beginPath()
+            const p = center(start.getBounds()) // Just pick the center of the bounds for now
+            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
+            ctx.moveTo(p.x, p.y)
+            ctx.lineTo(q.x,q.y)
+            ctx.stroke()
+        }
+    }
+}
+
+function createCurvedLineEdge() {
+    let start = undefined
+    let end = undefined
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
@@ -196,7 +332,7 @@ function createLineEdge() {
             end = e
         },
         draw: () => {
-            const canvas = document.getElementById('graphPanel')
+            const canvas = document.getElementById(elementID)
             const ctx = canvas.getContext('2d')
             ctx.beginPath()
             const p = center(start.getBounds()) // Just pick the center of the bounds for now
@@ -204,6 +340,9 @@ function createLineEdge() {
             ctx.moveTo(p.x, p.y)
             ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.stroke()
+        },
+        testEvent: () => {
+          window.alert("pressed")
         }
     }
 }

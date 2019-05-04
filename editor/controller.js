@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
     //Create Property sheet
     const properties = createPropertySheet()
 
-    const e = createLineEdge()
+    //const e = createCurvedLineEdge()
     graph.add(n1)
     graph.add(n2)
     graph.add(n3)
-    graph.connect(e, { x: 20, y: 20 }, { x: 40, y: 40 })
+    //graph.connect(e, { x: 20, y: 20 }, { x: 40, y: 40 })
     graph.draw()
 
     
@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let selected = undefined
     let dragStartPoint = undefined
     let dragStartBounds = undefined
+    let rubberBandStart = undefined
+    let lastMousePoint = undefined
 
     function repaint() {
         panel.innerHTML = ''
@@ -53,22 +55,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
     panel.addEventListener('mousedown', event => {
         let mousePoint = mouseLocation(event)
-        selected = graph.findNode(mousePoint)
-        if (selected !== undefined) {
+        let node = graph.findNode(mousePoint)
+        //need to add edge contains first
+        //let edge = graph.findEdge(mousePoint)
+        let tool = toolbar.getSelectedTool()
+        //selected = graph.findNode(mousePoint)
+        toolbar.setSelected(selected)
+        if(tool === undefined) {
+          if(node !== undefined) {
+            selected = node
             dragStartPoint = mousePoint
-            dragStartBounds = selected.getBounds()
+            dragStartBounds = node.getBounds()
+            properties.setObj(node)
+          }
+          else selected == undefined
+        }
+        else /*if (tool instanceof createEdgeNode) */ {
+          if (node !== undefined) rubberBandStart = mousePoint
+        }
+        /*
+        if (node !== undefined && tool === undefined) {
+            dragStartPoint = mousePoint
+            dragStartBounds = node.getBounds()
 
             // focuses property sheet on new object
             //if(properties.object !=== selected)
-            properties.setObj(selected)
+            properties.setObj(node)
 
             //Right click
             // window.oncontextmenu = function () {
             //     prompt('Node', 'Name', 'Attributes')
             //     return false     // cancel default menu
             // }
+        } */
+        lastMousePoint = mousePoint
+        repaint()
+    })
+
+    panel.addEventListener('mouseup', event => {
+        let tool = toolbar.getSelectedTool()
+        dragStartPoint = undefined
+        dragStartBounds = undefined
+        if(rubberBandStart !== undefined) {
+          let mousePoint = mouseLocation(event)
+          let newEdge = createLineEdge()
+          graph.connect(newEdge,rubberBandStart,mousePoint)
         }
         repaint()
+        lastMousePoint = undefined
+        dragStartBounds = undefined
+        rubberBandStart = undefined
+
+
     })
 
     panel.addEventListener('mousemove', event => {
@@ -84,11 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 mousePoint.y - dragStartPoint.y);
             repaint()
         }
-    })
-
-    panel.addEventListener('mouseup', event => {
-        dragStartPoint = undefined
-        dragStartBounds = undefined
     })
 })
 
