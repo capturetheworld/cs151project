@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             selected = node
             dragStartPoint = mousePoint
             dragStartBounds = node.getBounds()
+            properties.setObj(node)
           }
           else selected == undefined
         }
@@ -98,11 +99,10 @@ document.addEventListener('DOMContentLoaded', function () {
           graph.connect(newEdge,rubberBandStart,mousePoint)
         }
         repaint()
-        selected = undefined
-        dragStartPoint = undefined
+        lastMousePoint = undefined
         dragStartBounds = undefined
         rubberBandStart = undefined
-        lastMousePoint = undefined
+
 
     })
 
