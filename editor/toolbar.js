@@ -43,15 +43,15 @@ class Toolbar {
         }
         let nodeIndex = 0
         for (const n of this.nodes) {
-            var buttonArea = document.getElementById('toolbarDiv')
-            var button = document.createElement('button')
+            let buttonArea = document.getElementById('toolbarDiv')
+            let button = document.createElement('button')
             button.type = 'button'
             button.style.position = 'relative'
             button.id = 'button' + nodeIndex
             buttonArea.appendChild(button)
             n.setElementID('button' + nodeIndex)
 
-            var self = this
+            let self = this
 
             const elem = document.getElementById('button' + nodeIndex);
             elem.onclick = function () {
