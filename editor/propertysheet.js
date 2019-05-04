@@ -27,6 +27,7 @@ function createProp(text, id){
 function createPropertySheet(){
     let container = document.getElementById('propertySheetWrapper')
     let form = document.createElement('form')
+    form.setAttribute.id = "form"
     let getters = []
     let setters = []
 
@@ -35,6 +36,7 @@ function createPropertySheet(){
     let submit = document.createElement('button')
     submit.setAttribute('onclick', "saveProperties()")
     submit.className = "apply"
+    submit.innerHTML = "Save"
     container.appendChild(form)
     container.appendChild(submit)
     
@@ -48,6 +50,7 @@ function createPropertySheet(){
             getters = []
             for(i = 0; i < attributes.length; i+=2){getters.push(attributes[i])}
 
+            
             // gets property setters from odds
             setters = []
             for(i = 1; i < attributes.length; i+=2){setters.push(attributes[i])}
@@ -56,6 +59,8 @@ function createPropertySheet(){
             while(form.firstChild){
                 form.removeChild(form.firstChild)
             }
+            
+            
             // removes old submit button
             while(container.submit){
                 container.removeChild(submit)

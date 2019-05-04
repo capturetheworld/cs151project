@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     const panel = document.getElementById('graphPanel')
-
-
+    
+    
     //Create Graph
     const graph = new Graph()
     const n1 = createCircleNode(10, 10, 20, 'goldenrod')
@@ -21,12 +21,13 @@ document.addEventListener('DOMContentLoaded', function () {
     graph.add(n2)
     graph.add(n3)
     //graph.connect(e, { x: 20, y: 20 }, { x: 40, y: 40 })
-    graph.draw()
-
     
-    panel.width = window.innerWidth
-    panel.height = window.innerHeight
+    
+    resize()
 
+    graph.draw()
+    
+    
     let selected = undefined
     let dragStartPoint = undefined
     let dragStartBounds = undefined
@@ -125,12 +126,25 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 })
 
-window.addEventListener('resize', function () {
+function resize() {
+    console.log("resizing")
     const toolbar = document.getElementById('toolbarDiv')
-    const panel = document.getElementById('graphDiv')
+    const panelDiv = document.getElementById('graphDiv')
+    const panel = document.getElementById('graphPanel')
     const properties = document.getElementById('propertySheetWrapper')
+    
+    let tbHeight = Number(toolbar.clientHeight)
+    let propHeight = Number(properties.clientHeight)
 
     toolbar.width = window.innerWidth
+    panelDiv.style.width = window.innerWidth 
+    panelDiv.style.height = window.innerHeight - tbHeight - propHeight - 13
+
+    console.log(toolbar.clientHeight)
+    console.log(properties.clientHeight)
+    panel.height = window.innerHeight - tbHeight - propHeight
     panel.width = window.innerWidth
-    panel.height = window.innerHeight - toolbar.height - properties.height
-})
+
+}
+
+window.addEventListener('resize', resize)
