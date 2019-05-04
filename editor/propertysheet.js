@@ -79,7 +79,7 @@ function createPropertySheet(){
                 let input = createProp(getters[i](), label)
                 form.appendChild(input)
             }
-            console.log("new save props")
+            
             
             this.saveProperties = function(){  
                 // goes through setters array and 
