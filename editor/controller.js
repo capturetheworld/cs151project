@@ -90,10 +90,11 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 window.addEventListener('resize', function () {
-    const panel = document.getElementById('graphPanel')
-    panel.width = window.innerWidth
-    panel.height = window.innerHeight
+    const toolbar = document.getElementById('toolbarDiv')
+    const panel = document.getElementById('graphDiv')
+    const properties = document.getElementById('propertySheetWrapper')
 
-    const toolbar = document.getElementById('toolbar')
     toolbar.width = window.innerWidth
+    panel.width = window.innerWidth
+    panel.height = window.innerHeight - toolbar.height - properties.height
 })

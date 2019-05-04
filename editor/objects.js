@@ -130,9 +130,7 @@ function createCircleNode(x, y, s, c) {
         },
 
         setSize: (s) => {
-            console.log("setting size")
-            size = s
-
+            size = Number(s)
         },
         getColor: () => {
             return color

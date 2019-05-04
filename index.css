@@ -79,3 +79,7 @@ html, body {
     height: 30;
 
 }
+
+#graphDiv {
+    margin: 0;
+}
