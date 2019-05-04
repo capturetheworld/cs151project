@@ -96,6 +96,66 @@ function createNode(x, y, s, c, id, nm, attr) {
     }
 }
 
+function createNVPair() {
+    let x = 100
+    let y = 100
+    let size = 10
+    let parent = undefined
+    let name = 'Name'
+    let value = 'Value'
+    let elementID = undefined
+    return {
+        setParent: (newParent) => {
+            parent = newParent
+        },
+        setElementID: (newID) => {
+            elementID = newID
+        },
+        setName: (newName) => {
+            name = newName
+        },
+        setValue: (newValue) => {
+            value = newValue
+        },
+        getBounds: () => {
+            return {
+                x: x,
+                y: y,
+                width: size,
+                height: size
+            }
+        },
+        contains: p => {
+            return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
+        },
+        translate: (dx, dy) => {
+            x += dx
+            y += dy
+        },
+        draw: () => {
+            let body = document.getElementById(elementID)
+            let table = document.createElement('table')
+            table.style.fontSize = 5
+            table.style.position = 'absolute'
+            table.style.backgroundColor = "white"
+            table.style.left = 5
+            table.style.top = 5
+            table.width = 10
+
+            let tableBody = document.createElement('tbody')
+            table.appendChild(tableBody)
+
+            let tr = document.createElement('tr')
+            let th = document.createElement('th')
+            th.innerText = name + ' = ' + value
+            tr.appendChild(th)
+            tableBody.appendChild(tr)
+
+            body.appendChild(table)
+        }
+    }
+}
+
 function createCircleNode(x, y, s, c) {
     let size = s
     let color = c
