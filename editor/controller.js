@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Create Property sheet
     const properties = createPropertySheet()
 
-    const e = createLineEdge()
+    const e = createCurvedLineEdge()
     graph.add(n1)
     graph.add(n2)
     graph.add(n3)

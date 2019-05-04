@@ -5,11 +5,13 @@ class Toolbar {
           createNode(14, 7, 0, 'white', 'button', '', ''),
           createNode(14, 7, 0, 'white', 'button', '', '')
         ]
-
+        var dashedEdge = createLineEdge()
+        dashedEdge.dashed(true)
         this.edges = [
+          createCurvedLineEdge(),
           createLineEdge(),
-          createLineEdge()
         ]
+        this.edges.push(dashedEdge)
         this.toolbarGraph = graph
         this.name = 'hello'
 
