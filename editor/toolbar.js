@@ -30,9 +30,11 @@ class Toolbar {
 
             const elem = document.getElementById('button' + nodeIndex);
             elem.onclick = function () {
+                
                 const n = createNode(60, 60, 200, 'lightgray', 'nodeContainer')
                 self.toolbarGraph.add(n)
                 self.toolbarGraph.draw()
+
             }
             n.draw()
             nodeIndex++
