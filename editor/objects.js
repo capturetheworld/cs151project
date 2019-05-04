@@ -14,6 +14,7 @@ function createNode(x, y, s, c, id, nm, attr) {
     let attributes = attr
     let nvPairs = []
     let nodeID = undefined
+    let prototype = 'genericNode'
     return {
         setNodeID: (newNodeID) => {
             nodeID = newNodeID
@@ -105,6 +106,10 @@ function createNode(x, y, s, c, id, nm, attr) {
             name = nm
         },
 
+        getPrototype: () => {
+          return prototype
+        },
+
         getAttributes(){
              // format:  getter (even index), setter (odd)
             return [
@@ -124,6 +129,7 @@ function createNVPair() {
     let name = 'Name'
     let value = 'Value'
     let elementID = undefined
+    let prototype = 'NVpair'
     return {
         setParent: (newParent) => {
             parent = newParent
@@ -151,6 +157,9 @@ function createNVPair() {
         translate: (dx, dy) => {
             x += dx
             y += dy
+        },
+        getPrototype: () => {
+          return prototype
         },
         draw: () => {
             let body = document.getElementById(elementID)
@@ -201,6 +210,7 @@ function createNVPair() {
 function createCircleNode(x, y, s, c) {
     let size = s
     let color = c
+    let prototype = 'circleNode'
 
     return {
         setElementID: (newElementID) => {
@@ -245,6 +255,9 @@ function createCircleNode(x, y, s, c) {
         setColor: (c) => {
             console.log("setting color")
             color = c
+        },
+        getPrototype: () => {
+          return prototype
         },
         getAttributes(){
             // format:  getter (even index), setter (odd)
@@ -295,6 +308,7 @@ function createLineEdge() {
     let start = undefined
     let end = undefined
     let dashed = false
+    let prototype = 'genericEdge'
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
@@ -305,6 +319,10 @@ function createLineEdge() {
         },
         dashed: (boolean) => {
           dashed = boolean
+          if(dashed) prototype = 'dashedEdge'
+        },
+        getPrototype: () => {
+          return prototype
         },
         draw: () => {
             const canvas = document.getElementById(elementID)
@@ -325,6 +343,7 @@ function createLineEdge() {
 function createCurvedLineEdge() {
     let start = undefined
     let end = undefined
+    let prototype = 'curvedEdge'
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
@@ -343,8 +362,8 @@ function createCurvedLineEdge() {
             ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.stroke()
         },
-        testEvent: () => {
-          window.alert("pressed")
-        }
+        getPrototype: () => {
+          return prototype
+        },
     }
 }

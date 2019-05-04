@@ -53,7 +53,7 @@ class Toolbar {
                 self.toolbarGraph.draw()
             }
             n.draw()
-            this.tools.push(n)
+            this.tools.push(n.getPrototype())
             nodeIndex++
         }
 
@@ -77,7 +77,7 @@ class Toolbar {
 
             const elem = document.getElementById('button' + nodeIndex);
             elem.addEventListener('mousedown', event => {
-              this.selectedTool = this.tools[nodeIndex]
+              this.selectedTool = e.getPrototype()
             })
             let s = createPointNode()
             let f = createPointNode()
@@ -85,7 +85,7 @@ class Toolbar {
             f.translate(30, 10)
             e.connect(s, f)
             e.draw()
-            this.tools.push(e)
+            this.tools.push(e.getPrototype())
             nodeIndex++
         }
 
@@ -111,7 +111,7 @@ class Toolbar {
                     self.toolbarGraph.draw()
                 }
             }
-            this.tools.push(n)
+            this.tools.push(n.getPrototype())
             n.draw()
         }
     }
