@@ -2,6 +2,12 @@
     border: solid black thin; 
 } */
 
+.noselect {
+
+ user-select: none; 
+ /*disable selection of text*/
+
+}
 #toolbarDiv {
     border-bottom: solid black thin;
     border-top: 0px;
