@@ -3,7 +3,6 @@ class Toolbar {
     constructor(graph) {
         this.nodes = [
             createNode(14, 7, 0, 'white', 'button', '', ''),
-            createNode(14, 7, 0, 'white', 'button', '', '')
         ]
         this.edges = [
             createCurvedLineEdge(),
