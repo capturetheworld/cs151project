@@ -2,8 +2,15 @@
     border: solid black thin;
 } */
 
+.noselect {
+
+ user-select: none; 
+ /*disable selection of text*/
+
+}
 #toolbarDiv {
     border-bottom: solid black thin;
+    border-top: 0px;
     background-color: lightgray;
     padding: 10px;
 }
@@ -31,6 +38,10 @@ td, th {
 html, body {
     height: 100%;
     width: 100%;
+    margin-top:0px;
+    margin-left:0px;
+    margin-right:0px;
+    margin-bottom:0px;
 }
 
 .container {

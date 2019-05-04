@@ -27,6 +27,8 @@ function createPoint(x, y){
   }
 }
 
+
+
 function createGraph(getNodePrototypes, getEdgePrototypes) {
   let nodes = []
   let edges = []
@@ -596,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function mouseLocation(event) {
-        var rect = panel.getBoundingClientRect();
+        let rect = panel.getBoundingClientRect();
         return {
         x: event.clientX - rect.left,
         y: event.clientY - rect.top,

@@ -14,6 +14,7 @@ function createSimpleGraph() {
             nodeTypes = [
                 createCircleNode("black"),
                 createCircleNode("white"),
+                createCircleNode("orange"),
             ]
             return nodeTypes
         }, 
