@@ -148,7 +148,7 @@ function createCircleNode(x, y, s, c) {
                 this.getColor, this.setColor
             ]
         }
-    
+
     }
 }
 
@@ -167,10 +167,32 @@ function center(rect) {
     return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 }
 }
 
+function createPointNode() {
+   let x = 0
+   let y = 0
+   return {
+       getBounds: () => {
+           return {
+               x: x,
+               y: y,
+               width: 0,
+               height: 0
+           }
+        },
+        translate: (dx, dy) => {
+            x += dx
+            y += dy
+        }
+    }
+}
+
 function createLineEdge() {
     let start = undefined
     let end = undefined
     return {
+        setElementID: (newElementID) => {
+            elementID = newElementID
+        },
         connect: (s, e) => {
             start = s
             end = e
