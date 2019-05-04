@@ -31,9 +31,26 @@ class Toolbar {
         this.selected = newSelected
     }
 
+    drawGrabberButton() {
+      var buttonArea = document.getElementById('toolbarDiv')
+      var button = document.createElement('button')
+      button.type = 'button'
+      button.style.position = 'relative'
+      button.id = 'button0'
+      buttonArea.appendChild(button)
+      var self = this
+      const elem = document.getElementById('button0')
+      elem.addEventListener('mousedown', event => {
+        this.selectedTool = undefined
+      })
+      this.tools.push(undefined)
+      buttonArea.appendChild(button)
+    }
+
     draw() {
         //Draw Object Buttons
-        let nodeIndex = 0
+        this.drawGrabberButton()
+        let nodeIndex = 1
         for (const n of this.nodes) {
             var buttonArea = document.getElementById('toolbarDiv')
             var button = document.createElement('button')
@@ -74,7 +91,7 @@ class Toolbar {
 
             var self = this
 
-            const elem = document.getElementById('button' + nodeIndex);
+            const elem = document.getElementById('button' + nodeIndex)
             elem.addEventListener('mousedown', event => {
               this.selectedTool = e.getPrototype()
             })

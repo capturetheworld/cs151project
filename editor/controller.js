@@ -120,8 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
         lastMousePoint = undefined
         dragStartBounds = undefined
         rubberBandStart = undefined
-
-
     })
 
     panel.addEventListener('mousemove', event => {
