@@ -3,7 +3,6 @@ class Toolbar {
     constructor(graph) {
         this.nodes = [
             createNode(14, 7, 0, 'white', 'button', '', ''),
-            createNode(14, 7, 0, 'white', 'button', '', '')
         ]
         this.edges = [
             createCurvedLineEdge(),
@@ -32,9 +31,26 @@ class Toolbar {
         this.selected = newSelected
     }
 
+    drawGrabberButton() {
+      var buttonArea = document.getElementById('toolbarDiv')
+      var button = document.createElement('button')
+      button.type = 'button'
+      button.style.position = 'relative'
+      button.id = 'button0'
+      buttonArea.appendChild(button)
+      var self = this
+      const elem = document.getElementById('button0')
+      elem.addEventListener('mousedown', event => {
+        this.selectedTool = undefined
+      })
+      this.tools.push(undefined)
+      buttonArea.appendChild(button)
+    }
+
     draw() {
         //Draw Object Buttons
-        let nodeIndex = 0
+        this.drawGrabberButton()
+        let nodeIndex = 1
         for (const n of this.nodes) {
             var buttonArea = document.getElementById('toolbarDiv')
             var button = document.createElement('button')
@@ -53,7 +69,7 @@ class Toolbar {
                 self.toolbarGraph.draw()
             }
             n.draw()
-            this.tools.push(n)
+            this.tools.push(n.getPrototype())
             nodeIndex++
         }
 
@@ -75,9 +91,9 @@ class Toolbar {
 
             var self = this
 
-            const elem = document.getElementById('button' + nodeIndex);
+            const elem = document.getElementById('button' + nodeIndex)
             elem.addEventListener('mousedown', event => {
-              this.selectedTool = this.tools[nodeIndex]
+              this.selectedTool = e.getPrototype()
             })
             let s = createPointNode()
             let f = createPointNode()
@@ -85,7 +101,7 @@ class Toolbar {
             f.translate(30, 10)
             e.connect(s, f)
             e.draw()
-            this.tools.push(e)
+            this.tools.push(e.getPrototype())
             nodeIndex++
         }
 
@@ -111,7 +127,7 @@ class Toolbar {
                     self.toolbarGraph.draw()
                 }
             }
-            this.tools.push(n)
+            this.tools.push(n.getPrototype())
             n.draw()
         }
     }

@@ -14,6 +14,7 @@ function createNode(x, y, s, c, id, nm, attr) {
     let attributes = attr
     let nvPairs = []
     let nodeID = undefined
+    let prototype = 'genericNode'
     return {
         setNodeID: (newNodeID) => {
             nodeID = newNodeID
@@ -72,16 +73,12 @@ function createNode(x, y, s, c, id, nm, attr) {
                 let tr = document.createElement('tr')
                 let div = document.createElement('div')
                 div.id =  'nvRow' + rowIndex
-                div.innerText = 'hello'
-
                 tr.appendChild(div)
                 tableBody.appendChild(tr)
                 rowIndex++
             }
-
             table.appendChild(tableBody)
             body.appendChild(table)
-
             rowIndex = 0
             for(const n of nvPairs) {
                 n.setElementID( 'nvRow' + rowIndex)
@@ -105,6 +102,10 @@ function createNode(x, y, s, c, id, nm, attr) {
             name = nm
         },
 
+        getPrototype: () => {
+          return prototype
+        },
+
         getAttributes(){
              // format:  getter (even index), setter (odd)
             return [
@@ -124,6 +125,7 @@ function createNVPair() {
     let name = 'Name'
     let value = 'Value'
     let elementID = undefined
+    let prototype = 'NVpair'
     return {
         setParent: (newParent) => {
             parent = newParent
@@ -152,6 +154,9 @@ function createNVPair() {
             x += dx
             y += dy
         },
+        getPrototype: () => {
+          return prototype
+        },
         draw: () => {
             let body = document.getElementById(elementID)
             let table = document.createElement('table')
@@ -178,11 +183,11 @@ function createNVPair() {
         drawInCanvas: () => {
             let body = document.getElementById(elementID)
             let table = document.createElement('table')
-            table.style.fontSize = 5
-            table.style.backgroundColor = "white"
+            table.style.fontSize = 10
+            table.style.backgroundColor = 'lightgray'
             table.style.left = 5
             table.style.top = 5
-            table.width = 10
+            table.width = 60
 
             let tableBody = document.createElement('tbody')
             table.appendChild(tableBody)
@@ -201,6 +206,7 @@ function createNVPair() {
 function createCircleNode(x, y, s, c) {
     let size = s
     let color = c
+    let prototype = 'circleNode'
 
     return {
         setElementID: (newElementID) => {
@@ -243,6 +249,9 @@ function createCircleNode(x, y, s, c) {
         setColor: (c) => {
             console.log("setting color")
             color = c
+        },
+        getPrototype: () => {
+          return prototype
         },
         getAttributes(){
             // format:  getter (even index), setter (odd)
@@ -293,6 +302,7 @@ function createLineEdge() {
     let start = undefined
     let end = undefined
     let dashed = false
+    let prototype = 'genericEdge'
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
@@ -303,6 +313,10 @@ function createLineEdge() {
         },
         dashed: (boolean) => {
           dashed = boolean
+          if(dashed) prototype = 'dashedEdge'
+        },
+        getPrototype: () => {
+          return prototype
         },
         draw: () => {
             const canvas = document.getElementById(elementID)
@@ -323,6 +337,7 @@ function createLineEdge() {
 function createCurvedLineEdge() {
     let start = undefined
     let end = undefined
+    let prototype = 'curvedEdge'
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
@@ -341,8 +356,8 @@ function createCurvedLineEdge() {
             ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.stroke()
         },
-        testEvent: () => {
-          window.alert("pressed")
-        }
+        getPrototype: () => {
+          return prototype
+        },
     }
 }

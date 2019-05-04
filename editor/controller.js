@@ -71,9 +71,16 @@ document.addEventListener('DOMContentLoaded', function () {
           }
           else selected == undefined
         }
-        else /*if (tool instanceof createEdgeNode) */ {
+        else if (tool === 'curvedEdge')  {
           if (node !== undefined) rubberBandStart = mousePoint
         }
+        else if (tool === 'genericEdge')  {
+          if (node !== undefined) rubberBandStart = mousePoint
+        }
+        else if (tool === 'dashedEdge')  {
+          if (node !== undefined) rubberBandStart = mousePoint
+        }
+
         /*
         if (node !== undefined && tool === undefined) {
             dragStartPoint = mousePoint
@@ -99,15 +106,24 @@ document.addEventListener('DOMContentLoaded', function () {
         dragStartBounds = undefined
         if(rubberBandStart !== undefined) {
           let mousePoint = mouseLocation(event)
-          let newEdge = createLineEdge()
-          graph.connect(newEdge,rubberBandStart,mousePoint)
+          if(tool === 'curvedEdge'){
+            let newEdge = createCurvedLineEdge()
+            graph.connect(newEdge,rubberBandStart,mousePoint)
+          }
+          else if(tool === 'genericEdge'){
+            let newEdge = createLineEdge()
+            graph.connect(newEdge,rubberBandStart,mousePoint)
+          }
+          else if(tool === 'dashedEdge'){
+            let newEdge = createLineEdge()
+            newEdge.dashed(true)
+            graph.connect(newEdge,rubberBandStart,mousePoint)
+          }
         }
         repaint()
         lastMousePoint = undefined
         dragStartBounds = undefined
         rubberBandStart = undefined
-
-
     })
 
     panel.addEventListener('mousemove', event => {
