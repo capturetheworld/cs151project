@@ -12,8 +12,11 @@ function createNode(x, y, s, c, id, nm, attr) {
     let elementID = id
     let name = nm
     let attributes = attr
-
+    let nvPairs = []
     return {
+        addNVPair: (newNVPair) => {
+            nvPairs.push(newNVPair)
+        },
         setElementID: (newElementID) => {
             elementID = newElementID
         },
@@ -37,6 +40,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             y += dy
         },
         draw: () => {
+            
             let body = document.getElementById(elementID)
             var table = document.createElement('table')
             table.style.position = 'absolute'
@@ -46,7 +50,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             table.width = size
 
             var tableBody = document.createElement('tbody')
-            table.appendChild(tableBody)
+
 
             var tr = document.createElement('tr')
             var th = document.createElement('th')
@@ -58,16 +62,27 @@ function createNode(x, y, s, c, id, nm, attr) {
             tr.appendChild(th)
             tableBody.appendChild(tr)
 
-            var tr2 = document.createElement('tr')
-            var th2 = document.createElement('th')
-            if (attributes === undefined){
-                th2.innerText = 'Name = Value'
-            } else {
-                th2.innerText = attributes
-            }
-            tr2.appendChild(th2)
-            tableBody.appendChild(tr2)
+            //Create NV divs
+            let rowIndex = 0
+            for(const n of nvPairs) {
+                let tr = document.createElement('tr')
+                let div = document.createElement('div')
+                div.id = 'nvRow' + rowIndex
+                div.innerText = 'hello'
 
+                tr.appendChild(div)
+                tableBody.appendChild(tr)
+                rowIndex++
+            }
+
+            rowIndex = 0
+            for(const n of nvPairs) {
+                n.setElementID('nvRow' + rowIndex)
+                n.draw()
+                rowIndex++
+            }
+
+            table.appendChild(tableBody)
             body.appendChild(table)
         },
 

@@ -91,14 +91,17 @@ class Toolbar {
 
             let self = this
             document.getElementById('buttonEdge').onclick = function () {
-                const n = createNVPair()
-                //CHANGE THIS TO THE NODE
-                n.setElementID('nodeContainer')
-                self.toolbarGraph.addNVPair(n)
-                self.toolbarGraph.draw()
+                if (self.selected == undefined) {
+                    alert("Nothing Selected.")
+                } else {
+                    const n = createNVPair()
+                    self.selected.addNVPair(n)
+                    // n.setElementID('nodeContainer')
+                    self.toolbarGraph.addNVPair(n)
+                    self.toolbarGraph.draw()
+                }
             }
             n.draw()
         }
-
     }
 }

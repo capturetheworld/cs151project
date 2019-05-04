@@ -31,9 +31,9 @@ class Graph {
             n.draw()
         }
         //Delete later
-        for (const n of this.nvPairs) {
-            n.draw()
-        }
+        // for (const n of this.nvPairs) {
+        //     n.draw()
+        // }
     }
     connect(e, p1, p2) {
         const n1 = this.findNode(p1)
