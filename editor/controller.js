@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    const panel = document.getElementById('graphPanel')
+
+
     //Create Graph
     const graph = new Graph()
     const n1 = createCircleNode(10, 10, 20, 'goldenrod')
@@ -20,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     graph.connect(e, { x: 20, y: 20 }, { x: 40, y: 40 })
     graph.draw()
 
-    const panel = document.getElementById('graphPanel')
+    
     panel.width = window.innerWidth
     panel.height = window.innerHeight
 
