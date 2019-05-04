@@ -21,11 +21,12 @@ class Graph {
         for (const n of this.nodes) {
             n.draw()
         }
-  
+
     }
     connect(e, p1, p2) {
         const n1 = this.findNode(p1)
         const n2 = this.findNode(p2)
+        e.setElementID('graphPanel')
         if (n1 !== undefined && n2 !== undefined) {
             e.connect(n1, n2)
             this.edges.push(e)

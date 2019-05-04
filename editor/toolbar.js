@@ -7,8 +7,8 @@ class Toolbar {
         ]
 
         this.edges = [
-          createLineEdge2(),
-          createLineEdge2()
+          createLineEdge(),
+          createLineEdge()
         ]
         this.toolbarGraph = graph
         this.name = 'hello'
