@@ -12,7 +12,7 @@ class Graph {
     }
     addNVPair(n) {
         this.nvPairs.push(n)
-    } 
+    }
     findNode(p) {
         //Check if NVPair has been clicked
         for (let i = this.nvPairs.length - 1; i >= 0; i--) {
@@ -27,11 +27,15 @@ class Graph {
         }
         return undefined
     }
- 
+
     draw() {
         clearCanvas()
         for (const m of this.edges) {
-            m.draw()
+          //need to reset the built in dashed function for canvas
+          const canvas = document.getElementById(elementID)
+          const ctx = canvas.getContext('2d')
+          ctx.setLineDash([0, 0]);
+          m.draw()
         }
         let index = 0;
         for (const n of this.nodes) {
