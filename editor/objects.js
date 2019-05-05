@@ -56,7 +56,6 @@ function createNode(x, y, s, c, id, nm, attr) {
 
             var tableBody = document.createElement('tbody')
 
-
             var tr = document.createElement('tr')
             var th = document.createElement('th')
             if (name === undefined){
@@ -72,7 +71,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             for(const n of nvPairs) {
                 let tr = document.createElement('tr')
                 let div = document.createElement('div')
-                div.id =  'nvRow' + rowIndex
+                div.id =  nodeID +  'nvRow' + rowIndex
                 tr.appendChild(div)
                 tableBody.appendChild(tr)
                 rowIndex++
@@ -81,7 +80,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             body.appendChild(table)
             rowIndex = 0
             for(const n of nvPairs) {
-                n.setElementID( 'nvRow' + rowIndex)
+                n.setElementID(nodeID +  'nvRow' + rowIndex)
                 n.drawInCanvas()
                 rowIndex++
             }
@@ -120,16 +119,16 @@ function createNode(x, y, s, c, id, nm, attr) {
 function createNVPair() {
     let x = 100
     let y = 100
-    let size = 10
-    let parent = undefined
+    let size = 100
+    // let parent = undefined
     let name = 'Name'
     let value = 'Value'
     let elementID = undefined
     let prototype = 'NVpair'
     return {
-        setParent: (newParent) => {
-            parent = newParent
-        },
+        // setParent: (newParent) => {
+        //     parent = newParent
+        // },
         setElementID: (newID) => {
             elementID = newID
         },
@@ -162,7 +161,7 @@ function createNVPair() {
             let table = document.createElement('table')
             table.style.fontSize = 5
             table.style.position = 'absolute'
-            table.style.backgroundColor = "white"
+            table.style.backgroundColor = 'white'
             table.style.left = 5
             table.style.top = 5
             table.width = 10
@@ -183,11 +182,11 @@ function createNVPair() {
         drawInCanvas: () => {
             let body = document.getElementById(elementID)
             let table = document.createElement('table')
-            table.style.fontSize = 10
+            table.style.fontSize = 12
             table.style.backgroundColor = 'lightgray'
             table.style.left = 5
             table.style.top = 5
-            table.width = 60
+            table.width = size
 
             let tableBody = document.createElement('tbody')
             table.appendChild(tableBody)
