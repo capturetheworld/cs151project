@@ -107,16 +107,21 @@ body {
 
 #graphDiv {
     margin: 0;
+  
 
 }
 
 #graphPanel {
     position: absolute;
+     border-style: solid;
+  border-color: green;
     
 }
 
 #nodeContainer {
     position: absolute;
+     border-style: solid;
+     border-color: red;
     
 }
 
