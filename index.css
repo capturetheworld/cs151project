@@ -13,6 +13,7 @@
     border-top: 0px;
     background-color: lightgray;
     padding: 10px;
+    height: auto;
 }
 
 button {
@@ -20,6 +21,7 @@ button {
     height: 50;
     z-index: 3;
     margin-left: 3;
+    
 }
 
 
@@ -49,17 +51,29 @@ html, body {
     margin-left:0px;
     margin-right:0px;
     margin-bottom:0px;
+    padding: 0;
 }
 
+
+body {
+    margin: 0;
+    padding: 0;
+}
 .container {
-    height: 90%;
+    
     background: #ffffff;
     border: solid black thin;
 }
 
 #propertySheetWrapper {
     background-color: lightgrey;
-
+    margin: 0;
+    display: inline-flex;
+    height: fit-content;
+    padding: 6px;
+    align-items: flex-end;
+    flex-direction: row;
+    
 }
 
 .input {
@@ -71,7 +85,7 @@ html, body {
     display: inline;
     width: max-content;
     padding: 4px 0 4px 0;
-    margin: auto 10px auto 0px;
+    margin: auto 1em auto 1em;
 
 }
 
@@ -85,5 +99,35 @@ html, body {
 .apply {
     width: 50;
     height: 30;
+    margin: 0 15px 0 5px;
+    border-radius: 3px;
+    order: 1;
 
+}
+
+#graphDiv {
+    margin: 0;
+
+}
+
+#graphPanel {
+    position: absolute;
+    
+}
+
+#nodeContainer {
+    position: absolute;
+    
+}
+
+form {
+    margin: 0;
+    height: fit-content;
+    margin-block-end: 0;
+    display: inline;
+    order: 2;
+    font-family: system-ui;
+    font-size: .8em;
+    padding-bottom: 1px;
+    
 }
