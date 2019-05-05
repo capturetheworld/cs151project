@@ -144,20 +144,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function resize() {
     
-    const toolbar = document.getElementById('toolbarDiv')
-    const panelDiv = document.getElementById('graphDiv')
-    const panel = document.getElementById('graphPanel')
-    const properties = document.getElementById('propertySheetWrapper')
+    let toolbar = document.getElementById('toolbarDiv')
+    let panelDiv = document.getElementById('graphDiv')
+    let panel = document.getElementById('graphPanel')
+    let properties = document.getElementById('propertySheetWrapper')
     
     let tbHeight = Number(toolbar.clientHeight)
     let propHeight = Number(properties.clientHeight)
 
     toolbar.width = window.innerWidth
-    panelDiv.style.width = window.innerWidth 
-    panelDiv.style.height = window.innerHeight - tbHeight - propHeight - 13
+    panelDiv.style.width = window.innerWidth
+    panelDiv.style.height = window.innerHeight - tbHeight - propHeight - 17
 
     panel.height = window.innerHeight - tbHeight - propHeight
-    panel.width = window.innerWidth
+    panel.width = window.innerWidth 
 
 }
 
