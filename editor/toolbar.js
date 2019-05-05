@@ -83,7 +83,7 @@ class Toolbar {
             n.setElementID('button' + nodeIndex)
 
             let self = this
-
+            /* old clicker
             const elem = document.getElementById('button' + nodeIndex);
             elem.onclick = function () {
                 const buttons = document.getElementsByTagName('button')
@@ -96,6 +96,11 @@ class Toolbar {
                 self.toolbarGraph.add(n)
                 self.toolbarGraph.draw()
             }
+            */
+            const elem = document.getElementById('button' + nodeIndex)
+            elem.addEventListener('mousedown', event => {
+              this.selectedTool = n.getPrototype()
+            })
             n.draw()
             this.tools.push(n.getPrototype())
             nodeIndex++
