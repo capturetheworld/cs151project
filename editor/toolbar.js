@@ -38,11 +38,12 @@ class Toolbar {
       button.type = 'button'
       button.style.position = 'relative'
       button.id = 'button0'
+      button.style.backgroundColor = 'white'
       buttonArea.appendChild(button)
       document.getElementById('button0').onclick = function () {
         const buttons = document.getElementsByTagName('button')
         for (const n of buttons) {
-            n.style.backgroundColor = 'silver'
+            n.style.backgroundColor = 'white'
         }
         button.style.backgroundColor = 'lightblue'
     }
@@ -68,8 +69,6 @@ class Toolbar {
     }
 
     draw() {
-        //Draw grabbed/selector button
-
         //Draw Node Buttons
         this.drawGrabberButton()
         let nodeIndex = 1
@@ -79,6 +78,7 @@ class Toolbar {
             button.type = 'button'
             button.style.position = 'relative'
             button.id = 'button' + nodeIndex
+            button.style.backgroundColor = 'white'
             buttonArea.appendChild(button)
             n.setElementID('button' + nodeIndex)
 
@@ -88,7 +88,7 @@ class Toolbar {
             elem.onclick = function () {
                 const buttons = document.getElementsByTagName('button')
                 for (const n of buttons) {
-                    n.style.backgroundColor = 'silver'
+                    n.style.backgroundColor = 'white'
                 }
                 button.style.backgroundColor = 'lightblue'
                 const n = createNode(60, 60, 100, 'lightgray', 'nodeContainer')
@@ -113,6 +113,7 @@ class Toolbar {
             button.type = 'button'
             button.style.position = 'relative'
             button.id = 'button' + nodeIndex
+            button.style.backgroundColor = 'white'
             buttonArea.appendChild(button)
             button.appendChild(canvas)
             e.setElementID('canvasbutton' + nodeIndex)
@@ -122,7 +123,7 @@ class Toolbar {
             elem.onclick = function () {
                 const buttons = document.getElementsByTagName('button')
                 for (const n of buttons) {
-                    n.style.backgroundColor = 'silver'
+                    n.style.backgroundColor = 'white'
                 }
                 button.style.backgroundColor = 'lightblue'
             }
@@ -146,6 +147,7 @@ class Toolbar {
             button.type = 'button'
             button.style.position = 'relative'
             button.id = 'buttonEdge'
+            button.style.backgroundColor = 'white'
             buttonArea.appendChild(button)
             n.setElementID('buttonEdge')
 
