@@ -348,9 +348,29 @@ function createLineEdge() {
     let dashed = false
     let prototype = 'genericEdge'
     let objectType = 'edge'
+    let startlabel = ''
+    let endlabel = ''
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
+        },
+        getStartLabel: ()=> {
+            return startlabel
+        },
+        setStartLabel: (newlable) => {
+            startlabel = newlable
+        },
+        getEndLabel: () => {
+            return endlabel
+        },
+        setEndLabel: (newlabel) => {
+            endlabel = newlabel
+        },
+        getAttributes(){
+            return [
+                this.getStartLabel, this.setStartLabel,
+                this.getEndLabel, this.setEndLabel
+            ]
         },
         connect: (s, e) => {
             start = s
@@ -390,6 +410,18 @@ function createLineEdge() {
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(q.x,q.y)
             ctx.stroke()
+
+            ctx.font = "12px Helvetica";
+            ctx.textAlign = "center"; 
+            
+            startX = p.x + (q.x - p.x)/3.7 
+            startY = p.y + (q.y - p.y)/3.7
+            endX = q.x + (p.x - q.x)/3.7
+            endY = q.y + (p.y - q.y)/3.7
+            ctx.fillText(startlabel, startX, startY);
+            ctx.fillText(endlabel, endX, endY);
+
+
         },
     }
 }
