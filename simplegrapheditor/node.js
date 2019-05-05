@@ -17,6 +17,14 @@ function createGenericNode (x,y,id){
     	return id
     }
 
+    setX: newX =>{
+      x = newX;
+    },
+
+    setY: newY =>{
+     y = newY;
+    },
+
 
 	}
 
