@@ -45,6 +45,18 @@ class Toolbar {
       })
       this.tools.push(undefined)
       buttonArea.appendChild(button)
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext("2d")
+      canvas.id = 'canvasbutton0'
+      canvas.style.position = 'relative'
+      canvas.width = 45
+      canvas.height = 45
+      ctx.fillStyle = "purple"
+      ctx.fillRect(3, 8, 6, 6)
+      ctx.fillRect(3, 30, 6, 6)
+      ctx.fillRect(24, 8, 6, 6)
+      ctx.fillRect(24, 30, 6, 6)
+      button.appendChild(canvas)
     }
 
     draw() {
