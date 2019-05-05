@@ -13,6 +13,12 @@ class Graph {
     addNVPair(n) {
         this.nvPairs.push(n)
     }
+    findEdge(p) {
+      for (let i = this.edges.length - 1; i>= 0; i--) {
+        const e = this.edges[i]
+        if (e.contains(p)) return e
+      }
+    }
     findNode(p) {
         //Check if NVPair has been clicked
         for (let i = this.nvPairs.length - 1; i >= 0; i--) {
@@ -52,7 +58,7 @@ class Graph {
         e.setElementID('graphPanel')
         if (n1 !== undefined && n2 !== undefined) {
             e.connect(n1, n2)
-            this.edges.push(e)
+            this.addEdge(e)
             return true
         }
         return false

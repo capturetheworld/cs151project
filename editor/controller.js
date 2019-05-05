@@ -35,11 +35,17 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.innerHTML = ''
     graph.draw()
     if (selected !== undefined) {
-      const bounds = selected.getBounds()
-      drawGrabber(bounds.x, bounds.y)
-      drawGrabber(bounds.x + bounds.width, bounds.y)
-      drawGrabber(bounds.x, bounds.y + bounds.height)
-      drawGrabber(bounds.x + bounds.width, bounds.y + bounds.height)
+      if (selected.getObjectType() === 'node') {
+        const bounds = selected.getBounds()
+        drawGrabber(bounds.x, bounds.y)
+        drawGrabber(bounds.x + bounds.width, bounds.y)
+        drawGrabber(bounds.x, bounds.y + bounds.height)
+        drawGrabber(bounds.x + bounds.width, bounds.y + bounds.height)
+      }
+      else if (selected.getObjectType() === 'edge') {
+        drawGrabber(selected.getConnectionPoints().x1, selected.getConnectionPoints().y1)
+        drawGrabber(selected.getConnectionPoints().x2, selected.getConnectionPoints().y2)
+      }
     }
   }
 
@@ -55,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let mousePoint = mouseLocation(event)
     let node = graph.findNode(mousePoint)
     //need to add edge contains first
-    //let edge = graph.findEdge(mousePoint)
+    let edge = graph.findEdge(mousePoint)
     let tool = toolbar.getSelectedTool()
     //selected = graph.findNode(mousePoint)
     if (tool === undefined) {
@@ -64,6 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
         dragStartPoint = mousePoint
         dragStartBounds = node.getBounds()
         properties.setObj(node)
+      }
+      else if (edge !== undefined) {
+        selected = edge
       }
       else selected == undefined
     }
@@ -140,12 +149,12 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 function resize() {
-    
+
     let toolbar = document.getElementById('toolbarDiv')
     let panelDiv = document.getElementById('graphDiv')
     let panel = document.getElementById('graphPanel')
     let properties = document.getElementById('propertySheetWrapper')
-    
+
     let tbHeight = Number(toolbar.clientHeight)
     let propHeight = Number(properties.clientHeight)
 

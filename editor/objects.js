@@ -19,6 +19,7 @@ function createNode(x, y, s, c, id, nm, attr) {
     let nvPairs = []
     let nodeID = undefined
     let prototype = 'genericNode'
+    let objectType = 'node'
     return {
         setNodeID: (newNodeID) => {
             nodeID = newNodeID
@@ -119,6 +120,10 @@ function createNode(x, y, s, c, id, nm, attr) {
           return prototype
         },
 
+        getObjectType: () => {
+          return objectType
+        },
+
         getAttributes(){
              // format:  getter (even index), setter (odd)
             return [
@@ -141,6 +146,7 @@ function createNVPair() {
     let value = 'Value'
     let elementID = undefined
     let prototype = 'NVpair'
+    let objectType = 'node'
     return {
         // setParent: (newParent) => {
         //     parent = newParent
@@ -182,6 +188,9 @@ function createNVPair() {
         },
         getPrototype: () => {
           return prototype
+        },
+        getObjectType: () => {
+          return objectType
         },
         draw: () => {
             let body = document.getElementById(elementID)
@@ -238,6 +247,7 @@ function createCircleNode(x, y, s, c) {
     let size = s
     let color = c
     let prototype = 'circleNode'
+    let objectType = 'node'
 
     return {
         setElementID: (newElementID) => {
@@ -283,6 +293,9 @@ function createCircleNode(x, y, s, c) {
         },
         getPrototype: () => {
           return prototype
+        },
+        getObjectType: () => {
+          return objectType
         },
         getAttributes(){
             // format:  getter (even index), setter (odd)
@@ -334,6 +347,7 @@ function createLineEdge() {
     let end = undefined
     let dashed = false
     let prototype = 'genericEdge'
+    let objectType = 'edge'
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
@@ -349,6 +363,21 @@ function createLineEdge() {
         getPrototype: () => {
           return prototype
         },
+        getObjectType: () => {
+          return objectType
+        },
+        getConnectionPoints: () => {
+          return {
+            x1: center(start.getBounds()).x,
+            y1: center(start.getBounds()).y,
+            x2: center(end.getBounds()).x,
+            y2: center(end.getBounds()).y
+          }
+        },
+        contains: aPoint => {
+            return  ptSegDistSq(center(start.getBounds()).x, center(start.getBounds()).y,
+            center(end.getBounds()).x, center(end.getBounds()).y, aPoint.x, aPoint.y) < 2
+        },
         draw: () => {
             const canvas = document.getElementById(elementID)
             const ctx = canvas.getContext('2d')
@@ -361,7 +390,7 @@ function createLineEdge() {
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(q.x,q.y)
             ctx.stroke()
-        }
+        },
     }
 }
 
@@ -369,26 +398,41 @@ function createCurvedLineEdge() {
     let start = undefined
     let end = undefined
     let prototype = 'curvedEdge'
+    let objectType = 'edge'
+    let edgeID = undefined
+    let path = undefined
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
+        },
+        setEdgeID: (id) => {
+            edgeID = id
+        },
+        getEdgeID: () => {
+            return edgeID
         },
         connect: (s, e) => {
             start = s
             end = e
         },
+        getPath: () => {
+          return path
+        },
         draw: () => {
-            const canvas = document.getElementById(elementID)
-            const ctx = canvas.getContext('2d')
-            ctx.beginPath()
-            const p = center(start.getBounds()) // Just pick the center of the bounds for now
-            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
-            ctx.moveTo(p.x, p.y)
-            ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
-            ctx.stroke()
+          const canvas = document.getElementById(elementID)
+          const ctx = canvas.getContext('2d')
+          ctx.beginPath()
+          const p = center(start.getBounds()) // Just pick the center of the bounds for now
+          const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
+          ctx.moveTo(p.x, p.y)
+          ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
+          ctx.stroke()
         },
         getPrototype: () => {
           return prototype
+        },
+        getObjectType: () => {
+          return objectType
         },
     }
 }
