@@ -119,16 +119,16 @@ function createNode(x, y, s, c, id, nm, attr) {
 function createNVPair() {
     let x = 100
     let y = 100
-    let size = 10
-    let parent = undefined
+    let size = 100
+    // let parent = undefined
     let name = 'Name'
     let value = 'Value'
     let elementID = undefined
     let prototype = 'NVpair'
     return {
-        setParent: (newParent) => {
-            parent = newParent
-        },
+        // setParent: (newParent) => {
+        //     parent = newParent
+        // },
         setElementID: (newID) => {
             elementID = newID
         },
@@ -186,7 +186,7 @@ function createNVPair() {
             table.style.backgroundColor = 'lightgray'
             table.style.left = 5
             table.style.top = 5
-            table.width = 100
+            table.width = size
 
             let tableBody = document.createElement('tbody')
             table.appendChild(tableBody)

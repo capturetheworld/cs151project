@@ -3,11 +3,10 @@
 } */
 
 .noselect {
-
- user-select: none;
- /*disable selection of text*/
-
+    user-select: none;
+    /*disable selection of text*/
 }
+
 #toolbarDiv {
     border-bottom: solid black thin;
     border-top: 0px;
@@ -21,9 +20,7 @@ button {
     height: 50;
     z-index: 3;
     margin-left: 3;
-    
 }
-
 
 #canvasbutton {
     width: 50;
@@ -35,32 +32,31 @@ table {
     /* border-radius: 10px; */
     border: solid black thin;
     /* border:1px solid black; */
-    border-collapse:collapse;
+    border-collapse: collapse;
 }
 
 td, th {
     border: 1px solid #999;
     padding: 0.5rem;
     text-align: left;
-  }
+}
 
 html, body {
     height: 100%;
     width: 100%;
-    margin-top:0px;
-    margin-left:0px;
-    margin-right:0px;
-    margin-bottom:0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
     padding: 0;
 }
-
 
 body {
     margin: 0;
     padding: 0;
 }
+
 .container {
-    
     background: #ffffff;
     border: solid black thin;
 }
@@ -73,7 +69,6 @@ body {
     padding: 6px;
     align-items: flex-end;
     flex-direction: row;
-    
 }
 
 .input {
@@ -86,7 +81,6 @@ body {
     width: max-content;
     padding: 4px 0 4px 0;
     margin: auto 1em auto 1em;
-
 }
 
 .label {
@@ -102,27 +96,22 @@ body {
     margin: 0 15px 0 5px;
     border-radius: 3px;
     order: 1;
-
 }
 
 #graphDiv {
     margin: 0;
-  
-
 }
 
 #graphPanel {
     position: absolute;
-     border-style: solid;
-  border-color: green;
-    
+    border-style: solid;
+    border-color: green;
 }
 
 #nodeContainer {
     position: absolute;
-     border-style: solid;
-     border-color: red;
-    
+    border-style: solid;
+    border-color: red;
 }
 
 form {
@@ -134,5 +123,4 @@ form {
     font-family: system-ui;
     font-size: .8em;
     padding-bottom: 1px;
-    
 }

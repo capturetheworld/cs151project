@@ -14,7 +14,13 @@ class Graph {
         this.nvPairs.push(n)
     } 
     findNode(p) {
-        //ADD LOGIC TO FIND NV PAIR
+        //Check if NVPair has been clicked
+        for (let i = this.nvPairs.length - 1; i >= 0; i--) {
+            const n = this.nvPairs[i]
+            if (n.contains(p)) return n
+        }
+
+        //check if the node has been clicked
         for (let i = this.nodes.length - 1; i >= 0; i--) {
             const n = this.nodes[i]
             if (n.contains(p)) return n
@@ -30,8 +36,6 @@ class Graph {
         let index = 0;
         for (const n of this.nodes) {
             n.draw()
-            // n.setNodeID(index)
-            // index++
         }
         //Delete later
         // for (const n of this.nvPairs) {
