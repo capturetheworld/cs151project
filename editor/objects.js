@@ -3,7 +3,7 @@ function drawGrabber(x, y) {
     const size = 5;
     const canvas = document.getElementById('graphPanel')
     const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = 'purple'
     ctx.fillRect(x - size / 2, y - size / 2, size, size)
 }
 
@@ -421,9 +421,9 @@ function createLineEdge() {
 
             // Start and end labels
             ctx.font = "12px Helvetica";
-            ctx.textAlign = "center"; 
-            
-            startX = p.x + (q.x - p.x)/3.4 
+            ctx.textAlign = "center";
+
+            startX = p.x + (q.x - p.x)/3.4
             startY = p.y + (q.y - p.y)/3.4 - 4
             midX = p.x + (q.x - p.x)/2
             midY = p.y + (q.y - p.y)/2 - 4
