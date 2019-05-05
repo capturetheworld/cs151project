@@ -54,6 +54,7 @@ html, body {
 .container {
     height: 90%;
     background: #ffffff;
+    border: solid black thin;
 }
 
 #propertySheetWrapper {
