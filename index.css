@@ -97,6 +97,14 @@ body {
     margin: 0 15px 0 5px;
     border-radius: 3px;
     order: 1;
+    color: white;
+    background-color: green;
+    outline: none;
+    
+}
+.apply:active {
+    background-color: rgb(3, 150, 3);
+    color: yellow;
 }
 
 #graphDiv {
