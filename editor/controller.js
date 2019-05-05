@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       else if (edge !== undefined) {
         selected = edge
+        properties.setObj(edge)
       }
       else selected == undefined
     }

@@ -349,6 +349,7 @@ function createLineEdge() {
     let prototype = 'genericEdge'
     let objectType = 'edge'
     let startlabel = ''
+    let midlabel = ''
     let endlabel = ''
     return {
         setElementID: (newElementID) => {
@@ -360,6 +361,12 @@ function createLineEdge() {
         setStartLabel: (newlable) => {
             startlabel = newlable
         },
+        getMidLabel: () => {
+            return midlabel
+        },
+        setMidLabel: (newlabel) => {
+            midlabel = newlabel
+        },
         getEndLabel: () => {
             return endlabel
         },
@@ -369,6 +376,7 @@ function createLineEdge() {
         getAttributes(){
             return [
                 this.getStartLabel, this.setStartLabel,
+                this.getMidLabel, this.setMidLabel,
                 this.getEndLabel, this.setEndLabel
             ]
         },
@@ -411,16 +419,19 @@ function createLineEdge() {
             ctx.lineTo(q.x,q.y)
             ctx.stroke()
 
+            // Start and end labels
             ctx.font = "12px Helvetica";
             ctx.textAlign = "center"; 
             
-            startX = p.x + (q.x - p.x)/3.7 
-            startY = p.y + (q.y - p.y)/3.7
-            endX = q.x + (p.x - q.x)/3.7
-            endY = q.y + (p.y - q.y)/3.7
+            startX = p.x + (q.x - p.x)/3.4 
+            startY = p.y + (q.y - p.y)/3.4 - 4
+            midX = p.x + (q.x - p.x)/2
+            midY = p.y + (q.y - p.y)/2 - 4
+            endX = q.x + (p.x - q.x)/3.4
+            endY = q.y + (p.y - q.y)/3.4 - 4
             ctx.fillText(startlabel, startX, startY);
+            ctx.fillText(midlabel, midX, midY);
             ctx.fillText(endlabel, endX, endY);
-
 
         },
     }
