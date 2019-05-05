@@ -48,7 +48,7 @@ class Toolbar {
     }
 
     draw() {
-        //Draw Object Buttons
+        //Draw Node Buttons
         this.drawGrabberButton()
         let nodeIndex = 1
         for (const n of this.nodes) {
@@ -65,6 +65,7 @@ class Toolbar {
             const elem = document.getElementById('button' + nodeIndex);
             elem.onclick = function () {
                 const n = createNode(60, 60, 200, 'lightgray', 'nodeContainer')
+                n.setNodeID(nodeIndex)
                 self.toolbarGraph.add(n)
                 self.toolbarGraph.draw()
             }

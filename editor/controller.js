@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const panel = document.getElementById('graphPanel')
     
-    
     //Create Graph
     const graph = new Graph()
     const n1 = createCircleNode(10, 10, 20, 'goldenrod')
     const n2 = createCircleNode(30, 30, 20, 'blue')
     const n3 = createNode(100, 100, 100, 'lightgray', 'nodeContainer')
+    n3.setNodeID(0)
 
     //Create Toolbar
     const toolbar = new Toolbar(graph)
@@ -22,11 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
     graph.add(n3)
     //graph.connect(e, { x: 20, y: 20 }, { x: 40, y: 40 })
     
-    
     resize()
-
     graph.draw()
-    
     
     let selected = undefined
     let dragStartPoint = undefined
@@ -61,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
         //let edge = graph.findEdge(mousePoint)
         let tool = toolbar.getSelectedTool()
         //selected = graph.findNode(mousePoint)
-        toolbar.setSelected(selected)
         if(tool === undefined) {
           if(node !== undefined) {
             selected = node
@@ -97,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // }
         } */
         lastMousePoint = mousePoint
+        toolbar.setSelected(selected)
         repaint()
     })
 
