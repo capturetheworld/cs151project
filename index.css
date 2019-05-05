@@ -13,6 +13,7 @@
     background-color: lightgray;
     padding: 10px;
     height: auto;
+    
 }
 
 button {
@@ -44,16 +45,14 @@ td, th {
 html, body {
     height: 100%;
     width: 100%;
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
+    margin: 0;
     padding: 0;
 }
 
 body {
     margin: 0;
     padding: 0;
+    
 }
 
 .container {
@@ -65,15 +64,12 @@ body {
     background-color: lightgrey;
     margin: 0;
     display: inline-flex;
-    height: fit-content;
-    padding: 6px;
+    
+    padding: .5%;
     align-items: flex-end;
     flex-direction: row;
-<<<<<<< HEAD
-    width: 100%;
+    width: 99%;
     
-=======
->>>>>>> 420be6a3a344d7febf4cbcc352291c09bb6df300
 }
 
 .input {

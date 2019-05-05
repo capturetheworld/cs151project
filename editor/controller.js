@@ -151,10 +151,10 @@ function resize() {
 
     toolbar.width = window.innerWidth
     panelDiv.style.width = window.innerWidth
-    panelDiv.style.height = window.innerHeight - tbHeight - propHeight - 17
+    panelDiv.style.height = window.innerHeight - tbHeight - propHeight - 2
 
-    panel.height = window.innerHeight - tbHeight - propHeight
-    panel.width = window.innerWidth 
+    panel.height = window.innerHeight - tbHeight - propHeight - 7
+    panel.width = window.innerWidth - 6
 
 }
 
