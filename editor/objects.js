@@ -1,5 +1,5 @@
 function drawGrabber(x, y) {
-    
+
     const size = 5;
     const canvas = document.getElementById('graphPanel')
     const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
@@ -45,7 +45,7 @@ function createNode(x, y, s, c, id, nm, attr) {
         contains: p => {
             // this creates a circle
             //return (x + width / 2 - p.x) ** 2 + (y + height / 2 - p.y) ** 2 <= size ** 2 / 4
-            
+
             // rectangle
             return(Math.abs(x + width/2 - p.x) < width/2 && Math.abs(y + height/2 - p.y) < height/2 )
         },
@@ -62,9 +62,9 @@ function createNode(x, y, s, c, id, nm, attr) {
             table.style.left = x
             table.style.top = y
             table.width = width
-            
+
             var tableBody = document.createElement('tbody')
-            
+
             var tr = document.createElement('tr')
             var th = document.createElement('th')
             if (name === undefined){
@@ -73,10 +73,10 @@ function createNode(x, y, s, c, id, nm, attr) {
                 th.innerText = name
             }
             tr.appendChild(th)
-            
+
             tableBody.appendChild(tr)
 
-            
+
             //Create NV divs
             let rowIndex = 0
             for(const n of nvPairs) {
@@ -85,7 +85,7 @@ function createNode(x, y, s, c, id, nm, attr) {
                 div.id =  nodeID +  'nvRow' + rowIndex
                 tr.appendChild(div)
                 tableBody.appendChild(tr)
-                
+
                 rowIndex++
             }
             table.appendChild(tableBody)
@@ -98,7 +98,7 @@ function createNode(x, y, s, c, id, nm, attr) {
             }
             // gets height of table
             height = tableBody.offsetHeight
-            
+
 
         },
 
@@ -204,7 +204,7 @@ function createNVPair() {
 
             let tableBody = document.createElement('tbody')
             table.appendChild(tableBody)
-            
+
             let tr = document.createElement('tr')
             let th = document.createElement('th')
             th.innerText = name + ' = ' + value
@@ -226,7 +226,7 @@ function createNVPair() {
 
             let tableBody = document.createElement('tbody')
             table.appendChild(tableBody)
-            
+
 
             let tr = document.createElement('tr')
             let th = document.createElement('th')
@@ -236,9 +236,9 @@ function createNVPair() {
             body.appendChild(table)
             tr.offsetWidth = width
             th.offsetWidth = width
-            
-            
-            
+
+
+
         }
     }
 }
@@ -376,7 +376,7 @@ function createLineEdge() {
         },
         contains: aPoint => {
             return  ptSegDistSq(center(start.getBounds()).x, center(start.getBounds()).y,
-            center(end.getBounds()).x, center(end.getBounds()).y, aPoint.x, aPoint.y) < 2
+            center(end.getBounds()).x, center(end.getBounds()).y, aPoint.x, aPoint.y) < 4
         },
         draw: () => {
             const canvas = document.getElementById(elementID)
