@@ -1,4 +1,5 @@
 function drawGrabber(x, y) {
+    
     const size = 5;
     const canvas = document.getElementById('graphPanel')
     const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
@@ -7,7 +8,10 @@ function drawGrabber(x, y) {
 }
 
 function createNode(x, y, s, c, id, nm, attr) {
+    let width = s
     let size = s
+    let height = 0
+    let parentheight = 55
     let color = c
     let elementID = id
     let name = nm
@@ -34,12 +38,16 @@ function createNode(x, y, s, c, id, nm, attr) {
             return {
                 x: x,
                 y: y,
-                width: size,
-                height: size
+                width: width,
+                height: height
             }
         },
         contains: p => {
-            return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
+            // this creates a circle
+            //return (x + width / 2 - p.x) ** 2 + (y + height / 2 - p.y) ** 2 <= size ** 2 / 4
+            
+            // rectangle
+            return(Math.abs(x + width/2 - p.x) < width/2 && Math.abs(y + height/2 - p.y) < height/2 )
         },
         translate: (dx, dy) => {
             x += dx
@@ -53,10 +61,10 @@ function createNode(x, y, s, c, id, nm, attr) {
             table.style.backgroundColor = color
             table.style.left = x
             table.style.top = y
-            table.width = size
-
+            table.width = width
+            
             var tableBody = document.createElement('tbody')
-
+            
             var tr = document.createElement('tr')
             var th = document.createElement('th')
             if (name === undefined){
@@ -65,8 +73,10 @@ function createNode(x, y, s, c, id, nm, attr) {
                 th.innerText = name
             }
             tr.appendChild(th)
+            
             tableBody.appendChild(tr)
 
+            
             //Create NV divs
             let rowIndex = 0
             for(const n of nvPairs) {
@@ -75,6 +85,7 @@ function createNode(x, y, s, c, id, nm, attr) {
                 div.id =  nodeID +  'nvRow' + rowIndex
                 tr.appendChild(div)
                 tableBody.appendChild(tr)
+                
                 rowIndex++
             }
             table.appendChild(tableBody)
@@ -85,6 +96,9 @@ function createNode(x, y, s, c, id, nm, attr) {
                 n.drawInCanvas()
                 rowIndex++
             }
+            // gets height of table
+            height = tableBody.offsetHeight
+            
 
         },
 
@@ -125,6 +139,8 @@ function createNVPair() {
     let x = 100
     let y = 100
     let size = 100
+    let width = 0
+    let height = 0
     // let parent = undefined
     let name = 'Name'
     let value = 'Value'
@@ -138,8 +154,14 @@ function createNVPair() {
         setElementID: (newID) => {
             elementID = newID
         },
+        getName: () => {
+            return name
+        },
         setName: (newName) => {
             name = newName
+        },
+        getValue: () => {
+            return value
         },
         setValue: (newValue) => {
             value = newValue
@@ -148,12 +170,17 @@ function createNVPair() {
             return {
                 x: x,
                 y: y,
-                width: size,
-                height: size
+                width: width,
+                height: height
             }
         },
+        getAttributes(){
+            return [this.getName, this.setName,
+                    this.getValue, this.setValue]
+        },
         contains: p => {
-            return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
+            //return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
+            return(Math.abs(x + width/2 - p.x) < width/2 && Math.abs(y + height/2 - p.y) < height/2 )
         },
         translate: (dx, dy) => {
             x += dx
@@ -177,7 +204,7 @@ function createNVPair() {
 
             let tableBody = document.createElement('tbody')
             table.appendChild(tableBody)
-
+            
             let tr = document.createElement('tr')
             let th = document.createElement('th')
             th.innerText = name + ' = ' + value
@@ -199,14 +226,19 @@ function createNVPair() {
 
             let tableBody = document.createElement('tbody')
             table.appendChild(tableBody)
+            
 
             let tr = document.createElement('tr')
             let th = document.createElement('th')
             th.innerText = name + ' = ' + value
             tr.appendChild(th)
             tableBody.appendChild(tr)
-
             body.appendChild(table)
+            tr.offsetWidth = width
+            th.offsetWidth = width
+            
+            
+            
         }
     }
 }

@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Create Graph
   const graph = new Graph()
-  const n1 = createCircleNode(10, 10, 20, 'goldenrod')
-  const n2 = createCircleNode(30, 30, 20, 'blue')
-  const n3 = createNode(100, 100, 100, 'lightgray', 'nodeContainer')
-  n3.setNodeID(0)
+  //const n1 = createCircleNode(10, 10, 20, 'goldenrod')
+  //const n2 = createCircleNode(30, 30, 20, 'blue')
+  //const n3 = createNode(100, 100, 100, 'lightgray', 'nodeContainer')
+  //n3.setNodeID(0)
 
   //Create Toolbar
   const toolbar = new Toolbar(graph)
@@ -16,9 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
   //Create Property sheet
   const properties = createPropertySheet()
 
-  graph.add(n1)
-  graph.add(n2)
-  graph.add(n3)
+  //const e = createCurvedLineEdge()
+  //graph.add(n1)
+  //graph.add(n2)
+  //graph.add(n3)
+  //graph.connect(e, { x: 20, y: 20 }, { x: 40, y: 40 })
 
   resize()
   graph.draw()
