@@ -37,10 +37,10 @@ class Toolbar {
       var button = document.createElement('button')
       button.type = 'button'
       button.style.position = 'relative'
-      button.id = 'button0'
+      button.id = 'grabberButton'
       button.style.backgroundColor = 'white'
       buttonArea.appendChild(button)
-      document.getElementById('button0').onclick = function () {
+      document.getElementById('grabberButton').onclick = function () {
         const buttons = document.getElementsByTagName('button')
         for (const n of buttons) {
             n.style.backgroundColor = 'white'
@@ -48,7 +48,7 @@ class Toolbar {
         button.style.backgroundColor = 'lightblue'
     }
       var self = this
-      const elem = document.getElementById('button0')
+      const elem = document.getElementById('grabberButton')
       elem.addEventListener('mousedown', event => {
         this.selectedTool = undefined
       })
@@ -56,7 +56,7 @@ class Toolbar {
       buttonArea.appendChild(button)
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext("2d")
-      canvas.id = 'canvasbutton0'
+      canvas.id = 'grabberButtonCanvas'
       canvas.style.position = 'relative'
       canvas.width = 45
       canvas.height = 45
@@ -71,33 +71,32 @@ class Toolbar {
     draw() {
         //Draw Node Buttons
         this.drawGrabberButton()
-        let nodeIndex = 1
+        let nodeIndex = 0
         for (const n of this.nodes) {
             let buttonArea = document.getElementById('toolbarDiv')
             let button = document.createElement('button')
             button.type = 'button'
             button.style.position = 'relative'
-            button.id = 'button' + nodeIndex
+            button.id = 'nodeButton' + nodeIndex
             button.style.backgroundColor = 'white'
             buttonArea.appendChild(button)
-            n.setElementID('button' + nodeIndex)
+            n.setElementID('nodeButton' + nodeIndex)
 
             let self = this
-            /* old clicker
-            const elem = document.getElementById('button' + nodeIndex);
+            const elem = document.getElementById('nodeButton' + nodeIndex)
             elem.onclick = function () {
                 const buttons = document.getElementsByTagName('button')
                 for (const n of buttons) {
                     n.style.backgroundColor = 'white'
                 }
-                button.style.backgroundColor = 'lightblue'
-                const n = createNode(60, 60, 100, 'lightgray', 'nodeContainer')
-                n.setNodeID(nodeIndex)
-                self.toolbarGraph.add(n)
-                self.toolbarGraph.draw()
+                elem.style.backgroundColor = 'lightblue'
+                // const n = createNode(60, 60, 100, 'lightgray', 'nodeContainer')
+                // n.setNodeID(nodeIndex)
+                // self.toolbarGraph.add(n)
+                // self.toolbarGraph.draw()
             }
-            */
-            const elem = document.getElementById('button' + nodeIndex)
+            
+            
             elem.addEventListener('mousedown', event => {
               this.selectedTool = n.getPrototype()
             })
@@ -107,30 +106,31 @@ class Toolbar {
         }
 
         //Draw Edge Buttons
+        let edgeIndex = 0
         for (const e of this.edges) {
             const buttonArea = document.getElementById('toolbarDiv')
             const canvas = document.createElement('canvas')
-            canvas.id = 'canvasbutton' + nodeIndex
+            canvas.id = 'edgeButtonCanvas' + edgeIndex
             canvas.style.position = 'relative'
             canvas.width = 45
             canvas.height = 45
             var button = document.createElement('button')
             button.type = 'button'
             button.style.position = 'relative'
-            button.id = 'button' + nodeIndex
+            button.id = 'edgeButton' + edgeIndex
             button.style.backgroundColor = 'white'
             buttonArea.appendChild(button)
             button.appendChild(canvas)
-            e.setElementID('canvasbutton' + nodeIndex)
+            e.setElementID('edgeButtonCanvas' + edgeIndex)
 
             var self = this
-            const elem = document.getElementById('button' + nodeIndex)
+            const elem = document.getElementById('edgeButton' + edgeIndex)
             elem.onclick = function () {
                 const buttons = document.getElementsByTagName('button')
                 for (const n of buttons) {
                     n.style.backgroundColor = 'white'
                 }
-                button.style.backgroundColor = 'lightblue'
+                elem.style.backgroundColor = 'lightblue'
             }
             elem.addEventListener('mousedown', event => {
                 this.selectedTool = e.getPrototype()
@@ -142,7 +142,7 @@ class Toolbar {
             e.connect(s, f)
             e.draw()
             this.tools.push(e.getPrototype())
-            nodeIndex++
+            edgeIndex++
         }
 
         //Draw NVPair Button(s)
@@ -151,13 +151,13 @@ class Toolbar {
             let button = document.createElement('button')
             button.type = 'button'
             button.style.position = 'relative'
-            button.id = 'buttonEdge'
+            button.id = 'nvButton'
             button.style.backgroundColor = 'white'
             buttonArea.appendChild(button)
-            n.setElementID('buttonEdge')
+            n.setElementID('nvButton')
 
             let self = this
-            document.getElementById('buttonEdge').onclick = function () {
+            document.getElementById('nvButton').onclick = function () {
                 if (self.selected == undefined) {
                     alert("Nothing Selected.")
                 } else {
