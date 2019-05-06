@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lineedge.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lineedge.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+        * Creates a line edge
+    */
+
+function createLineEdge() {
+    let start = undefined
+    let end = undefined
+    let dashed = false
+    let prototype = 'genericEdge'
+    let objectType = 'edge'
+    let startlabel = ''
+    let midlabel = ''
+    let endlabel = ''
+    let p = undefined
+    let q = undefined
+    let arrowTypeStart = 'none'
+    let arrowTypeEnd = 'none'
+
+    return {
+        setElementID: (newElementID) => {
+            elementID = newElementID
+        },
+        getStartLabel: () => {
+            return startlabel
+        },
+        setStartLabel: (newlable) => {
+            startlabel = newlable
+        },
+        getMidLabel: () => {
+            return midlabel
+        },
+        setMidLabel: (newlabel) => {
+            midlabel = newlabel
+        },
+        getEndLabel: () => {
+            return endlabel
+        },
+        setEndLabel: (newlabel) => {
+            endlabel = newlabel
+        },
+
+        setArrowHeadStart: (type) => {
+            arrowTypeStart = type
+        },
+        getArrowHeadStart: () => {
+            return arrowTypeStart
+        },
+        setArrowHeadEnd: (type) => {
+            arrowTypeEnd = type
+        },
+        getArrowHeadEnd: () => {
+            return arrowTypeEnd
+        },
+
+
+        getAttributes() {
+            return [
+                this.getStartLabel, this.setStartLabel,
+                this.getMidLabel, this.setMidLabel,
+                this.getEndLabel, this.setEndLabel,
+                this.getArrowHeadStart, this.setArrowHeadStart,
+                this.getArrowHeadEnd, this.setArrowHeadEnd
+            ]
+        },
+        connect: (s, e) => {
+            start = s
+            end = e
+        },
+        dashed: (boolean) => {
+            dashed = boolean
+            if (dashed) prototype = 'dashedEdge'
+        },
+        getPrototype: () => {
+            return prototype
+        },
+        getObjectType: () => {
+            return objectType
+        },
+        getConnectionPoints: () => {
+            return {
+                x1: p.x,
+                y1: p.y,
+                x2: q.x,
+                y2: q.y
+            }
+        },
+        contains: aPoint => {
+            return ptSegDistSq(p.x, p.y, q.x, q.y, aPoint.x, aPoint.y) &lt; 4
+        },
+        draw: () => {
+            const canvas = document.getElementById(elementID)
+            const ctx = canvas.getContext('2d')
+            if (dashed) {
+                ctx.setLineDash([4, 4]);
+            }
+            ctx.beginPath()
+            p = center(start.getBounds()) // Just pick the center of the bounds for now
+            q = centerAll(end.getBounds(),{x: p.x, y: p.y}) // Not the "connection points" that graphed2 uses
+            p = centerAll(start.getBounds(), {x: q.x, y: q.y})
+            ctx.moveTo(p.x, p.y)
+            ctx.lineTo(q.x, q.y)
+            ctx.stroke()
+            if (arrowTypeEnd !== 'none') {
+              let arrowgraphic = arrowHeadGenerator(p, q, arrowTypeEnd)
+              if(arrowTypeEnd === 'BlackDiamond' || arrowTypeEnd === 'BlackTriangle') {
+                ctx.fillStyle = 'black'
+                ctx.fill(arrowgraphic)
+              }
+              ctx.setLineDash([0, 0])
+              ctx.stroke(arrowgraphic)
+            }
+            if (arrowTypeStart !== 'none') {
+              let arrowgraphic = arrowHeadGenerator(q, p, arrowTypeStart)
+              if(arrowTypeStart === 'BlackDiamond' || arrowTypeStart === 'BlackTriangle') {
+                ctx.fillStyle = 'black'
+                ctx.fill(arrowgraphic)
+              }
+              ctx.setLineDash([0, 0])
+              ctx.stroke(arrowgraphic)
+            }
+
+            // Start and end labels
+            ctx.font = "12px Helvetica";
+            ctx.textAlign = "center";
+
+            startX = p.x + (q.x - p.x) / 3.4
+            startY = p.y + (q.y - p.y) / 3.4 - 4
+            midX = p.x + (q.x - p.x) / 2
+            midY = p.y + (q.y - p.y) / 2 - 4
+            endX = q.x + (p.x - q.x) / 3.4
+            endY = q.y + (p.y - q.y) / 3.4 - 4
+            ctx.fillText(startlabel, startX, startY);
+            ctx.fillText(midlabel, midX, midY);
+            ctx.fillText(endlabel, endX, endY);
+
+        },
+    }
+
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#createLineEdge">createLineEdge</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.1</a> on Mon May 06 2019 16:29:22 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

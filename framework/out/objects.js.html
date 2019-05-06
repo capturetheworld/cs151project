@@ -26,7 +26,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** 
+            <pre class="prettyprint source linenums"><code>/**
         * Sets the tool the user selected
         * @arg {int} x - the x position
         * @arg {int} y - the y position
@@ -36,15 +36,15 @@ function drawGrabber(x, y) {
     const canvas = document.getElementById('graphPanel')
     const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
     ctx.fillStyle = 'purple'
-    ctx.fillRect(x - size + 2 , y - size  , size, size)
+    ctx.fillRect(x - size + 2, y - size, size, size)
 }
 
-/** 
+/**
         * Sets the tool the user selected
         * @arg {int} x - the x position
         * @arg {int} y - the y position
         * @arg {int} s -  the size
-        * @arg {string} - color
+        * @arg {string} c - color
         * @arg {int} id - id of the node
         * @return {createNode~setNodeID} - inner function: sets node ID
         * @return {createNode~addNVPair} - adds a Name Value pair - inner
@@ -77,6 +77,14 @@ function createNode(x, y, s, c, id) {
             name = newName
             attributes = newAttributes
         },
+        /**
+        * Returns the bounds
+        * @return {int} x - x position
+        * @return {int} y - y position
+        * @return {int} width- width of the bounds
+        * @return {int} height- height of the bounds
+    */
+
         getBounds: () => {
             return {
                 x: x,
@@ -85,13 +93,28 @@ function createNode(x, y, s, c, id) {
                 height: height
             }
         },
+        /**
+            * Checks if point is contained
+            * @arg {int} p - a point
+            * @return {boolean} - if the point is inside or not
+        */
+
         contains: p => {
             return (Math.abs(x + width / 2 - p.x) &lt; width / 2 &amp;&amp; Math.abs(y + height / 2 - p.y) &lt; height / 2)
         },
+        /**
+        * Moves the x y position
+        * @arg {int} dx - change of x position
+        * @arg {int} dy - change of y position
+    */
         translate: (dx, dy) => {
             x += dx
             y += dy
         },
+
+        /**
+        * Draws the node
+        */
         draw: () => {
             let body = document.getElementById(elementID)
             var table = document.createElement('table')
@@ -138,12 +161,26 @@ function createNode(x, y, s, c, id) {
 
 
         },
+
         getElementID: () => {
             return elementID
         },
         getObjectName: () => {
             return name
         },
+        /**
+                * Sets the tool the user selected
+                * @arg {int} x - the x position
+                * @arg {int} y - the y position
+                * @arg {int} s -  the size
+                * @arg {string} c - color
+                * @arg {int} id - id of the node
+                * @return {createNode~setNodeID} - inner function: sets node ID
+                * @return {createNode~addNVPair} - adds a Name Value pair - inner
+                * @return {createNode~setElementID} - sets element id to a new ID
+            */
+
+
         setObjectName: (nm) => {
             name = nm
         },
@@ -177,6 +214,41 @@ function center(rect) {
     return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 }
 }
 
+function centerEastWest(rect, fromP) {
+    if (fromP.x >= rect.x)
+        return { x: rect.x + rect.width, y: rect.y + rect.height / 2 }
+    else if (fromP.x &lt; rect.x)
+        return { x: rect.x, y: rect.y + rect.height / 2 }
+}
+
+function centerAll(rect, fromP) {
+    let centerX = rect.x + rect.width / 2;
+    let centerY = rect.y + rect.height / 2;
+    let dx = fromP.x - centerX;
+    let dy = fromP.y - centerY;
+    if (dx &lt; dy &amp;&amp; dx >= -dy)
+        return {
+            x: rect.x + rect.width / 2,
+            y: rect.y + rect.height
+        }
+    else if (dx >= dy &amp;&amp; dx >= -dy)
+        return {
+            x: rect.x + rect.width,
+            y: rect.y + rect.height / 2
+        }
+    else if (dx &lt; -dy &amp;&amp; dx >= dy)
+        return {
+            x: rect.x + rect.width / 2,
+            y: rect.y
+        }
+    else if (dx &lt; dy &amp;&amp; dx &lt; -dy)
+        return {
+            x: rect.x,
+            y: rect.y + rect.height / 2
+        }
+    else return other;
+}
+
 function createPointNode() {
     let x = 0
     let y = 0
@@ -195,9 +267,6 @@ function createPointNode() {
         }
     }
 }
-
-
-
 </code></pre>
         </article>
     </section>
@@ -208,13 +277,13 @@ function createPointNode() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#createNode">createNode</a></li><li><a href="global.html#drawGrabber">drawGrabber</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#contains">contains</a></li><li><a href="global.html#createNode">createNode</a></li><li><a href="global.html#draw">draw</a></li><li><a href="global.html#drawGrabber">drawGrabber</a></li><li><a href="global.html#getBounds">getBounds</a></li><li><a href="global.html#setObjectName">setObjectName</a></li><li><a href="global.html#translate">translate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.1</a> on Mon May 06 2019 05:45:17 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.1</a> on Mon May 06 2019 16:29:26 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
