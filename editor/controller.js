@@ -78,8 +78,9 @@ document.addEventListener('DOMContentLoaded', function () {
       else selected == undefined
     }
     else if (tool === 'genericNode'){
-      const n = createNode(mousePoint.x, mousePoint.y, 100, 'lightgray', 'nodeContainer')
+      const n = createNode(mousePoint.x, mousePoint.y, 120, 'lightgray', 'nodeContainer')
       n.setNodeID(graph.nodes.length)
+      n.setObjectName('Object Name')
       graph.add(n)
       graph.draw()
     }
