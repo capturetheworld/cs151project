@@ -49,14 +49,6 @@ function createCurvedLineEdge() {
             p = center(start.getBounds()) // Just pick the center of the bounds for now
             q = centerEastWest(end.getBounds(),{x: p.x, y: p.y}) // Not the "connection points" that graphed2 uses
             p = centerEastWest(start.getBounds(), {x: q.x, y: q.y})
-            /*
-            path.moveTo(p.x, p.y)
-            path.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
-            ctx.beginPath()
-            ctx.moveTo(p.x, p.y)
-            ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
-            ctx.stroke()
-            */
             let y1 = p.y
             let y2 = q.y
             let xmid = (p.x + q.x) / 2
