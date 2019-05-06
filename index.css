@@ -49,6 +49,7 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+     background-color: #5674a0;
 }
 
 body {
@@ -112,13 +113,17 @@ body {
 #graphPanel {
     position: absolute;
     border-style: solid;
-    border-color: green;
+    border-color: white;
+    border-radius: 1em;
+    /*background-color: #474d56;*/
 }
 
 #nodeContainer {
     position: absolute;
-    border-style: solid;
-    border-color: red;
+    /*border-style: solid;
+    border-color: black;
+    background-color: #474d56;
+}*/
 }
 
 form {
