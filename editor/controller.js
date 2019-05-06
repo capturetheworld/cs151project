@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Create Graph
   const graph = new Graph()
+
+  //Prototype Objects
   //const n1 = createCircleNode(10, 10, 20, 'goldenrod')
   //const n2 = createCircleNode(30, 30, 20, 'blue')
   //const n3 = createNode(100, 100, 100, 'lightgray', 'nodeContainer')
@@ -15,12 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Create Property sheet
   const properties = createPropertySheet()
-
-  //const e = createCurvedLineEdge()
-  //graph.add(n1)
-  //graph.add(n2)
-  //graph.add(n3)
-  //graph.connect(e, { x: 20, y: 20 }, { x: 40, y: 40 })
 
   resize()
   graph.draw()
@@ -93,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
     else if (tool === 'dashedEdge') {
       if (node !== undefined) rubberBandStart = mousePoint
     }
-
     /*
     if (node !== undefined && tool === undefined) {
         dragStartPoint = mousePoint
@@ -157,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 function resize() {
-
     let toolbar = document.getElementById('toolbarDiv')
     let panelDiv = document.getElementById('graphDiv')
     let panel = document.getElementById('graphPanel')
@@ -172,7 +166,6 @@ function resize() {
 
     panel.height = window.innerHeight - tbHeight - propHeight - 7
     panel.width = window.innerWidth - 6
-
 }
 
 window.addEventListener('resize', resize)

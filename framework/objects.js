@@ -1,5 +1,4 @@
 function drawGrabber(x, y) {
-
     const size = 5;
     const canvas = document.getElementById('graphPanel')
     const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
@@ -15,7 +14,6 @@ function createNode(x, y, s, c, id) {
     let color = c
     let elementID = id
     let name = ''
-    // let attributes = attr
     let nvPairs = []
     let nodeID = undefined
     let prototype = 'genericNode'
@@ -43,10 +41,6 @@ function createNode(x, y, s, c, id) {
             }
         },
         contains: p => {
-            // this creates a circle
-            //return (x + width / 2 - p.x) ** 2 + (y + height / 2 - p.y) ** 2 <= size ** 2 / 4
-
-            // rectangle
             return (Math.abs(x + width / 2 - p.x) < width / 2 && Math.abs(y + height / 2 - p.y) < height / 2)
         },
         translate: (dx, dy) => {
@@ -117,7 +111,6 @@ function createNode(x, y, s, c, id) {
         getAttributes() {
             // format:  getter (even index), setter (odd)
             return [
-                
                 this.getObjectName, this.setObjectName
             ]
         }

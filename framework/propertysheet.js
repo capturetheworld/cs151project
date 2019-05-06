@@ -1,5 +1,4 @@
 function createProp(text, id){
-    
     // create prop wrapper
     let prop = document.createElement('div')
     prop.className = "prop"
@@ -58,7 +57,6 @@ function createPropertySheet(){
                 form.removeChild(form.firstChild)
             }
             
-            
             // removes old submit button
             while(container.submit){
                 container.removeChild(submit)
@@ -76,13 +74,11 @@ function createPropertySheet(){
                 
                 // if a JSON obje
                 // if(typeof getters[i]() == object){
-
                 // }
                 
                 let input = createProp(getters[i](), label)
                 form.appendChild(input)
             }
-            
             
             this.saveProperties = function(){  
                 // goes through setters array and 
