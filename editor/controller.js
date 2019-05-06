@@ -39,10 +39,17 @@ document.addEventListener('DOMContentLoaded', function () {
         drawGrabber(bounds.x, bounds.y + bounds.height)
         drawGrabber(bounds.x + bounds.width, bounds.y + bounds.height)
       }
-      else if (selected.getObjectType() === 'edge') {
+      if (selected.getObjectType() === 'edge') {
         drawGrabber(selected.getConnectionPoints().x1, selected.getConnectionPoints().y1)
         drawGrabber(selected.getConnectionPoints().x2, selected.getConnectionPoints().y2)
       }
+    }
+    if (rubberBandStart !== undefined) {
+      ctx = panel.getContext('2d')
+      ctx.beginPath()
+      ctx.moveTo(rubberBandStart.x, rubberBandStart.y)
+      ctx.lineTo(lastMousePoint.x, lastMousePoint.y)
+      ctx.stroke()
     }
   }
 
@@ -55,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   panel.addEventListener('mousedown', event => {
+    selected = undefined
     let mousePoint = mouseLocation(event)
     let node = graph.findNode(mousePoint)
     //need to add edge contains first
@@ -72,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
         selected = edge
         properties.setObj(edge)
       }
-      else selected == undefined
+      else selected = undefined
     }
     else if (tool === 'genericNode'){
       const n = createNode(mousePoint.x, mousePoint.y, 120, 'lightgray', 'nodeContainer')
@@ -82,29 +90,23 @@ document.addEventListener('DOMContentLoaded', function () {
       graph.draw()
     }
     else if (tool === 'curvedEdge') {
-      if (node !== undefined) rubberBandStart = mousePoint
+      if (node !== undefined) {
+        rubberBandStart = mousePoint
+        dragStartPoint = rubberBandStart
+      }
     }
     else if (tool === 'genericEdge') {
-      if (node !== undefined) rubberBandStart = mousePoint
+      if (node !== undefined) {
+        rubberBandStart = mousePoint
+        dragStartPoint = rubberBandStart
+      }
     }
     else if (tool === 'dashedEdge') {
-      if (node !== undefined) rubberBandStart = mousePoint
+      if (node !== undefined) {
+        rubberBandStart = mousePoint
+        dragStartPoint = rubberBandStart
+      }
     }
-    /*
-    if (node !== undefined && tool === undefined) {
-        dragStartPoint = mousePoint
-        dragStartBounds = node.getBounds()
-
-        // focuses property sheet on new object
-        //if(properties.object !=== selected)
-        properties.setObj(node)
-
-        //Right click
-        // window.oncontextmenu = function () {
-        //     prompt('Node', 'Name', 'Attributes')
-        //     return false     // cancel default menu
-        // }
-    } */
     lastMousePoint = mousePoint
     toolbar.setSelected(selected)
     repaint()
@@ -130,25 +132,30 @@ document.addEventListener('DOMContentLoaded', function () {
         graph.connect(newEdge, rubberBandStart, mousePoint)
       }
     }
-    repaint()
     lastMousePoint = undefined
     dragStartBounds = undefined
     rubberBandStart = undefined
+    repaint()
   })
 
   panel.addEventListener('mousemove', event => {
     if (dragStartPoint === undefined) return
     let mousePoint = mouseLocation(event)
-    if (selected !== undefined) {
+    if (selected === undefined) {
+      lastMousePoint = mousePoint
+      repaint()
+      return
+    }
+    if (selected.getObjectType() === 'node') {
       const bounds = selected.getBounds();
-
       selected.translate(
         dragStartBounds.x - bounds.x +
         mousePoint.x - dragStartPoint.x,
         dragStartBounds.y - bounds.y +
         mousePoint.y - dragStartPoint.y);
-      repaint()
     }
+    lastMousePoint = mousePoint
+    repaint()
   })
 })
 
