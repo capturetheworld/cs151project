@@ -126,7 +126,7 @@ function createNode(x, y, s, c, id, nm, attr) {
         getAttributes() {
             // format:  getter (even index), setter (odd)
             return [
-                this.getElementID, this.setElementID,
+                
                 this.getObjectName, this.setObjectName
             ]
         }
