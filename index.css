@@ -76,19 +76,19 @@ body {
 
 .input {
     margin: 4px;
-    width: 50px;
+    width: 6em;
 }
 
 .prop {
     display: inline;
     width: max-content;
-    padding: 4px 0 4px 0;
+    padding: 1em 0 1em 0;
     margin: auto 1em auto 1em;
 }
 
 .label {
     width: auto;
-    margin: auto 4px;
+    margin: auto .3em;
     background-color: 'orange';
     display: inline;
 }
@@ -97,7 +97,7 @@ body {
     width: 50;
     height: 30;
     margin: 0 15px 0 5px;
-    border-radius: 3px;
+    border-radius: .3em;
     order: 1;
     background-color: white;
     outline: none;
