@@ -193,6 +193,34 @@ function center2(rect, fromP) {
       return { x: rect.x, y: rect.y + rect.height / 2}
 }
 
+function center3(rect, fromP) {
+      let centerX = rect.x + rect.width / 2;
+      let centerY = rect.y + rect.height / 2;
+      let dx = fromP.x - centerX;
+      let dy = fromP.y - centerY;
+      if (dx < dy && dx >= -dy)
+          return {
+                  x: rect.x + rect.width/2,
+                  y: rect.y + rect.height
+                }
+      else if (dx >= dy && dx >= -dy)
+          return {
+                  x: rect.x + rect.width,
+                  y: rect.y + rect.height/2
+                }
+      else if (dx < -dy && dx >= dy)
+          return {
+                  x: rect.x + rect.width/2,
+                  y: rect.y
+                }
+      else if (dx < dy && dx < -dy)
+          return {
+                  x: rect.x,
+                  y: rect.y + rect.height/2
+                }
+      else return other;
+}
+
 function createPointNode() {
     let x = 0
     let y = 0

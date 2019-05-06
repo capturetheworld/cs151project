@@ -44,8 +44,8 @@ function createCurvedLineEdge() {
             const canvas = document.getElementById(elementID)
             const ctx = canvas.getContext('2d')
             p = center(start.getBounds()) // Just pick the center of the bounds for now
-            q = center2(end.getBounds(),{x: p.x, y: p.y}) // Not the "connection points" that graphed2 uses
-            p = center2(start.getBounds(), {x: q.x, y: q.y})
+            q = center3(end.getBounds(),{x: p.x, y: p.y}) // Not the "connection points" that graphed2 uses
+            p = center3(start.getBounds(), {x: q.x, y: q.y})
             path.moveTo(p.x, p.y)
             path.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.beginPath()
