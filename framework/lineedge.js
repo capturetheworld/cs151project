@@ -9,17 +9,8 @@ function createLineEdge() {
     let endlabel = ''
     let p = undefined
     let q = undefined
-
-    let arrowheadEnum = {
-        none: 'none',
-        Triangle: 'Triangle',
-        V: 'V',
-        Diamond: 'Diamond',
-        BlackDiamond: 'BlackDiamond',
-        BlackTriangle: 'BlackTriangle'
-    }
-    let arrowTypeStart = arrowheadEnum.none
-    let arrowTypeEnd = arrowheadEnum.none
+    let arrowTypeStart = 'none'
+    let arrowTypeEnd = 'none'
 
     return {
         setElementID: (newElementID) => {
@@ -45,25 +36,13 @@ function createLineEdge() {
         },
 
         setArrowHeadStart: (type) => {
-            if(arrowheadEnum[type]){
-                arrowType = type
-            }
-            else{
-                // none if typed wrong key
-                arrowType = arrowheadEnum.none
-            }
+            arrowTypeStart = type
         },
         getArrowHeadStart: () => {
             return arrowTypeStart
         },
-        setArrowHeadEnd: () => {
-            if(arrowheadEnum[type]){
-                arrowType = type
-            }
-            else{
-                // none if typed wrong key
-                arrowType = arrowheadEnum.none
-            }
+        setArrowHeadEnd: (type) => {
+            arrowTypeEnd = type
         },
         getArrowHeadEnd: () => {
             return arrowTypeEnd
@@ -127,7 +106,7 @@ function createLineEdge() {
               ctx.stroke(arrowgraphic)
             }
             if (arrowTypeStart !== 'none') {
-              let arrowgraphic = arrowHeadGenerator(q, p, 'Diamond')
+              let arrowgraphic = arrowHeadGenerator(q, p, arrowTypeStart)
               if(arrowTypeStart === 'BlackDiamond' || arrowTypeStart === 'BlackTriangle') {
                 ctx.fillStyle = 'black'
                 ctx.fill(arrowgraphic)
