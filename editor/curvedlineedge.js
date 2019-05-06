@@ -46,13 +46,33 @@ function createCurvedLineEdge() {
             p = center(start.getBounds()) // Just pick the center of the bounds for now
             q = centerEastWest(end.getBounds(),{x: p.x, y: p.y}) // Not the "connection points" that graphed2 uses
             p = centerEastWest(start.getBounds(), {x: q.x, y: q.y})
+            /*
             path.moveTo(p.x, p.y)
             path.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.beginPath()
             ctx.moveTo(p.x, p.y)
             ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.stroke()
-            let arrowgraphic = arrowHeadGenerator({x: p.x, y: p.y}, {x: q.x, y: q.y}, 'BlackTriangle')
+            */
+            let y1 = p.y
+            let y2 = q.y
+            let xmid = (p.x + q.x) / 2
+            let ymid = (p.y + q.y) / 2
+            let x1 = p.x + 10
+            let x2 = q.x - 10
+            path.moveTo(p.x, y1)
+            path.lineTo(x1, y1);
+            path.quadraticCurveTo(((x1 + xmid) / 2), y1, xmid, ymid)
+            path.quadraticCurveTo(((x2 + xmid) / 2), y2, x2, y2)
+            path.lineTo(q.x, y2);
+            ctx.beginPath()
+            ctx.moveTo(p.x, y1)
+            ctx.lineTo(x1, y1);
+            ctx.quadraticCurveTo(((x1 + xmid) / 2), y1, xmid, ymid)
+            ctx.quadraticCurveTo(((x2 + xmid) / 2), y2, x2, y2)
+            ctx.lineTo(q.x, y2);
+            ctx.stroke()
+            let arrowgraphic = arrowHeadGenerator({x: q.x-10, y: q.y}, {x: q.x, y: q.y}, 'BlackTriangle')
             ctx.fillStyle = 'black'
             ctx.fill(arrowgraphic)
             ctx.stroke(arrowgraphic)

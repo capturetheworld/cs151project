@@ -102,8 +102,7 @@ function createLineEdge() {
             }
         },
         contains: aPoint => {
-            return ptSegDistSq(center(start.getBounds()).x, center(start.getBounds()).y,
-                center(end.getBounds()).x, center(end.getBounds()).y, aPoint.x, aPoint.y) < 4
+            return ptSegDistSq(p.x, p.y, q.x, q.y, aPoint.x, aPoint.y) < 4
         },
         draw: () => {
             const canvas = document.getElementById(elementID)
