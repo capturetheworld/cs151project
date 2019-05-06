@@ -95,10 +95,10 @@ function createLineEdge() {
         },
         getConnectionPoints: () => {
             return {
-                x1: center(start.getBounds()).x,
-                y1: center(start.getBounds()).y,
-                x2: center(end.getBounds()).x,
-                y2: center(end.getBounds()).y
+                x1: p.x,
+                y1: p.y,
+                x2: q.x,
+                y2: q.y
             }
         },
         contains: aPoint => {
