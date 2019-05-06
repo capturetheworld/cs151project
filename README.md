@@ -16,4 +16,4 @@ http://horstmann.com/sjsu/spring2019/cs151/project.html
 4. Use HTML tables
 
 ## View As Webpage
-http://capturetheworld.github.io/cs151project
+http://iansoohoo.me/cs151project/
