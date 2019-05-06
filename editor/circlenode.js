@@ -1,3 +1,15 @@
+/**
+        * Creates a circular node
+        * @arg {int} x - the x position
+        * @arg {int} y - the y position
+        * @arg {int} s -  the size
+        * @arg {string} c - color
+        * @arg {int} id - id of the node
+        * @return {createCircleNode~setElementID} - inner function: sets element ID
+        * @return {createCircleNode~draw} - draws the node
+        * @return {createCircleNode~translate} - draws the node of the canvs
+    */
+
 function createCircleNode(x, y, s, c) {
     let size = s
     let color = c
@@ -16,6 +28,11 @@ function createCircleNode(x, y, s, c) {
                 height: size
             }
         },
+
+        /**
+        * Checks to see if it contains a point
+        * @return {boolean} - true or false if it contains a node
+        */
         contains: p => {
             return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
         },

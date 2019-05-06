@@ -1,3 +1,11 @@
+/**
+        * Places arrowheads on a connection line
+        * @arg {int} p - starting point
+        * @arg {int} q - ending point
+        * @arg {string} arrowType -  the type of arrow None, Triangle, BlackTriangle, Diamond, BlackDiamond, V
+        * @return {Path2D} path - 2D path of connections
+    */
+
 function arrowHeadGenerator(p, q, arrowType)
 {
    let path = new Path2D()

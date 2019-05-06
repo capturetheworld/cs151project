@@ -1,3 +1,8 @@
+/**
+        * Managers all of the nodes and dragging items back and forth around the canvas, controls controls to repaint the canvas
+    */
+
+
 document.addEventListener('DOMContentLoaded', function () {
 
   const panel = document.getElementById('graphPanel')
@@ -28,6 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
   let rubberBandStart = undefined
   let lastMousePoint = undefined
 
+
+  /**
+        * Refreshes the canvas
+    */
+
+
   function repaint() {
     panel.innerHTML = ''
     graph.draw()
@@ -52,6 +63,14 @@ document.addEventListener('DOMContentLoaded', function () {
       ctx.stroke()
     }
   }
+
+  /**
+        * Finds the bounding box location
+        * @arg event - listens for mouse pointer
+        * @return {int} x - coordinate of bounding box
+        * @return {int} y - coordinate of bounding box
+    */
+
 
   function mouseLocation(event) {
     var rect = panel.getBoundingClientRect();
@@ -158,6 +177,10 @@ document.addEventListener('DOMContentLoaded', function () {
     repaint()
   })
 })
+
+/**
+        * Resizes canvas
+    */
 
 function resize() {
     let toolbar = document.getElementById('toolbarDiv')
