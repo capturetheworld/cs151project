@@ -49,6 +49,8 @@ function createCurvedLineEdge() {
             ctx.moveTo(p.x, p.y)
             ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.stroke()
+            let arrow = arrowHeadGenerator(p, q, 'Triangle')
+            ctx.stroke(arrow)
             var self = this
         },
         getPrototype: () => {
