@@ -1,3 +1,10 @@
+/**
+        * Creates a generic node
+        * @param {int} x - x coord
+        * @param {int} y - y coord
+        * @param {int} id - identification
+    */
+
 function createGenericNode(x, y, id) {
   let x = x
   let y = y

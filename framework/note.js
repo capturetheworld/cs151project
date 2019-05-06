@@ -1,4 +1,6 @@
-
+/**
+        * Creates a note node
+    */
 function createNote() {
     let width = 8
     let height = 0

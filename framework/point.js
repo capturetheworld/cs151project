@@ -1,3 +1,7 @@
+
+/**
+        * Creates a point node
+    */
 function createPointNode() {
     let x = 0
     let y = 0

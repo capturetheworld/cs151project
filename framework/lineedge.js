@@ -1,3 +1,7 @@
+/**
+        * Creates a line edge
+    */
+
 function createLineEdge() {
     let start = undefined
     let end = undefined

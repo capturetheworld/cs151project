@@ -1,3 +1,15 @@
+/**
+        * Does math to find point segment distance 
+        * @arg {int} x1 - the x position
+        * @arg {int} x2 - second x
+        * @arg {int} y1 -  first y
+        * @arg {int} y2 - second y
+        * @arg {int} px - change x
+        * @arg {int} py - change y
+        * @return {int} - answer
+    */
+
+
 //ptSegDistSq from Java 8
 function ptSegDistSq(x1, y1, x2, y2, px, py) {
   pd2 = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);

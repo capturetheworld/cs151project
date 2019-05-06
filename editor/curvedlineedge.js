@@ -1,3 +1,8 @@
+/**
+        * Creates a curvedLineEdge node
+    */
+
+
 function createCurvedLineEdge() {
     let start = undefined
     let end = undefined
