@@ -186,14 +186,14 @@ function center(rect) {
     return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 }
 }
 
-function center2(rect, fromP) {
+function centerEastWest(rect, fromP) {
     if(fromP.x >= rect.x)
       return { x: rect.x + rect.width, y: rect.y + rect.height / 2 }
     else if (fromP.x < rect.x)
       return { x: rect.x, y: rect.y + rect.height / 2}
 }
 
-function center3(rect, fromP) {
+function centerAll(rect, fromP) {
       let centerX = rect.x + rect.width / 2;
       let centerY = rect.y + rect.height / 2;
       let dx = fromP.x - centerX;
