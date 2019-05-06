@@ -7,15 +7,15 @@ function drawGrabber(x, y) {
     ctx.fillRect(x - size / 2, y - size / 2, size, size)
 }
 
-function createNode(x, y, s, c, id, nm, attr) {
+function createNode(x, y, s, c, id) {
     let width = s
     let size = s
     let height = 0
     let parentheight = 55
     let color = c
     let elementID = id
-    let name = nm
-    let attributes = attr
+    let name = ''
+    // let attributes = attr
     let nvPairs = []
     let nodeID = undefined
     let prototype = 'genericNode'
@@ -75,7 +75,6 @@ function createNode(x, y, s, c, id, nm, attr) {
 
             tableBody.appendChild(tr)
 
-
             //Create NV divs
             let rowIndex = 0
             for (const n of nvPairs) {
@@ -100,29 +99,21 @@ function createNode(x, y, s, c, id, nm, attr) {
 
 
         },
-
         getElementID: () => {
             return elementID
         },
-        // setElementID: (id) => {
-        //     this.elementID = id
-        // },
         getObjectName: () => {
             return name
         },
-
         setObjectName: (nm) => {
             name = nm
         },
-
         getPrototype: () => {
             return prototype
         },
-
         getObjectType: () => {
             return objectType
         },
-
         getAttributes() {
             // format:  getter (even index), setter (odd)
             return [
@@ -130,14 +121,13 @@ function createNode(x, y, s, c, id, nm, attr) {
                 this.getObjectName, this.setObjectName
             ]
         }
-
     }
 }
 
 function createNVPair() {
     let x = 100
     let y = 100
-    let size = 100
+    let size = 120
     let width = 0
     let height = 0
     let name = 'Name'

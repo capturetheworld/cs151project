@@ -26,7 +26,7 @@ class Graph {
             if (n.contains(p)) return n
         }
 
-        //check if the node has been clicked
+        //Check if the node has been clicked
         for (let i = this.nodes.length - 1; i >= 0; i--) {
             const n = this.nodes[i]
             if (n.contains(p)) return n

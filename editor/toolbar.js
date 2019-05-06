@@ -2,7 +2,7 @@ class Toolbar {
 
     constructor(graph) {
         this.nodes = [
-            createNode(14, 7, 0, 'white', 'button', '', ''),
+            createNode(14, 7, 0, 'white', 'button')
         ]
         this.edges = [
             createCurvedLineEdge(),
@@ -90,12 +90,7 @@ class Toolbar {
                     n.style.backgroundColor = 'white'
                 }
                 elem.style.backgroundColor = 'lightblue'
-                // const n = createNode(60, 60, 100, 'lightgray', 'nodeContainer')
-                // n.setNodeID(nodeIndex)
-                // self.toolbarGraph.add(n)
-                // self.toolbarGraph.draw()
             }
-            
             
             elem.addEventListener('mousedown', event => {
               this.selectedTool = n.getPrototype()
@@ -163,7 +158,6 @@ class Toolbar {
                 } else {
                     const n = createNVPair()
                     self.selected.addNVPair(n)
-                    // n.setElementID('nodeContainer')
                     self.toolbarGraph.addNVPair(n)
                     self.toolbarGraph.draw()
                 }
