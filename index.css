@@ -34,6 +34,7 @@ table {
     border: solid black thin;
     /* border:1px solid black; */
     border-collapse: collapse;
+    cursor:default;
 }
 
 td, th {
@@ -49,11 +50,7 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
-     background-color: #5674a0;
-
-
-
-     background-color: #fff;
+    background-color: #fff;
     background-size: 30px 30px;
     background-image: linear-gradient(to right, #f2e5f2 1px, transparent 1px), linear-gradient(to bottom, #f2e5f2 1px, transparent 1px);
 }
@@ -77,6 +74,7 @@ body {
     align-items: flex-end;
     flex-direction: row;
     width: 99%;
+
 }
 
 .input {
@@ -89,6 +87,7 @@ body {
     width: max-content;
     padding: 1em 0 1em 0;
     margin: auto .5em auto .5em;
+
 }
 
 .label {
@@ -122,11 +121,13 @@ body {
     border-style: solid;
     border-color: white;
     border-radius: 1em;
+   
     /*background-color: #474d56;*/
 }
 
 #nodeContainer {
     position: absolute;
+    cursor:default;
     /*border-style: solid;
     border-color: black;
     background-color: #474d56;
@@ -142,6 +143,7 @@ form {
     font-family: system-ui;
     font-size: .8em;
     padding-bottom: 1px;
+
 }
 
 input[type=text] {

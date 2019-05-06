@@ -36,6 +36,9 @@ function createPropertySheet(){
     submit.innerHTML = "Save"
     container.appendChild(form)
     container.appendChild(submit)
+
+
+
     
     return {
         // called when an object is selected
