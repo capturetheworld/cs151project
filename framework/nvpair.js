@@ -97,7 +97,7 @@ function createNVPair() {
             //mark position of the nvpair
             let bounds = body.getBoundingClientRect()
             x = bounds.x - 3
-            y = bounds.y - 95
+            y = bounds.y - 0
             width = bounds.width
             height = bounds.height
         }
