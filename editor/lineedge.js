@@ -13,9 +13,10 @@ function createLineEdge() {
         Triangle: 'Triangle',
         V: 'V',
         Diamond: 'Diamond',
-        BlackDiamond: 'BlackDiamond'
+        BlackDiamond: 'BlackDiamond',
+        BlackTriangle: 'BlackTriangle'
     }
-    let arrowTypeStart = arrowheadEnum.none
+    let arrowTypeStart = arrowheadEnum.BlackTriangle
     let arrowTypeEnd = arrowheadEnum.none
 
     return {
@@ -40,7 +41,7 @@ function createLineEdge() {
         setEndLabel: (newlabel) => {
             endlabel = newlabel
         },
-        
+
         setArrowHeadStart: (type) => {
             if(arrowheadEnum[type]){
                 arrowType = type
@@ -114,6 +115,16 @@ function createLineEdge() {
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(q.x, q.y)
             ctx.stroke()
+            if (arrowTypeStart !== 'none') {
+              let arrowgraphic = arrowHeadGenerator(p, q, arrowTypeStart)
+              arrowgraphic.closePath()
+              if(arrowTypeStart === 'BlackDiamond' || arrowTypeStart === 'BlackTriangle') {
+                ctx.fillStyle = 'black'
+                ctx.fill(arrowgraphic)
+              }
+              ctx.setLineDash([0, 0])
+              ctx.stroke(arrowgraphic)
+            }
 
             // Start and end labels
             ctx.font = "12px Helvetica";
@@ -133,5 +144,3 @@ function createLineEdge() {
     }
 
 }
-
-
