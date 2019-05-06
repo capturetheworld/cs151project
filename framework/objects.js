@@ -8,7 +8,7 @@ function drawGrabber(x, y) {
     const canvas = document.getElementById('graphPanel')
     const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
     ctx.fillStyle = 'purple'
-    ctx.fillRect(x - size + 2 , y - size  , size, size)
+    ctx.fillRect(x - size + 2, y - size, size, size)
 }
 
 /**
@@ -65,11 +65,11 @@ function createNode(x, y, s, c, id) {
                 height: height
             }
         },
-    /**
-        * Checks if point is contained
-        * @arg {int} p - a point
-        * @return {boolean} - if the point is inside or not
-    */
+        /**
+            * Checks if point is contained
+            * @arg {int} p - a point
+            * @return {boolean} - if the point is inside or not
+        */
 
         contains: p => {
             return (Math.abs(x + width / 2 - p.x) < width / 2 && Math.abs(y + height / 2 - p.y) < height / 2)
@@ -140,17 +140,17 @@ function createNode(x, y, s, c, id) {
         getObjectName: () => {
             return name
         },
-/**
-        * Sets the tool the user selected
-        * @arg {int} x - the x position
-        * @arg {int} y - the y position
-        * @arg {int} s -  the size
-        * @arg {string} c - color
-        * @arg {int} id - id of the node
-        * @return {createNode~setNodeID} - inner function: sets node ID
-        * @return {createNode~addNVPair} - adds a Name Value pair - inner
-        * @return {createNode~setElementID} - sets element id to a new ID
-    */
+        /**
+                * Sets the tool the user selected
+                * @arg {int} x - the x position
+                * @arg {int} y - the y position
+                * @arg {int} s -  the size
+                * @arg {string} c - color
+                * @arg {int} id - id of the node
+                * @return {createNode~setNodeID} - inner function: sets node ID
+                * @return {createNode~addNVPair} - adds a Name Value pair - inner
+                * @return {createNode~setElementID} - sets element id to a new ID
+            */
 
 
         setObjectName: (nm) => {
@@ -187,38 +187,38 @@ function center(rect) {
 }
 
 function centerEastWest(rect, fromP) {
-    if(fromP.x >= rect.x)
-      return { x: rect.x + rect.width, y: rect.y + rect.height / 2 }
+    if (fromP.x >= rect.x)
+        return { x: rect.x + rect.width, y: rect.y + rect.height / 2 }
     else if (fromP.x < rect.x)
-      return { x: rect.x, y: rect.y + rect.height / 2}
+        return { x: rect.x, y: rect.y + rect.height / 2 }
 }
 
 function centerAll(rect, fromP) {
-      let centerX = rect.x + rect.width / 2;
-      let centerY = rect.y + rect.height / 2;
-      let dx = fromP.x - centerX;
-      let dy = fromP.y - centerY;
-      if (dx < dy && dx >= -dy)
-          return {
-                  x: rect.x + rect.width/2,
-                  y: rect.y + rect.height
-                }
-      else if (dx >= dy && dx >= -dy)
-          return {
-                  x: rect.x + rect.width,
-                  y: rect.y + rect.height/2
-                }
-      else if (dx < -dy && dx >= dy)
-          return {
-                  x: rect.x + rect.width/2,
-                  y: rect.y
-                }
-      else if (dx < dy && dx < -dy)
-          return {
-                  x: rect.x,
-                  y: rect.y + rect.height/2
-                }
-      else return other;
+    let centerX = rect.x + rect.width / 2;
+    let centerY = rect.y + rect.height / 2;
+    let dx = fromP.x - centerX;
+    let dy = fromP.y - centerY;
+    if (dx < dy && dx >= -dy)
+        return {
+            x: rect.x + rect.width / 2,
+            y: rect.y + rect.height
+        }
+    else if (dx >= dy && dx >= -dy)
+        return {
+            x: rect.x + rect.width,
+            y: rect.y + rect.height / 2
+        }
+    else if (dx < -dy && dx >= dy)
+        return {
+            x: rect.x + rect.width / 2,
+            y: rect.y
+        }
+    else if (dx < dy && dx < -dy)
+        return {
+            x: rect.x,
+            y: rect.y + rect.height / 2
+        }
+    else return other;
 }
 
 function createPointNode() {
