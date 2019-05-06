@@ -22,13 +22,16 @@ function createProp(text, id){
 }
 
 function createPropertySheet(){
+    let propGraph = undefined
     let container = document.getElementById('propertySheetWrapper')
     let form = document.createElement('form')
     form.setAttribute.id = "form"
     let getters = []
     let setters = []
 
-    saveProperties = function(){console.log("init save prop")}
+    saveProperties = function(){
+        console.log("init save prop")
+    }
 
     let submit = document.createElement('button')
     submit.setAttribute('onclick', "saveProperties()")
@@ -37,10 +40,10 @@ function createPropertySheet(){
     container.appendChild(form)
     container.appendChild(submit)
 
-
-
-    
     return {
+        setGraph: (graph) => {
+            propGraph = graph
+        },
         // called when an object is selected
         setObj: (obj) => {
             // fetches functions (getters & setters) from obj
@@ -82,7 +85,6 @@ function createPropertySheet(){
                 let input = createProp(getters[i](), label)
                 form.appendChild(input)
             }
-            
             this.saveProperties = function(){  
                 // goes through setters array and 
                 for(i = 0; i < setters.length; i++){
@@ -91,8 +93,8 @@ function createPropertySheet(){
                     let label = functName.substring(3, functName.length)
                     input = document.getElementById(label)
                     setters[i](input.lastChild.value)
-
                 }
+                propGraph.draw()
             }
         },
     }

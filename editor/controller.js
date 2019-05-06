@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //Create Property sheet
   const properties = createPropertySheet()
+  properties.setGraph(graph)
 
   resize()
   graph.draw()
