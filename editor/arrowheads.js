@@ -23,12 +23,12 @@ function arrowHeadGenerator(p, q, arrowType)
       path.moveTo(x2, y2);
       path.lineTo(q.x, q.y);
    }
-   else if (arrowType === 'Triangle' || 'BlackTriangle')
+   else if (arrowType === 'Triangle' || arrowType === 'BlackTriangle')
    {
       path.lineTo(x2, y2);
       path.closePath();
    }
-   else if (arrowType === 'Diamond' || arrowType == 'BlackDiamond')
+   else if (arrowType === 'Diamond' || arrowType === 'BlackDiamond')
    {
       let x3 = x2 - ARROW_LENGTH * Math.cos(angle + ARROW_ANGLE);
       let y3 = y2 - ARROW_LENGTH * Math.sin(angle + ARROW_ANGLE);
