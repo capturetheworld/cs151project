@@ -50,7 +50,14 @@ html, body {
     margin: 0;
     padding: 0;
      background-color: #5674a0;
+
+
+
+     background-color: #fff;
+    background-size: 30px 30px;
+    background-image: linear-gradient(to right, #f2e5f2 1px, transparent 1px), linear-gradient(to bottom, #f2e5f2 1px, transparent 1px);
 }
+
 
 body {
     margin: 0;

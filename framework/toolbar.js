@@ -61,9 +61,9 @@ class Toolbar {
       canvas.width = 45
       canvas.height = 45
       ctx.fillStyle = "purple"
-      ctx.fillRect(3, 8, 6, 6)
-      ctx.fillRect(3, 30, 6, 6)
-      ctx.fillRect(24, 8, 6, 6)
+      ctx.fillRect(3, 8, 6, 8)
+      ctx.fillRect(3, 30, 6, 8)
+      ctx.fillRect(24, 8, 6, 8)
       ctx.fillRect(24, 30, 6, 6)
       button.appendChild(canvas)
     }
