@@ -1,9 +1,9 @@
 function drawGrabber(x, y) {
-    const size = 5;
+    const size = 8;
     const canvas = document.getElementById('graphPanel')
     const ctx = canvas.getContext('2d'); // No need for "if (canvas.getContext)"
     ctx.fillStyle = 'purple'
-    ctx.fillRect(x - size / 2, y - size / 2, size, size)
+    ctx.fillRect(x - size + 2 , y - size  , size, size)
 }
 
 function createNode(x, y, s, c, id) {
