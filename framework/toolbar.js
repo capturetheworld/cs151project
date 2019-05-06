@@ -22,6 +22,9 @@ class Toolbar {
         this.NVPairs = [
             createNVPair()
         ]
+        this.notes = [
+            createNote()
+        ]
         this.tools = []
         var dashedEdge = createLineEdge()
         dashedEdge.dashed(true)
@@ -201,5 +204,30 @@ class Toolbar {
             this.tools.push(n.getPrototype())
             n.draw()
         }
+
+        //Draw Note
+        for (const t of this.notes) {
+            let buttonArea = document.getElementById('toolbarDiv')
+            let button = document.createElement('button')
+            button.type = 'button'
+            button.style.position = 'relative'
+            button.id = 'noteButton'
+            button.style.backgroundColor = 'white'
+            buttonArea.appendChild(button)
+            t.setElementID('noteButton')
+
+            let self = this
+            document.getElementById('noteButton').onclick = function () {
+                
+                    const x = createNote()
+                    self.selected.newNote(x)
+                    self.toolbarGraph.newNote(x)
+                    self.toolbarGraph.draw()
+            
+            
+            this.tools.push(t.getPrototype())
+            x.draw()
+        }
+    }
     }
 }
