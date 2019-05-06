@@ -14,14 +14,12 @@ function createProp(text, id){
     inp.type = "text"
     inp.value = text
     inp.className = "input"
-    
 
     prop.appendChild(label)
     prop.appendChild(inp)
     prop.id = id
     
     return prop
-    
 }
 
 function createPropertySheet(){

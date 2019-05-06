@@ -124,10 +124,6 @@ function createNode(x, y, s, c, id) {
     }
 }
 
-
-
-
-
 function clearCanvas() {
     const canvas = document.getElementById('graphPanel')
     const ctx = canvas.getContext('2d') // No need for "if (canvas.getContext)"
