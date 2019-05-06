@@ -47,14 +47,13 @@ function createNode(x, y, s, c, id, nm, attr) {
             //return (x + width / 2 - p.x) ** 2 + (y + height / 2 - p.y) ** 2 <= size ** 2 / 4
 
             // rectangle
-            return(Math.abs(x + width/2 - p.x) < width/2 && Math.abs(y + height/2 - p.y) < height/2 )
+            return (Math.abs(x + width / 2 - p.x) < width / 2 && Math.abs(y + height / 2 - p.y) < height / 2)
         },
         translate: (dx, dy) => {
             x += dx
             y += dy
         },
         draw: () => {
-
             let body = document.getElementById(elementID)
             var table = document.createElement('table')
             table.style.position = 'absolute'
@@ -67,7 +66,7 @@ function createNode(x, y, s, c, id, nm, attr) {
 
             var tr = document.createElement('tr')
             var th = document.createElement('th')
-            if (name === undefined){
+            if (name === undefined) {
                 th.innerText = 'Object Name'
             } else {
                 th.innerText = name
@@ -79,10 +78,10 @@ function createNode(x, y, s, c, id, nm, attr) {
 
             //Create NV divs
             let rowIndex = 0
-            for(const n of nvPairs) {
+            for (const n of nvPairs) {
                 let tr = document.createElement('tr')
                 let div = document.createElement('div')
-                div.id =  nodeID +  'nvRow' + rowIndex
+                div.id = nodeID + 'nvRow' + rowIndex
                 tr.appendChild(div)
                 tableBody.appendChild(tr)
 
@@ -91,8 +90,8 @@ function createNode(x, y, s, c, id, nm, attr) {
             table.appendChild(tableBody)
             body.appendChild(table)
             rowIndex = 0
-            for(const n of nvPairs) {
-                n.setElementID(nodeID +  'nvRow' + rowIndex)
+            for (const n of nvPairs) {
+                n.setElementID(nodeID + 'nvRow' + rowIndex)
                 n.drawInCanvas()
                 rowIndex++
             }
@@ -102,7 +101,7 @@ function createNode(x, y, s, c, id, nm, attr) {
 
         },
 
-        getElementID: ()=>{
+        getElementID: () => {
             return elementID
         },
         // setElementID: (id) => {
@@ -117,15 +116,15 @@ function createNode(x, y, s, c, id, nm, attr) {
         },
 
         getPrototype: () => {
-          return prototype
+            return prototype
         },
 
         getObjectType: () => {
-          return objectType
+            return objectType
         },
 
-        getAttributes(){
-             // format:  getter (even index), setter (odd)
+        getAttributes() {
+            // format:  getter (even index), setter (odd)
             return [
                 this.getElementID, this.setElementID,
                 this.getObjectName, this.setObjectName
@@ -141,16 +140,12 @@ function createNVPair() {
     let size = 100
     let width = 0
     let height = 0
-    // let parent = undefined
     let name = 'Name'
     let value = 'Value'
     let elementID = undefined
     let prototype = 'NVpair'
     let objectType = 'node'
     return {
-        // setParent: (newParent) => {
-        //     parent = newParent
-        // },
         setElementID: (newID) => {
             elementID = newID
         },
@@ -174,23 +169,22 @@ function createNVPair() {
                 height: height
             }
         },
-        getAttributes(){
+        getAttributes() {
             return [this.getName, this.setName,
-                    this.getValue, this.setValue]
+            this.getValue, this.setValue]
         },
         contains: p => {
-            //return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
-            return(Math.abs(x + width/2 - p.x) < width/2 && Math.abs(y + height/2 - p.y) < height/2 )
+            return (Math.abs(x + width / 2 - p.x) < width / 2 && Math.abs(y + height / 2 - p.y) < height / 2)
         },
         translate: (dx, dy) => {
             x += dx
             y += dy
         },
         getPrototype: () => {
-          return prototype
+            return prototype
         },
         getObjectType: () => {
-          return objectType
+            return objectType
         },
         draw: () => {
             let body = document.getElementById(elementID)
@@ -227,7 +221,6 @@ function createNVPair() {
             let tableBody = document.createElement('tbody')
             table.appendChild(tableBody)
 
-
             let tr = document.createElement('tr')
             let th = document.createElement('th')
             th.innerText = name + ' = ' + value
@@ -237,8 +230,12 @@ function createNVPair() {
             tr.offsetWidth = width
             th.offsetWidth = width
 
-
-
+            //mark position of the nvpair
+            let bounds = body.getBoundingClientRect()
+            x = bounds.x - 3
+            y = bounds.y - 73
+            width = bounds.width
+            height = bounds.height
         }
     }
 }
@@ -292,12 +289,12 @@ function createCircleNode(x, y, s, c) {
             color = c
         },
         getPrototype: () => {
-          return prototype
+            return prototype
         },
         getObjectType: () => {
-          return objectType
+            return objectType
         },
-        getAttributes(){
+        getAttributes() {
             // format:  getter (even index), setter (odd)
             return [
                 this.getSize, this.setSize,
@@ -324,16 +321,16 @@ function center(rect) {
 }
 
 function createPointNode() {
-   let x = 0
-   let y = 0
-   return {
-       getBounds: () => {
-           return {
-               x: x,
-               y: y,
-               width: 0,
-               height: 0
-           }
+    let x = 0
+    let y = 0
+    return {
+        getBounds: () => {
+            return {
+                x: x,
+                y: y,
+                width: 0,
+                height: 0
+            }
         },
         translate: (dx, dy) => {
             x += dx
@@ -355,7 +352,7 @@ function createLineEdge() {
         setElementID: (newElementID) => {
             elementID = newElementID
         },
-        getStartLabel: ()=> {
+        getStartLabel: () => {
             return startlabel
         },
         setStartLabel: (newlable) => {
@@ -373,7 +370,7 @@ function createLineEdge() {
         setEndLabel: (newlabel) => {
             endlabel = newlabel
         },
-        getAttributes(){
+        getAttributes() {
             return [
                 this.getStartLabel, this.setStartLabel,
                 this.getMidLabel, this.setMidLabel,
@@ -385,50 +382,50 @@ function createLineEdge() {
             end = e
         },
         dashed: (boolean) => {
-          dashed = boolean
-          if(dashed) prototype = 'dashedEdge'
+            dashed = boolean
+            if (dashed) prototype = 'dashedEdge'
         },
         getPrototype: () => {
-          return prototype
+            return prototype
         },
         getObjectType: () => {
-          return objectType
+            return objectType
         },
         getConnectionPoints: () => {
-          return {
-            x1: center(start.getBounds()).x,
-            y1: center(start.getBounds()).y,
-            x2: center(end.getBounds()).x,
-            y2: center(end.getBounds()).y
-          }
+            return {
+                x1: center(start.getBounds()).x,
+                y1: center(start.getBounds()).y,
+                x2: center(end.getBounds()).x,
+                y2: center(end.getBounds()).y
+            }
         },
         contains: aPoint => {
-            return  ptSegDistSq(center(start.getBounds()).x, center(start.getBounds()).y,
-            center(end.getBounds()).x, center(end.getBounds()).y, aPoint.x, aPoint.y) < 4
+            return ptSegDistSq(center(start.getBounds()).x, center(start.getBounds()).y,
+                center(end.getBounds()).x, center(end.getBounds()).y, aPoint.x, aPoint.y) < 4
         },
         draw: () => {
             const canvas = document.getElementById(elementID)
             const ctx = canvas.getContext('2d')
-            if(dashed) {
-              ctx.setLineDash([4, 4]);
+            if (dashed) {
+                ctx.setLineDash([4, 4]);
             }
             ctx.beginPath()
             const p = center(start.getBounds()) // Just pick the center of the bounds for now
             const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
             ctx.moveTo(p.x, p.y)
-            ctx.lineTo(q.x,q.y)
+            ctx.lineTo(q.x, q.y)
             ctx.stroke()
 
             // Start and end labels
             ctx.font = "12px Helvetica";
             ctx.textAlign = "center";
 
-            startX = p.x + (q.x - p.x)/3.4
-            startY = p.y + (q.y - p.y)/3.4 - 4
-            midX = p.x + (q.x - p.x)/2
-            midY = p.y + (q.y - p.y)/2 - 4
-            endX = q.x + (p.x - q.x)/3.4
-            endY = q.y + (p.y - q.y)/3.4 - 4
+            startX = p.x + (q.x - p.x) / 3.4
+            startY = p.y + (q.y - p.y) / 3.4 - 4
+            midX = p.x + (q.x - p.x) / 2
+            midY = p.y + (q.y - p.y) / 2 - 4
+            endX = q.x + (p.x - q.x) / 3.4
+            endY = q.y + (p.y - q.y) / 3.4 - 4
             ctx.fillText(startlabel, startX, startY);
             ctx.fillText(midlabel, midX, midY);
             ctx.fillText(endlabel, endX, endY);
@@ -459,42 +456,42 @@ function createCurvedLineEdge() {
             end = e
         },
         getPath: () => {
-          return path
+            return path
         },
         setPath: path2d => {
-          path = path2d
+            path = path2d
         },
         contains: p => {
-          const canvas = document.getElementById(elementID)
-          const ctx = canvas.getContext('2d')
-          return ctx.isPointInPath(path, p.x, p.y)
+            const canvas = document.getElementById(elementID)
+            const ctx = canvas.getContext('2d')
+            return ctx.isPointInPath(path, p.x, p.y)
         },
         getConnectionPoints: () => {
-          return {
-            x1: center(start.getBounds()).x,
-            y1: center(start.getBounds()).y,
-            x2: center(end.getBounds()).x,
-            y2: center(end.getBounds()).y
-          }
+            return {
+                x1: center(start.getBounds()).x,
+                y1: center(start.getBounds()).y,
+                x2: center(end.getBounds()).x,
+                y2: center(end.getBounds()).y
+            }
         },
         draw: () => {
-          const canvas = document.getElementById(elementID)
-          const ctx = canvas.getContext('2d')
-          const p = center(start.getBounds()) // Just pick the center of the bounds for now
-          const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
-          path.moveTo(p.x, p.y)
-          path.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
-          ctx.beginPath()
-          ctx.moveTo(p.x, p.y)
-          ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
-          ctx.stroke()
-          var self = this
+            const canvas = document.getElementById(elementID)
+            const ctx = canvas.getContext('2d')
+            const p = center(start.getBounds()) // Just pick the center of the bounds for now
+            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
+            path.moveTo(p.x, p.y)
+            path.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
+            ctx.beginPath()
+            ctx.moveTo(p.x, p.y)
+            ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
+            ctx.stroke()
+            var self = this
         },
         getPrototype: () => {
-          return prototype
+            return prototype
         },
         getObjectType: () => {
-          return objectType
+            return objectType
         },
     }
 }
