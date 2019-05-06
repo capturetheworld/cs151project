@@ -5,6 +5,8 @@ function createCurvedLineEdge() {
     let objectType = 'edge'
     let edgeID = undefined
     let path = new Path2D()
+    let p = undefined
+    let q = undefined
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
@@ -32,26 +34,28 @@ function createCurvedLineEdge() {
         },
         getConnectionPoints: () => {
             return {
-                x1: center(start.getBounds()).x,
-                y1: center(start.getBounds()).y,
-                x2: center(end.getBounds()).x,
-                y2: center(end.getBounds()).y
+                x1: p.x,
+                y1: p.y,
+                x2: q.x,
+                y2: q.y
             }
         },
         draw: () => {
             const canvas = document.getElementById(elementID)
             const ctx = canvas.getContext('2d')
-            const p = center(start.getBounds()) // Just pick the center of the bounds for now
-            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
+            p = center(start.getBounds()) // Just pick the center of the bounds for now
+            q = center2(end.getBounds(),{x: p.x, y: p.y}) // Not the "connection points" that graphed2 uses
+            p = center2(start.getBounds(), {x: q.x, y: q.y})
             path.moveTo(p.x, p.y)
             path.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.beginPath()
             ctx.moveTo(p.x, p.y)
             ctx.bezierCurveTo(p.x, q.y, q.x, p.y, q.x, q.y)
             ctx.stroke()
-            //commenting out for now
-            //let arrow = arrowHeadGenerator(p, q, 'Triangle')
-            //ctx.stroke(arrow)
+            let arrowgraphic = arrowHeadGenerator({x: p.x, y: p.y}, {x: q.x, y: q.y}, 'BlackTriangle')
+            ctx.fillStyle = 'black'
+            ctx.fill(arrowgraphic)
+            ctx.stroke(arrowgraphic)
             var self = this
         },
         getPrototype: () => {

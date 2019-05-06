@@ -1,4 +1,4 @@
-/** 
+/**
         * Sets the tool the user selected
         * @arg {int} x - the x position
         * @arg {int} y - the y position
@@ -11,7 +11,7 @@ function drawGrabber(x, y) {
     ctx.fillRect(x - size + 2 , y - size  , size, size)
 }
 
-/** 
+/**
         * Sets the tool the user selected
         * @arg {int} x - the x position
         * @arg {int} y - the y position
@@ -49,7 +49,7 @@ function createNode(x, y, s, c, id) {
             name = newName
             attributes = newAttributes
         },
-        /** 
+        /**
         * Returns the bounds
         * @return {int} x - x position
         * @return {int} y - y position
@@ -65,7 +65,7 @@ function createNode(x, y, s, c, id) {
                 height: height
             }
         },
-    /** 
+    /**
         * Checks if point is contained
         * @arg {int} p - a point
         * @return {boolean} - if the point is inside or not
@@ -74,7 +74,7 @@ function createNode(x, y, s, c, id) {
         contains: p => {
             return (Math.abs(x + width / 2 - p.x) < width / 2 && Math.abs(y + height / 2 - p.y) < height / 2)
         },
-        /** 
+        /**
         * Moves the x y position
         * @arg {int} dx - change of x position
         * @arg {int} dy - change of y position
@@ -84,7 +84,7 @@ function createNode(x, y, s, c, id) {
             y += dy
         },
 
-        /** 
+        /**
         * Draws the node
         */
         draw: () => {
@@ -140,7 +140,7 @@ function createNode(x, y, s, c, id) {
         getObjectName: () => {
             return name
         },
-/** 
+/**
         * Sets the tool the user selected
         * @arg {int} x - the x position
         * @arg {int} y - the y position
@@ -152,7 +152,7 @@ function createNode(x, y, s, c, id) {
         * @return {createNode~setElementID} - sets element id to a new ID
     */
 
-        
+
         setObjectName: (nm) => {
             name = nm
         },
@@ -186,6 +186,13 @@ function center(rect) {
     return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 }
 }
 
+function center2(rect, fromP) {
+    if(fromP.x >= rect.x)
+      return { x: rect.x + rect.width, y: rect.y + rect.height / 2 }
+    else if (fromP.x < rect.x)
+      return { x: rect.x, y: rect.y + rect.height / 2}
+}
+
 function createPointNode() {
     let x = 0
     let y = 0
@@ -204,6 +211,3 @@ function createPointNode() {
         }
     }
 }
-
-
-

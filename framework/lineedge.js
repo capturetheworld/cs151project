@@ -110,8 +110,9 @@ function createLineEdge() {
                 ctx.setLineDash([4, 4]);
             }
             ctx.beginPath()
-            const p = center(start.getBounds()) // Just pick the center of the bounds for now
-            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
+            let p = center(start.getBounds()) // Just pick the center of the bounds for now
+            const q = center2(end.getBounds(),{x: p.x, y: p.y}) // Not the "connection points" that graphed2 uses
+            p = center2(start.getBounds(), {x: q.x, y: q.y})
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(q.x, q.y)
             ctx.stroke()
