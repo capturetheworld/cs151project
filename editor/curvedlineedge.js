@@ -27,6 +27,9 @@ function createCurvedLineEdge() {
         setPath: path2d => {
             path = path2d
         },
+        getAttributes() {
+            return []
+        },
         contains: p => {
             const canvas = document.getElementById(elementID)
             const ctx = canvas.getContext('2d')
