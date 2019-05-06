@@ -77,14 +77,14 @@ body {
 
 .input {
     margin: 4px;
-    width: 6em;
+    width: 4em;
 }
 
 .prop {
     display: inline;
     width: max-content;
     padding: 1em 0 1em 0;
-    margin: auto 1em auto 1em;
+    margin: auto .5em auto .5em;
 }
 
 .label {
