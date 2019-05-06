@@ -16,7 +16,7 @@ function drawGrabber(x, y) {
         * @arg {int} x - the x position
         * @arg {int} y - the y position
         * @arg {int} s -  the size
-        * @arg {string} - color
+        * @arg {string} c - color
         * @arg {int} id - id of the node
         * @return {createNode~setNodeID} - inner function: sets node ID
         * @return {createNode~addNVPair} - adds a Name Value pair - inner
@@ -49,6 +49,14 @@ function createNode(x, y, s, c, id) {
             name = newName
             attributes = newAttributes
         },
+        /** 
+        * Returns the bounds
+        * @return {int} x - x position
+        * @return {int} y - y position
+        * @return {int} width- width of the bounds
+        * @return {int} height- height of the bounds
+    */
+
         getBounds: () => {
             return {
                 x: x,
@@ -57,13 +65,28 @@ function createNode(x, y, s, c, id) {
                 height: height
             }
         },
+    /** 
+        * Checks if point is contained
+        * @arg {int} p - a point
+        * @return {boolean} - if the point is inside or not
+    */
+
         contains: p => {
             return (Math.abs(x + width / 2 - p.x) < width / 2 && Math.abs(y + height / 2 - p.y) < height / 2)
         },
+        /** 
+        * Moves the x y position
+        * @arg {int} dx - change of x position
+        * @arg {int} dy - change of y position
+    */
         translate: (dx, dy) => {
             x += dx
             y += dy
         },
+
+        /** 
+        * Draws the node
+        */
         draw: () => {
             let body = document.getElementById(elementID)
             var table = document.createElement('table')
