@@ -76,6 +76,11 @@ function createPropertySheet(){
                 let functName = getters[i].name
                 let label = functName.substring(3, functName.length)
                 
+                // if a JSON obje
+                // if(typeof getters[i]() == object){
+
+                // }
+                
                 let input = createProp(getters[i](), label)
                 form.appendChild(input)
             }
@@ -92,7 +97,6 @@ function createPropertySheet(){
 
                 }
             }
-
         },
     }
 }
