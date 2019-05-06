@@ -13,7 +13,6 @@
     background-color: lightgray;
     padding: 10px;
     height: auto;
-    
 }
 
 button {
@@ -55,7 +54,6 @@ html, body {
 body {
     margin: 0;
     padding: 0;
-    
 }
 
 .container {
@@ -67,12 +65,10 @@ body {
     background-color: lightgrey;
     margin: 0;
     display: inline-flex;
-    
     padding: .5%;
     align-items: flex-end;
     flex-direction: row;
     width: 99%;
-    
 }
 
 .input {
@@ -102,8 +98,8 @@ body {
     order: 1;
     background-color: white;
     outline: none;
-    
 }
+
 .apply:active {
     background-color: white;
     color: orange;
@@ -134,4 +130,8 @@ form {
     font-family: system-ui;
     font-size: .8em;
     padding-bottom: 1px;
+}
+
+input[type=text] {
+    width: 20em;
 }

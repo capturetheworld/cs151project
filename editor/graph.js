@@ -33,7 +33,6 @@ class Graph {
         }
         return undefined
     }
-
     draw() {
         clearCanvas()
         for (const m of this.edges) {
@@ -43,14 +42,10 @@ class Graph {
           ctx.setLineDash([0, 0]);
           m.draw()
         }
-        let index = 0;
+        // let index = 0;
         for (const n of this.nodes) {
             n.draw()
         }
-        //Delete later
-        // for (const n of this.nvPairs) {
-        //     n.draw()
-        // }
     }
     connect(e, p1, p2) {
         const n1 = this.findNode(p1)
