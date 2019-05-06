@@ -72,7 +72,13 @@ function createCurvedLineEdge() {
             ctx.quadraticCurveTo(((x2 + xmid) / 2), y2, x2, y2)
             ctx.lineTo(q.x, y2);
             ctx.stroke()
-            let arrowgraphic = arrowHeadGenerator({x: q.x-10, y: q.y}, {x: q.x, y: q.y}, 'BlackTriangle')
+            let arrowgraphic = undefined
+            if(q.x > p.x){
+              arrowgraphic = arrowHeadGenerator({x: q.x-10, y: q.y}, {x: q.x, y: q.y}, 'BlackTriangle')
+            }
+            else if (q.x <= p.x){
+              arrowgraphic = arrowHeadGenerator({x: q.x+10, y: q.y}, {x: q.x - 10, y: q.y}, 'BlackTriangle')
+            }
             ctx.fillStyle = 'black'
             ctx.fill(arrowgraphic)
             ctx.stroke(arrowgraphic)
