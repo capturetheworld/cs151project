@@ -7,6 +7,17 @@ function createLineEdge() {
     let startlabel = ''
     let midlabel = ''
     let endlabel = ''
+
+    let arrowheadEnum = {
+        none: 'none',
+        Triangle: 'Triangle',
+        V: 'V',
+        Diamond: 'Diamond',
+        BlackDiamond: 'BlackDiamond'
+    }
+    let arrowTypeStart = arrowheadEnum.none
+    let arrowTypeEnd = arrowheadEnum.none
+
     return {
         setElementID: (newElementID) => {
             elementID = newElementID
@@ -29,11 +40,39 @@ function createLineEdge() {
         setEndLabel: (newlabel) => {
             endlabel = newlabel
         },
+
+        setArrowHeadStart: (type) => {
+            if(arrowheadEnum[type]){
+                arrowType = type
+            }
+            else{
+                // none if typed wrong key
+                arrowType = arrowheadEnum.none
+            }
+        },
+        getArrowHeadStart: () => {
+            return arrowTypeStart
+        },
+        setArrowHeadEnd: (type) => {
+            if(arrowheadEnum[type]){
+                arrowType = type
+            }
+            else{
+                // none if typed wrong key
+                arrowType = arrowheadEnum.none
+            }
+        },
+        getArrowHeadEnd: () => {
+            return arrowTypeEnd
+        },
+
         getAttributes() {
             return [
                 this.getStartLabel, this.setStartLabel,
                 this.getMidLabel, this.setMidLabel,
-                this.getEndLabel, this.setEndLabel
+                this.getEndLabel, this.setEndLabel,
+                this.getArrowHeadStart, this.setArrowHeadStart,
+                this.getArrowHeadEnd, this.setArrowHeadEnd
             ]
         },
         connect: (s, e) => {
@@ -91,7 +130,4 @@ function createLineEdge() {
 
         },
     }
-
 }
-
-
