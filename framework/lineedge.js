@@ -17,7 +17,7 @@ function createLineEdge() {
         BlackTriangle: 'BlackTriangle'
     }
     let arrowTypeStart = arrowheadEnum.none
-    let arrowTypeEnd = arrowheadEnum.BlackDiamond
+    let arrowTypeEnd = arrowheadEnum.none
 
     return {
         setElementID: (newElementID) => {
@@ -126,10 +126,10 @@ function createLineEdge() {
             }
             if (arrowTypeStart !== 'none') {
               let arrowgraphic = arrowHeadGenerator(q, p, 'Diamond')
-              /* if(arrowTypeStart === 'BlackDiamond' || arrowTypeStart === 'BlackTriangle') {
+              if(arrowTypeStart === 'BlackDiamond' || arrowTypeStart === 'BlackTriangle') {
                 ctx.fillStyle = 'black'
                 ctx.fill(arrowgraphic)
-              } */
+              }
               ctx.setLineDash([0, 0])
               ctx.stroke(arrowgraphic)
             }
