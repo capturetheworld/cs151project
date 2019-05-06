@@ -21,6 +21,7 @@ button {
     height: 50;
     z-index: 3;
     margin-left: 3;
+    outline: none;
 }
 
 #canvasbutton {
@@ -98,14 +99,13 @@ body {
     margin: 0 15px 0 5px;
     border-radius: 3px;
     order: 1;
-    color: white;
-    background-color: green;
+    background-color: white;
     outline: none;
     
 }
 .apply:active {
-    background-color: rgb(3, 150, 3);
-    color: yellow;
+    background-color: white;
+    color: orange;
 }
 
 #graphDiv {
