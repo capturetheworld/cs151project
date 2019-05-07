@@ -1,6 +1,6 @@
-/**
+/*
         * Creates a note node
-    */
+
 function createNote() {
     let width = 8
     let height = 0
@@ -32,7 +32,7 @@ function createNote() {
         * @return {int} width- width of the bounds
         * @return {int} height- height of the bounds
     */
-
+/*
         getBounds: () => {
             return {
                 x: x,
@@ -41,12 +41,13 @@ function createNote() {
                 height: height
             }
         },
-        
+
         /**
         * Moves the x y position
         * @arg {int} dx - change of x position
         * @arg {int} dy - change of y position
     */
+    /*
         translate: (dx, dy) => {
             x += dx
             y += dy
@@ -55,6 +56,7 @@ function createNote() {
         /**
         * Draws the node
         */
+        /*
         draw: () => {
             let body = document.getElementById(elementID)
             var table = document.createElement('table')
@@ -77,7 +79,7 @@ function createNote() {
 
             tableBody.appendChild(tr)
 
-        
+
             // gets height of table
             height = tableBody.offsetHeight
 
@@ -111,4 +113,4 @@ function createNote() {
         }
     }
 }
-
+*/
