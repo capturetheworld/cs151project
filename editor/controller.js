@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
   //const n2 = createCircleNode(30, 30, 20, 'blue')
   //const n3 = createNode(100, 100, 100, 'lightgray', 'nodeContainer')
   //n3.setNodeID(0)
-  //const n1 = createNote(10,10,100,150,'yellow','graphPanel')
 
   //Create Toolbar
   const toolbar = new Toolbar(graph)
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
   properties.setGraph(graph)
 
   resize()
-  //graph.add(n1)
   graph.draw()
 
   let selected = undefined
@@ -107,12 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const n = createNode(mousePoint.x, mousePoint.y, 120, 'lightgray', 'nodeContainer')
       n.setNodeID(graph.nodes.length)
       n.setObjectName('Object Name')
-      graph.add(n)
-      graph.draw()
-    }
-    else if (tool === 'noteNode'){
-      const n = createNote(mousePoint.x, mousePoint.y,150, 100,'yellow','graphPanel')
-      n.setNodeID(graph.nodes.length)
       graph.add(n)
       graph.draw()
     }
