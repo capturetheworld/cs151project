@@ -35,10 +35,10 @@ class Toolbar {
     }
 
 
-     /**  
-        *Returns the selection tool
-        * @returns selectedTool
-    */
+    /**  
+       *Returns the selection tool
+       * @returns selectedTool
+   */
 
     getSelectedTool() {
         return this.selectedTool
@@ -53,54 +53,76 @@ class Toolbar {
         this.selectedTool = elem
     }
 
-     /**  
-        * Sets newly selected tool to whatever the user selects next
-        * @arg newSelected
-    */
+    /**  
+       * Sets newly selected tool to whatever the user selects next
+       * @arg newSelected
+   */
 
     setSelected(newSelected) {
         this.selected = newSelected
     }
 
-     /**  
-        * Draws the button that is for selection
-    */
+    /**  
+       * Draws the button that is for selection
+   */
 
     drawGrabberButton() {
-      var buttonArea = document.getElementById('toolbarDiv')
-      var button = document.createElement('button')
-      button.type = 'button'
-      button.style.position = 'relative'
-      button.id = 'grabberButton'
-      button.style.backgroundColor = 'white'
-      buttonArea.appendChild(button)
-      document.getElementById('grabberButton').onclick = function () {
-        const buttons = document.getElementsByTagName('button')
-        for (const n of buttons) {
-            n.style.backgroundColor = 'white'
+        var buttonArea = document.getElementById('toolbarDiv')
+        var button = document.createElement('button')
+        button.type = 'button'
+        button.style.position = 'relative'
+        button.id = 'grabberButton'
+        button.style.backgroundColor = 'white'
+        buttonArea.appendChild(button)
+        document.getElementById('grabberButton').onclick = function () {
+            const buttons = document.getElementsByTagName('button')
+            for (const n of buttons) {
+                n.style.backgroundColor = 'white'
+            }
+            button.style.backgroundColor = 'lightblue'
         }
-        button.style.backgroundColor = 'lightblue'
+        var self = this
+        const elem = document.getElementById('grabberButton')
+        elem.addEventListener('mousedown', event => {
+            this.selectedTool = undefined
+        })
+        this.tools.push(undefined)
+        buttonArea.appendChild(button)
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext("2d")
+        canvas.id = 'grabberButtonCanvas'
+        canvas.style.position = 'relative'
+        canvas.width = 45
+        canvas.height = 45
+        ctx.fillStyle = "purple"
+        ctx.fillRect(3, 8, 8, 8)
+        ctx.fillRect(3, 30, 8, 8)
+        ctx.fillRect(24, 8, 8, 8)
+        ctx.fillRect(24, 30, 8, 8)
+        button.appendChild(canvas)
+        //the actual button on toolbar
     }
-      var self = this
-      const elem = document.getElementById('grabberButton')
-      elem.addEventListener('mousedown', event => {
-        this.selectedTool = undefined
-      })
-      this.tools.push(undefined)
-      buttonArea.appendChild(button)
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext("2d")
-      canvas.id = 'grabberButtonCanvas'
-      canvas.style.position = 'relative'
-      canvas.width = 45
-      canvas.height = 45
-      ctx.fillStyle = "purple"
-      ctx.fillRect(3, 8, 8, 8)
-      ctx.fillRect(3, 30, 8, 8)
-      ctx.fillRect(24, 8, 8, 8)
-      ctx.fillRect(24, 30, 8, 8)
-      button.appendChild(canvas)
-      //the actual button on toolbar
+
+    drawDeleteButton() {
+        //Draw Delete Button
+        let buttonArea = document.getElementById('toolbarDiv')
+        let button = document.createElement('button')
+        button.type = 'button'
+        button.style.position = 'absolute'
+        button.id = 'deleteButton'
+        button.style.backgroundColor = 'white'
+        buttonArea.appendChild(button)
+        button.innerText = 'Delete'
+
+        let self = this
+        document.getElementById('deleteButton').onclick = function () {
+            if (self.selected == undefined) {
+                alert("Nothing Selected.")
+            } else {
+                self.toolbarGraph.deleteObj(self.selected)
+                self.toolbarGraph.draw()
+            }
+        }
     }
 
     /** 
@@ -130,9 +152,9 @@ class Toolbar {
                 }
                 elem.style.backgroundColor = 'lightblue'
             }
-            
+
             elem.addEventListener('mousedown', event => {
-              this.selectedTool = n.getPrototype()
+                this.selectedTool = n.getPrototype()
             })
             n.draw()
             this.tools.push(n.getPrototype())
@@ -205,29 +227,30 @@ class Toolbar {
             n.draw()
         }
 
-        //Draw Note
-        for (const t of this.notes) {
-            let buttonArea = document.getElementById('toolbarDiv')
-            let button = document.createElement('button')
-            button.type = 'button'
-            button.style.position = 'relative'
-            button.id = 'noteButton'
-            button.style.backgroundColor = 'white'
-            buttonArea.appendChild(button)
-            t.setElementID('noteButton')
+        this.drawDeleteButton()
 
-            let self = this
-            document.getElementById('noteButton').onclick = function () {
-                
-                    const x = createNote()
-                    self.selected.newNote(x)
-                    self.toolbarGraph.newNote(x)
-                    self.toolbarGraph.draw()
-            
-            
-            this.tools.push(t.getPrototype())
-            x.draw()
-        }
-    }
+        //Draw Note
+        // for (const t of this.notes) {
+        //     let buttonArea = document.getElementById('toolbarDiv')
+        //     let button = document.createElement('button')
+        //     button.type = 'button'
+        //     button.style.position = 'relative'
+        //     button.id = 'noteButton'
+        //     button.style.backgroundColor = 'white'
+        //     buttonArea.appendChild(button)
+        //     t.setElementID('noteButton')
+
+        //     let self = this
+        //     document.getElementById('noteButton').onclick = function () {
+
+        //             const x = createNote()
+        //             self.selected.newNote(x)
+        //             self.toolbarGraph.newNote(x)
+        //             self.toolbarGraph.draw()
+
+
+        //     this.tools.push(t.getPrototype())
+        //     x.draw()
+        // }
     }
 }

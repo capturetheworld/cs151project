@@ -17,12 +17,33 @@ class Graph {
     }
     addNVPair(n) {
         this.nvPairs.push(n)
+
+    }
+    deleteObj(n) {
+        for (var i = 0; i < this.nodes.length; i++) {
+            if (this.nodes[i] === n) {
+                this.nodes.splice(i, 1);
+            }
+        }
+        for (var i = 0; i < this.nvPairs.length; i++) {
+            if (this.nvPairs[i] === n) {
+                this.nvPairs.splice(i, 1);
+            }
+            for (var i = 0; i < this.nodes.length; i++) {
+                this.nodes[i].deleteNVPair(n)
+            }
+        }
+        for (var i = 0; i < this.edges.length; i++) {
+            if (this.edges[i] === n) {
+                this.edges.splice(i, 1);
+            }
+        }
     }
     findEdge(p) {
-      for (let i = this.edges.length - 1; i>= 0; i--) {
-        const e = this.edges[i]
-        if (e.contains(p)) return e
-      }
+        for (let i = this.edges.length - 1; i >= 0; i--) {
+            const e = this.edges[i]
+            if (e.contains(p)) return e
+        }
     }
 
     /**
@@ -44,30 +65,30 @@ class Graph {
         }
         return undefined
     }
-        /**
-        * Draws canvas
-        */
+    /**
+    * Draws canvas
+    */
     draw() {
         clearCanvas()
         for (const m of this.edges) {
-          //need to reset the built in dashed function for canvas
-          const canvas = document.getElementById(elementID)
-          const ctx = canvas.getContext('2d')
-          ctx.setLineDash([0, 0]);
-          m.draw()
+            //need to reset the built in dashed function for canvas
+            const canvas = document.getElementById(elementID)
+            const ctx = canvas.getContext('2d')
+            ctx.setLineDash([0, 0]);
+            m.draw()
         }
         // let index = 0;
         for (const n of this.nodes) {
             n.draw()
         }
     }
-        /**
-        * Connects Nodes
-        * @arg {point} p1 - pt 1
-        * @arg {point} p2 - p2 2
-        * @arg {element} e - connector
-        * @return {boolean}  - if it is connected or not
-    */
+    /**
+    * Connects Nodes
+    * @arg {point} p1 - pt 1
+    * @arg {point} p2 - p2 2
+    * @arg {element} e - connector
+    * @return {boolean}  - if it is connected or not
+*/
     connect(e, p1, p2) {
         const n1 = this.findNode(p1)
         const n2 = this.findNode(p2)
