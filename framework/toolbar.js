@@ -22,7 +22,7 @@ class Toolbar {
         this.NVPairs = [
             createNVPair()
         ]
-        this.shapes = [
+        this.notes = [
             createNote(2, 8, 30, 30, 'yellow', 'button' )
         ]
         this.tools = []
@@ -231,7 +231,7 @@ class Toolbar {
             n.draw()
         }
         let noteIndex = 0
-        for (const t of this.shapes) {
+        for (const t of this.notes) {
           const buttonArea = document.getElementById('toolbarDiv')
           const canvas = document.createElement('canvas')
           canvas.id = 'noteButtonCanvas' + noteIndex

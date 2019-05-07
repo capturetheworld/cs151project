@@ -93,39 +93,10 @@ function createNote(x, y, w, h, c, id) {
         getObjectType: () => {
             return objectType
         },
-        getWidth: () => {
-            return width
-        },
-
-        setWidth: (w) => {
-            width = Number(w)
-        },
-        getHeight: () => {
-            return height
-        },
-
-        setHeight: (h) => {
-            height = Number(h)
-        },
-        getColor: () => {
-            return color
-        },
-        setColor: (c) => {
-            console.log("setting color")
-            color = c
-        },
-        getPrototype: () => {
-            return prototype
-        },
-        getObjectType: () => {
-            return objectType
-        },
         getAttributes() {
             // format:  getter (even index), setter (odd)
             return [
-                this.getWidth, this.setWidth,
-                this.getHeight, this.setHeight,
-                this.getColor, this.setColor
+                this.getObjectName, this.setObjectName
             ]
         }
     }
