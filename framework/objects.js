@@ -13,14 +13,14 @@ function drawGrabber(x, y) {
 
 /**
         * Sets the tool the user selected
-        * @arg {int} x - the x position
-        * @arg {int} y - the y position
-        * @arg {int} s -  the size
-        * @arg {string} c - color
-        * @arg {int} id - id of the node
-        * @return {createNode~setNodeID} - inner function: sets node ID
-        * @return {createNode~addNVPair} - adds a Name Value pair - inner
-        * @return {createNode~setElementID} - sets element id to a new ID
+        * @arg x - the x position
+        * @arg y - the y position
+        * @arg s -  the size
+        * @arg c - color
+        * @arg id - id of the node
+        * @return  - inner function: sets node ID
+        * @return - adds a Name Value pair - inner
+        * @return - sets element id to a new ID
     */
 
 function createNode(x, y, s, c, id) {
@@ -74,8 +74,8 @@ function createNode(x, y, s, c, id) {
         },
         /**
             * Checks if point is contained
-            * @arg {int} p - a point
-            * @return {boolean} - if the point is inside or not
+            * @arg p - a point
+            * @return - if the point is inside or not
         */
 
         contains: p => {
@@ -83,8 +83,8 @@ function createNode(x, y, s, c, id) {
         },
         /**
         * Moves the x y position
-        * @arg {int} dx - change of x position
-        * @arg {int} dy - change of y position
+        * @arg dx - change of x position
+        * @arg dy - change of y position
     */
         translate: (dx, dy) => {
             x += dx
@@ -149,11 +149,11 @@ function createNode(x, y, s, c, id) {
         },
         /**
                 * Sets the tool the user selected
-                * @arg {int} x - the x position
-                * @arg {int} y - the y position
-                * @arg {int} s -  the size
-                * @arg {string} c - color
-                * @arg {int} id - id of the node
+                * @arg x - the x position
+                * @arg y - the y position
+                * @arg s -  the size
+                * @arg c - color
+                * @arg id - id of the node
                 * @return {createNode~setNodeID} - inner function: sets node ID
                 * @return {createNode~addNVPair} - adds a Name Value pair - inner
                 * @return {createNode~setElementID} - sets element id to a new ID
