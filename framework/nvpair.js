@@ -12,7 +12,14 @@ function createNVPair() {
     let elementID = undefined
     let prototype = 'NVpair'
     let objectType = 'node'
+    let identifier = undefined
     return {
+        setIdentifier: (id) => {
+            identifier = undefined
+        },
+        getIdentifier: () => {
+            return identifier
+        },
         setElementID: (newID) => {
             elementID = newID
         },

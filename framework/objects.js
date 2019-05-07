@@ -36,6 +36,9 @@ function createNode(x, y, s, c, id) {
     let prototype = 'genericNode'
     let objectType = 'node'
     return {
+        getNVPairs: () => {
+            return nvPairs
+        },
         deleteNVPair: (n) => {
             for (var i = 0; i < nvPairs.length; i++) {
                 if (nvPairs[i] === n) {

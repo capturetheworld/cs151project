@@ -32,6 +32,7 @@ class Toolbar {
         this.toolbarGraph = graph
         this.selectedTool = undefined
         this.buttons = []
+        this.nvIndex = 0
     }
 
 
@@ -60,7 +61,6 @@ class Toolbar {
 
     setSelected(newSelected) {
         this.selected = newSelected
-        console.log('selection: ' + this.selected)
     }
 
     /**  
@@ -220,6 +220,8 @@ class Toolbar {
                     alert("Nothing Selected.")
                 } else {
                     const n = createNVPair()
+                    n.setIdentifier(self.nvIndex)
+                    self.nvIndex++
                     self.selected.addNVPair(n)
                     self.toolbarGraph.addNVPair(n)
                     self.toolbarGraph.draw()

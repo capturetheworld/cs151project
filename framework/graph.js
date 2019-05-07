@@ -23,7 +23,26 @@ class Graph {
         //Node Deletion
         for (var i = 0; i < this.nodes.length; i++) {
             if (this.nodes[i] === n) {
+                let delNV = this.nodes[i].getNVPairs()
                 this.nodes.splice(i, 1);
+
+                console.log(delNV)
+                if (delNV.length > 0) {
+
+                    for (var i = 0; i < delNV.length; i++) {
+                        for (var j = 0; j < this.nvPairs.length; j++) {
+
+                            if (delNV[i].getIdentifier() === this.nvPairs[j].getIdentifier()){
+                                this.nvPairs.splice(i, 1);
+                            }
+
+                            // if (delNV[i] === this.nvPairs[j]) {
+                            //     this.nvPairs.splice(i, 1);
+
+                            // }
+                        }
+                    }
+                }
             }
         }
         //NVPair Deletion
