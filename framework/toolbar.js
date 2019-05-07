@@ -60,6 +60,7 @@ class Toolbar {
 
     setSelected(newSelected) {
         this.selected = newSelected
+        console.log('selection: ' + this.selected)
     }
 
     /**  
@@ -121,6 +122,7 @@ class Toolbar {
             } else {
                 self.toolbarGraph.deleteObj(self.selected)
                 self.toolbarGraph.draw()
+                self.setSelected(undefined)
             }
         }
     }

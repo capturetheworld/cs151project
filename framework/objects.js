@@ -40,6 +40,7 @@ function createNode(x, y, s, c, id) {
             for (var i = 0; i < nvPairs.length; i++) {
                 if (nvPairs[i] === n) {
                     nvPairs.splice(i, 1);
+                    // alert('removed nvpair')
                 }
             }
         },
@@ -137,8 +138,6 @@ function createNode(x, y, s, c, id) {
             }
             // gets height of table
             height = tableBody.offsetHeight
-
-
         },
 
         getElementID: () => {

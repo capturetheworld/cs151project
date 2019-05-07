@@ -20,19 +20,22 @@ class Graph {
 
     }
     deleteObj(n) {
+        //Node Deletion
         for (var i = 0; i < this.nodes.length; i++) {
             if (this.nodes[i] === n) {
                 this.nodes.splice(i, 1);
             }
         }
+        //NVPair Deletion
         for (var i = 0; i < this.nvPairs.length; i++) {
             if (this.nvPairs[i] === n) {
                 this.nvPairs.splice(i, 1);
             }
-            for (var i = 0; i < this.nodes.length; i++) {
-                this.nodes[i].deleteNVPair(n)
-            }
         }
+        for (var i = 0; i < this.nodes.length; i++) {
+            this.nodes[i].deleteNVPair(n)
+        }
+        //Edge Deletion
         for (var i = 0; i < this.edges.length; i++) {
             if (this.edges[i] === n) {
                 this.edges.splice(i, 1);
