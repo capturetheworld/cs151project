@@ -135,11 +135,11 @@ function createLineEdge() {
             ctx.textAlign = "center";
 
             startX = p.x + (q.x - p.x) / 5
-            startY = p.y + (q.y - p.y) / 5 - 4
+            startY = p.y + (q.y - p.y) / 5 - 6
             midX = p.x + (q.x - p.x) / 2
-            midY = p.y + (q.y - p.y) / 2 - 4
+            midY = p.y + (q.y - p.y) / 2 - 6
             endX = q.x + (p.x - q.x) / 5
-            endY = q.y + (p.y - q.y) / 5 - 4
+            endY = q.y + (p.y - q.y) / 5 - 6
             ctx.fillText(startlabel, startX, startY);
             ctx.fillText(midlabel, midX, midY);
             ctx.fillText(endlabel, endX, endY);

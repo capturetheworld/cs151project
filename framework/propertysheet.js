@@ -1,11 +1,11 @@
+
 /**
- * Factory function to create the individual property divs to populate
+ * Factory function to create the individual dropdown property divs to populate
  * the property sheet form.
  * 
  * @param {string} text - the property value
  * @param {string} id - used for property label and get/set function names 
  */
-
 
 function createPropDropdown(obj, id){
     // create prop wrapper
@@ -18,17 +18,24 @@ function createPropDropdown(obj, id){
     label.innerHTML = id
     
     let menu = document.createElement('select')
-    menu.className = "inputD"
+    menu.className = "inputdrop"
     menu.id = 'dropdown'
-    menu.selected = obj.current
+
     for(opt in obj){
         if(opt != 'current'){
+            // creates option for dropdown
             let option = document.createElement('option')
             option.innerHTML = opt
             option.value = opt
             menu.appendChild(option)
+            
+            // sets selected value
+            if(obj.current == opt){               
+                menu.value = opt
+            }
         }
     }
+    //menu.selected = obj.current
 
     prop.appendChild(label)
     prop.appendChild(menu)
@@ -38,6 +45,13 @@ function createPropDropdown(obj, id){
 }
 
 
+/**
+ * Factory function to create the individual property divs to populate
+ * the property sheet form.
+ * 
+ * @param {string} text - the property value
+ * @param {string} id - used for property label and get/set function names 
+ */
 
  function createProp(text, id){
     // create prop wrapper
@@ -143,7 +157,7 @@ function createPropertySheet(){
                 // goes through setters array 
                 for(i = 0; i < setters.length; i++){
                     let functName = setters[i].name
-                    // slices 'Color' from 'getColor()'
+                    // slices 'Color' from 'setColor()'
                     let label = functName.substring(3, functName.length)
                     input = document.getElementById(label)
                     setters[i](input.lastChild.value)
