@@ -23,7 +23,7 @@ class Toolbar {
             createNVPair()
         ]
         this.notes = [
-            createNote()
+            createNote(2, 8, 30, 30, 'yellow', 'button' )
         ]
         this.tools = []
         var dashedEdge = createLineEdge()
@@ -36,7 +36,7 @@ class Toolbar {
     }
 
 
-    /**  
+    /**
        *Returns the selection tool
        * @returns selectedTool
    */
@@ -45,7 +45,7 @@ class Toolbar {
         return this.selectedTool
     }
 
-    /** 
+    /**
         * Sets the tool the user selected
         * @arg elem
     */
@@ -54,7 +54,7 @@ class Toolbar {
         this.selectedTool = elem
     }
 
-    /**  
+    /**
        * Sets newly selected tool to whatever the user selects next
        * @arg newSelected
    */
@@ -63,7 +63,7 @@ class Toolbar {
         this.selected = newSelected
     }
 
-    /**  
+    /**
        * Draws the button that is for selection
    */
 
@@ -127,7 +127,7 @@ class Toolbar {
         }
     }
 
-    /** 
+    /**
         * Draws a button to create nodes
     */
 
@@ -230,31 +230,34 @@ class Toolbar {
             this.tools.push(n.getPrototype())
             n.draw()
         }
+        let noteIndex = 0
+        for (const t of this.notes) {
+          const buttonArea = document.getElementById('toolbarDiv')
+          const canvas = document.createElement('canvas')
+          canvas.id = 'noteButtonCanvas' + noteIndex
+          canvas.style.position = 'relative'
+          canvas.width = 45
+          canvas.height = 45
+          var button = document.createElement('button')
+          button.type = 'button'
+          button.style.position = 'relative'
+          button.id = 'noteButton' + noteIndex
+          button.style.backgroundColor = 'white'
+          buttonArea.appendChild(button)
+          button.appendChild(canvas)
+          t.setElementID('noteButtonCanvas' + noteIndex)
+
+          let self = this
+          const elem = document.getElementById('noteButton' + noteIndex)
+          elem.addEventListener('mousedown', event => {
+               this.selectedTool = t.getPrototype()
+           })
+
+            this.tools.push(t.getPrototype())
+            t.draw()
+            noteIndex++
+        }
 
         this.drawDeleteButton()
-
-        //Draw Note
-        // for (const t of this.notes) {
-        //     let buttonArea = document.getElementById('toolbarDiv')
-        //     let button = document.createElement('button')
-        //     button.type = 'button'
-        //     button.style.position = 'relative'
-        //     button.id = 'noteButton'
-        //     button.style.backgroundColor = 'white'
-        //     buttonArea.appendChild(button)
-        //     t.setElementID('noteButton')
-
-        //     let self = this
-        //     document.getElementById('noteButton').onclick = function () {
-
-        //             const x = createNote()
-        //             self.selected.newNote(x)
-        //             self.toolbarGraph.newNote(x)
-        //             self.toolbarGraph.draw()
-
-
-        //     this.tools.push(t.getPrototype())
-        //     x.draw()
-        // }
+      }
     }
-}
