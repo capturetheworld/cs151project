@@ -3,7 +3,7 @@
  * Factory function to create the individual dropdown property divs to populate
  * the property sheet form.
  * 
- * @param {string} text - the property value
+ * @param {object} obj - object containing dropdown options
  * @param {string} id - used for property label and get/set function names 
  */
 
@@ -35,7 +35,6 @@ function createPropDropdown(obj, id){
             }
         }
     }
-    //menu.selected = obj.current
 
     prop.appendChild(label)
     prop.appendChild(menu)
@@ -150,7 +149,6 @@ function createPropertySheet(){
                     input = createProp(getters[i](), label)
                 }
 
-                
                 form.appendChild(input)
             }
             this.saveProperties = function(){  
