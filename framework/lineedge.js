@@ -43,15 +43,26 @@ function createLineEdge() {
             arrowTypeStart = type
         },
         getArrowHeadStart: () => {
-            return arrowTypeStart
+            return {
+                current: arrowTypeStart,
+                none: 'none',
+                V: 'V',
+                BlackDiamond: 'BlackDiamond',
+                BlackTriangle: 'BlackTriangle'            
+            }
         },
         setArrowHeadEnd: (type) => {
             arrowTypeEnd = type
         },
         getArrowHeadEnd: () => {
-            return arrowTypeEnd
+            return {
+                current: arrowTypeEnd,
+                none: 'none',
+                V: 'V',
+                BlackDiamond: 'BlackDiamond',
+                BlackTriangle: 'BlackTriangle'            
+            }
         },
-
 
         getAttributes() {
             return [
@@ -123,12 +134,12 @@ function createLineEdge() {
             ctx.font = "12px Helvetica";
             ctx.textAlign = "center";
 
-            startX = p.x + (q.x - p.x) / 3.4
-            startY = p.y + (q.y - p.y) / 3.4 - 4
+            startX = p.x + (q.x - p.x) / 5
+            startY = p.y + (q.y - p.y) / 5 - 4
             midX = p.x + (q.x - p.x) / 2
             midY = p.y + (q.y - p.y) / 2 - 4
-            endX = q.x + (p.x - q.x) / 3.4
-            endY = q.y + (p.y - q.y) / 3.4 - 4
+            endX = q.x + (p.x - q.x) / 5
+            endY = q.y + (p.y - q.y) / 5 - 4
             ctx.fillText(startlabel, startX, startY);
             ctx.fillText(midlabel, midX, midY);
             ctx.fillText(endlabel, endX, endY);

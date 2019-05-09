@@ -6,7 +6,40 @@
  * @param {string} id - used for property label and get/set function names 
  */
 
-function createProp(text, id){
+
+function createPropDropdown(obj, id){
+    // create prop wrapper
+    let prop = document.createElement('div')
+    prop.className = "prop"
+    
+    // label and menu
+    let label = document.createElement('p')
+    label.className = "label"
+    label.innerHTML = id
+    
+    let menu = document.createElement('select')
+    menu.className = "inputD"
+    menu.id = 'dropdown'
+    menu.selected = obj.current
+    for(opt in obj){
+        if(opt != 'current'){
+            let option = document.createElement('option')
+            option.innerHTML = opt
+            option.value = opt
+            menu.appendChild(option)
+        }
+    }
+
+    prop.appendChild(label)
+    prop.appendChild(menu)
+    prop.id = id
+    
+    return prop
+}
+
+
+
+ function createProp(text, id){
     // create prop wrapper
     let prop = document.createElement('div')
     prop.className = "prop"
@@ -96,7 +129,14 @@ function createPropertySheet(){
                 let functName = getters[i].name
                 let label = functName.substring(3, functName.length)
                 
-                let input = createProp(getters[i](), label)
+                let input = ''
+                if(typeof getters[i]() == 'object'){
+                    input = createPropDropdown(getters[i](), label)
+                }else{
+                    input = createProp(getters[i](), label)
+                }
+
+                
                 form.appendChild(input)
             }
             this.saveProperties = function(){  

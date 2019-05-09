@@ -79,7 +79,10 @@ body {
 
 .input {
     margin: 4px;
-    width: 4em;
+    width: 2em;
+    border: none;
+    padding: .3em;
+    border-radius: .2em;
 }
 
 .prop {
@@ -147,5 +150,9 @@ form {
 }
 
 input[type=text] {
-    width: 20em;
+    width: 9em;
+}
+
+#dropdown {
+    width: 7em;
 }
