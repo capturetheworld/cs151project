@@ -23,7 +23,7 @@ class Toolbar {
             createNVPair()
         ]
         this.notes = [
-            createNote()
+            //createNote()
         ]
         this.tools = []
         var dashedEdge = createLineEdge()
