@@ -1,5 +1,5 @@
 # Responsive Diagram Creator
-For use within CS151 Object Oriented Class. Built in HTML Canvas and JavaScript.
+For use within CS151 Object Oriented Class and other SJSU classes. Built in HTML Canvas and JavaScript.
 
 ## Team Members
 - Ian Soohoo
