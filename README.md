@@ -1,7 +1,5 @@
-# Team Hotel CS 151 Project
-Project for CS151 - Section 03
-Links:
-http://horstmann.com/sjsu/spring2019/cs151/project.html
+# Responsive Diagram Creator
+For use within CS151 Object Oriented Class. Built in HTML Canvas and JavaScript.
 
 ## Team Members
 - Ian Soohoo
@@ -16,4 +14,4 @@ http://horstmann.com/sjsu/spring2019/cs151/project.html
 4. Use HTML tables
 
 ## View As Webpage
-http://iansoohoo.me/cs151project/
+http://iansoohoo.me/diagram/
