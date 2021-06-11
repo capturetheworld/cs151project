@@ -8,11 +8,11 @@
 }
 
 #toolbarDiv {
-    border-bottom: solid black thin;
+    /* border-bottom: solid black thin; */
     border-top: 0px;
-    background-color: lightgray;
+    background-color:#14141A;
     padding: 10px;
-    height: auto;
+    height: 8%;
 }
 
 button {
@@ -21,6 +21,8 @@ button {
     z-index: 3;
     margin-left: 3;
     outline: none;
+    float: left;
+    background-color:#A5FBB1 ;
 }
 
 #canvasbutton {
